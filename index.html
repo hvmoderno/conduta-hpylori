@@ -1263,7 +1263,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
         <p class="case-line">${esc(caseLine(s))}</p>
         <div><p class="eyebrow">${dxBlock ? "Diagnóstico antes do tratamento" : "Fora do escopo do app"}</p><h2 id="blockTitle">Receita não gerada</h2></div>
         ${d.blocks.map((b) => BLOCK_HTML[b]).join("")}
-        ${dxBlock ? `${sheetsHtml("exam")}<div class="actions"><button type="button" id="copyRx">Copiar pedido do teste</button><button type="button" class="ghost" id="printRx">Imprimir pedido</button><span class="toast" id="toast" role="status"></span></div>` : ""}
+        ${dxBlock ? `${sheetsHtml("exam")}<div class="actions"><button type="button" id="copyRx">Copiar pedido do teste</button><button type="button" class="ghost" id="printRx">${viewerDl ? "Baixar pedido para imprimir" : "Imprimir pedido"}</button><span class="toast" id="toast" role="status"></span></div>` : ""}
       </section>`;
     }
     if (!d.pick) {
@@ -1293,7 +1293,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
       ${flagsHtml(d.flags)}
       ${s.adj ? "" : dayHtml(s, d.pick)}
       ${sheetsHtml(s.adj ? "adj" : "presc")}
-      <div class="actions"><button type="button" id="copyRx">${s.adj ? "Copiar ajustes" : sheets.length > 1 ? "Copiar todas as receitas" : "Copiar receita"}</button>${s.adj ? "" : `<button type="button" class="ghost" id="printRx">Imprimir receitas (com 2 vias)</button>`}<span class="toast" id="toast" role="status"></span></div>
+      <div class="actions"><button type="button" id="copyRx">${s.adj ? "Copiar ajustes" : sheets.length > 1 ? "Copiar todas as receitas" : "Copiar receita"}</button>${s.adj ? "" : `<button type="button" class="ghost" id="printRx">${viewerDl ? "Baixar receitas para imprimir (2 vias)" : "Imprimir receitas (com 2 vias)"}</button>`}<span class="toast" id="toast" role="status"></span></div>
     </section>`;
   }
 
@@ -1362,17 +1362,18 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
   }
 
   // ---------- adesão (Enunciado 26, texto: educação e lembretes no celular aumentam adesão e erradicação) ----------
+  const APP_URL = "https://hvmoderno.github.io/conduta-hpylori/";
   function adhPanel(s, d, dt) {
     const wa = `https://wa.me/?text=${encodeURIComponent(texts.wa || "")}`;
     return `<section class="panel" id="adhPanel" aria-labelledby="adhTitle"><h3 id="adhTitle">Adesão: entregue ao paciente</h3>
       <p class="hint">O V Consenso cita melhora da adesão e da erradicação com educação do paciente e lembretes no celular (texto do Enunciado 26).</p>
       <div class="adh-grid">
-        <button type="button" id="printLeaf">Imprimir folheto com calendário de 14 dias</button>
-        <button type="button" class="ghost" id="icsBtn">Lembretes no celular (.ics)</button>
+        <button type="button" id="printLeaf">${viewerDl ? "Baixar folheto com calendário para imprimir" : "Imprimir folheto com calendário de 14 dias"}</button>
+        ${inViewer ? `<a class="btn" href="${APP_URL}" target="_blank" rel="noopener">Lembretes .ics: abrir no app</a>` : `<button type="button" class="ghost" id="icsBtn">Lembretes no celular (.ics)</button>`}
         <a class="btn" href="${esc(wa)}" target="_blank" rel="noopener">Enviar orientações no WhatsApp</a>
         <span class="toast" id="toast3" role="status"></span>
       </div>
-      <p class="hint">O arquivo .ics cria um alarme em cada horário por 14 dias e lembra a data do teste de controle. Envie ao paciente pelo WhatsApp ou abra no celular dele: o iPhone e o Android oferecem adicionar à agenda.</p>
+      <p class="hint">O arquivo .ics cria um alarme em cada horário por 14 dias e lembra a data do teste de controle. Envie ao paciente pelo WhatsApp ou abra no celular dele: o iPhone e o Android oferecem adicionar à agenda.${inViewer ? " No claude.ai esse arquivo não pode ser baixado: gere os lembretes no app instalado." : ""}</p>
     </section>`;
   }
 
@@ -1407,10 +1408,34 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     </section>`;
   }
   const native = () => (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.condutaHP) || null;
-  function doPrint(html) {
+  // no claude.ai a página roda num visualizador: arquivo só sai pela capacidade "downloads", e .ics não está na lista dela
+  const inViewer = !!(window.claude && typeof window.claude.use === "function");
+  let viewerDl = null;
+  if (inViewer) window.claude.use("downloads").then((ns) => { if (ns) { viewerDl = ns; lastSig = null; update(); } }).catch(() => {});
+  // documento avulso com as regras de impressão da página, que abre e já chama a impressão
+  function printDoc(html) {
+    let rules = "";
+    for (const sh of document.styleSheets) {
+      let list;
+      try { list = sh.cssRules; } catch (e) { continue; }
+      for (const r of list) if (r.media && r.media.mediaText === "print") for (const rr of r.cssRules) rules += rr.cssText + "\n";
+    }
+    const cs = getComputedStyle(document.documentElement);
+    const vars = ["--font-display", "--font-body", "--font-mono"].map((v) => `${v}:${cs.getPropertyValue(v)}`).join(";");
+    const fonts = document.querySelector('link[rel="stylesheet"][href*="fonts.googleapis"]');
+    return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Conduta H. pylori · impressão</title>${fonts ? fonts.outerHTML : ""}<style>:root{${vars}} body{margin:0;padding:24px 0} .pp{max-width:182mm;margin:0 auto 28px} @media screen{.pp{border-bottom:1px dashed #999;padding-bottom:24px}}\n${rules}</style></head><body><div id="printArea">${html}</div><script>addEventListener("load",function(){setTimeout(function(){print()},500)})<\/script></body></html>`;
+  }
+  function doPrint(html, name, toastId) {
     $("printArea").innerHTML = html;
     const n = native();
-    if (n) n.postMessage({ type: "print" }); else window.print();
+    if (n) { n.postMessage({ type: "print" }); return; }
+    if (viewerDl) {
+      viewerDl.save({ filename: name, data: printDoc(html) })
+        .then(() => { if ($(toastId)) $(toastId).textContent = "Arquivo salvo: abra e imprima."; })
+        .catch((e) => { if ($(toastId)) $(toastId).textContent = e && e.code === "declined" ? "" : "Não deu para salvar aqui: use o app instalado para imprimir."; });
+      return;
+    }
+    window.print();
   }
   function saveFile(name, mime, text, toastId) {
     const n = native();
@@ -1428,7 +1453,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
   }
   // calendário: um evento diário por horário, 14 dias, com alarme; mais o dia do teste de controle
   function icsText(s, d, dt) {
-    const ie = (t) => String(t).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+    const ie = (t) => String(t).replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
     const ymd = (x) => `${x.getFullYear()}${pad(x.getMonth() + 1)}${pad(x.getDate())}`;
     const now = new Date();
     const stamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth() + 1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
@@ -1636,8 +1661,8 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     const sb = e.target.closest("[data-copy-sheet]");
     if (sb) { copyText(sheets[Number(sb.dataset.copySheet)] || "", (ok) => feedback(sb, null, ok)); return; }
     if (e.target.closest("#copyRx")) { const b = e.target.closest("#copyRx"); copyText(sheets.join(SEP), (ok) => feedback(b, "toast", ok, "Copiado para a área de transferência")); return; }
-    if (e.target.closest("#printRx")) { doPrint(rxPrintHtml()); return; }
-    if (e.target.closest("#printLeaf") && cur) { doPrint(leafletHtml(cur.s, cur.d, cur.dt)); return; }
+    if (e.target.closest("#printRx")) { doPrint(rxPrintHtml(), "receitas-h-pylori.html", "toast"); return; }
+    if (e.target.closest("#printLeaf") && cur) { doPrint(leafletHtml(cur.s, cur.d, cur.dt), "folheto-h-pylori.html", "toast3"); return; }
     if (e.target.closest("#icsBtn") && cur) { saveFile("tratamento-h-pylori.ics", "text/calendar", icsText(cur.s, cur.d, cur.dt), "toast3"); return; }
     if (e.target.closest("#copyTxt")) { const b = e.target.closest("#copyTxt"); copyText(texts[txtSel] || "", (ok) => feedback(b, "toast2", ok, "Texto copiado")); }
   });

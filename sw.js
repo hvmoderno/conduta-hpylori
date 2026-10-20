@@ -1,7 +1,7 @@
 /* Service worker do Conduta H. pylori.
    REGRA: a cada publicação, SUBA VERSAO. Sem isso o iPhone fica preso na versão velha.
    Página: rede primeiro, cache como reserva (offline). Fontes e ícones: cache primeiro. */
-var VERSAO = 'v2';
+var VERSAO = 'v2.1';
 var CACHE = 'conduta-hp-' + VERSAO;
 var ESSENCIAIS = ['./', './index.html', './manifest.json', './icons/icone-192.png', './icons/icone-512.png', './icons/apple-touch-icon.png'];
 
