@@ -893,7 +893,8 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
       } else if (s.line === 2) {
         order = s.quino === "low" ? ["M1", "M4", "M3"] : ["M1", "M3", "M4"];
       } else {
-        order = ["M1", "M5", "M3"];
+        // Enunciado 30: rifabutina "sobretudo quando a quádrupla com bismuto estiver indisponível ou já tiver sido usada"
+        order = s.uBQT && s.rifa ? ["M5", "M1", "M3"] : ["M1", "M5", "M3"];
       }
     } else {
       if (s.line === 1) order = ["M1", "M6"];
@@ -1001,7 +1002,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
           : "Opção de resgate na falta de bismuto e de rifabutina (Enunciado 30); pouco afetada pela resistência.",
       M8: "Maior taxa sem bismuto, ao custo de três antibióticos; falha com resistência dupla à claritromicina e ao metronidazol. Metronidazol 500 mg 4x/dia conforme a Tabela 3 do consenso (outras diretrizes usam 500 mg 2x/dia).",
       M4: "Bismuto supera parte da resistência ao levofloxacino; no Brasil, 100% no Hp-BraReg.",
-      M5: "Resistência à rifabutina <1%; não inferior à quádrupla com bismuto, com menos efeitos adversos. Peça hemograma.",
+      M5: (s.uBQT ? "Preferida no resgate quando a quádrupla com bismuto já foi usada (Enunciado 30). " : "") + "Resistência à rifabutina <1%; não inferior à quádrupla com bismuto, com menos efeitos adversos. Peça hemograma.",
       M6: "Primeiro ensaio randomizado em alérgicos: 92%, não inferior à quádrupla com bismuto, com menos efeitos adversos.",
       M7: L === 3 ? "Alternativa no resgate do alérgico que ainda não usou claritromicina nem levofloxacino; o consenso a cita para a 2ª linha (Enunciado 32)." : "Opção de 2ª linha no alérgico após revisar o esquema inicial (Enunciado 32).",
       M14: "Indicada após segunda falha no alérgico que ainda não usou claritromicina (Enunciado 32), com metronidazol em dose alta (1,6 g/dia). A dose da claritromicina é a usual; o consenso não a especifica.",
@@ -1574,6 +1575,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     ["Alergia confirmada, resgate, claritromicina e quádrupla já usadas, com bismuto", "Quádrupla repetida (não repete claritromicina)"],
     ["Alérgico, 2ª linha, já usou tetraciclina + vonoprazana, com bismuto", "Quádrupla com bismuto; tetraciclina + vonoprazana não se repete"],
     ["Resgate sem alergia, quádrupla já usada, com bismuto", "Quádrupla repetida, taxa de 76% (Hp-EuReg)"],
+    ["Resgate, quádrupla já usada, com rifabutina disponível", "Tripla com rifabutina antes da quádrupla repetida (Enunciado 30)"],
     ["Resgate, quádrupla já repetida (2 vezes)", "Quádrupla evitada; rifabutina ou dupla, conforme o acesso"],
     ["Resgate, todos os esquemas usados, sem bismuto e sem rifabutina", "Sem esquema; roteiro de caso refratário"],
     ["Gestante, ou idade < 18", "Receita não gerada, fora do escopo"],
