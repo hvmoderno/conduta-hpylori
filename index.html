@@ -1,0 +1,1494 @@
+<!doctype html><html lang="pt-BR"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>Conduta H. pylori</title>
+<meta name="description" content="Apoio à decisão para erradicação do H. pylori pelo V Consenso Brasileiro (2026).">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icone-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="H. pylori">
+<meta name="theme-color" content="#f4f3f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#12111a" media="(prefers-color-scheme: dark)">
+</head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,500;0,7..72,650;1,7..72,500;1,7..72,650&display=swap">
+<style>
+/* Layout: mesa de consulta. À esquerda a ficha do caso, que acompanha a rolagem no computador; à direita a conduta,
+   com as receitas em folhas lado a lado. No celular, uma coluna, com a conduta sempre à mão no rodapé.
+   Cores das lâminas de H&E: hematoxilina (índigo) para ação e estrutura, eosina (rosa) só como marca, sobre o lilás do vidro. */
+:root {
+  --bg: #f4f3f8;
+  --surface: #ffffff;
+  --sheet: #fffdf8;
+  --ink: #1f1d2d;
+  --muted: #5e5a70;
+  --line: #dcd9e5;
+  --accent: #3d3990;
+  --accent-ink: #ffffff;
+  --accent-soft: #ebe9f8;
+  --eosin: #b4486b;
+  --warn: #8c5300;
+  --warn-soft: #fbf0dc;
+  --bad: #a22f2a;
+  --bad-soft: #f9e4e2;
+  --st1: #eeecf7;
+  --st2: #dcd8f0;
+  --st3: #f6d7d3;
+  --st4: #efbdb6;
+  --shadow: 0 1px 2px rgba(31, 29, 45, 0.06), 0 10px 28px rgba(31, 29, 45, 0.07);
+  --font-display: "Literata", Georgia, "Times New Roman", serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12111a; --surface: #1a1925; --sheet: #211f2d; --ink: #ecebf4; --muted: #a29eb6; --line: #302e40;
+    --accent: #aba6f4; --accent-ink: #15141f; --accent-soft: #292750; --eosin: #ea8ea9;
+    --warn: #e8ab52; --warn-soft: #3a2b13; --bad: #f08e87; --bad-soft: #3f1f1d;
+    --st1: #22213a; --st2: #2d2b4d; --st3: #4a2422; --st4: #612c28;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12111a; --surface: #1a1925; --sheet: #211f2d; --ink: #ecebf4; --muted: #a29eb6; --line: #302e40;
+  --accent: #aba6f4; --accent-ink: #15141f; --accent-soft: #292750; --eosin: #ea8ea9;
+  --warn: #e8ab52; --warn-soft: #3a2b13; --bad: #f08e87; --bad-soft: #3f1f1d;
+  --st1: #22213a; --st2: #2d2b4d; --st3: #4a2422; --st4: #612c28;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 28px rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 22px 48px;
+}
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 22px; }
+a { color: var(--accent); }
+button, input, select, textarea { font: inherit; }
+input:focus-visible, textarea:focus-visible, select:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* cabeçalho */
+.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.mark { width: 46px; height: 46px; flex: none; }
+.mark .rod { fill: none; stroke: var(--accent); stroke-width: 4.4; stroke-linecap: round; }
+.mark .fla { fill: none; stroke: var(--eosin); stroke-width: 1.7; stroke-linecap: round; }
+h1 { font-family: var(--font-display); font-weight: 650; font-size: clamp(1.55rem, 2.4vw, 2rem); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+h1 i { color: var(--eosin); font-weight: 500; }
+.src { margin: 4px 0 0; color: var(--muted); font-size: 0.86rem; }
+.ver { margin: 0; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+
+.grid { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 860px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ficha do caso */
+form.case { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 22px; min-width: 0; }
+@media (min-width: 861px) {
+  form.case { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 14px); max-height: calc(100vh - 28px); overflow-y: auto; scrollbar-width: thin; }
+}
+fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; min-width: 0; }
+legend { padding: 0; margin-bottom: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); }
+.formtop { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.hint { margin: 0; font-size: 0.82rem; color: var(--muted); }
+.lbl-sm { margin: 0; font-size: 0.86rem; color: var(--muted); }
+.text-in { display: grid; gap: 5px; font-size: 0.86rem; color: var(--muted); min-width: 0; }
+.text-in input, .text-in textarea, select { font-size: 16px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 7px; padding: 8px 10px; width: 100%; }
+.text-in textarea { resize: vertical; line-height: 1.4; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.undo { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; border-radius: 8px; background: var(--accent-soft); font-size: 0.9rem; }
+
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--bg); }
+.seg label { position: relative; display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 6px; text-align: center; font-size: 0.9rem; color: var(--ink); cursor: pointer; border-right: 1px solid var(--line); user-select: none; }
+.seg label:last-child { border-right: 0; }
+.seg input, .chips input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.seg input:checked + span, .chips input:checked + span { font-weight: 700; }
+.seg label:has(input:checked) { background: var(--accent); color: var(--accent-ink); }
+.seg label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -3px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chips label { position: relative; display: inline-flex; align-items: center; min-height: 36px; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); font-size: 0.88rem; color: var(--ink); cursor: pointer; user-select: none; }
+.chips label:has(input:checked) { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chips label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chips .or { font-size: 0.82rem; color: var(--muted); padding: 0 2px; }
+.chips .brk { flex-basis: 100%; height: 0; }
+
+.checks { display: grid; gap: 7px; }
+.checks label { display: flex; gap: 9px; align-items: flex-start; font-size: 0.93rem; cursor: pointer; }
+.checks input { margin: 3px 0 0; width: 17px; height: 17px; flex: none; accent-color: var(--accent); }
+.safety { border: 1px solid var(--bad); border-radius: 9px; padding: 12px 14px; background: var(--bad-soft); }
+.safety legend { color: var(--bad); background: var(--bad-soft); padding: 0 6px; margin-left: -6px; }
+
+/* matrizes OLGA/OLGIM: linhas = grau no antro, colunas = grau no corpo */
+.bxbox { display: grid; gap: 12px; }
+.olga { display: flex; flex-wrap: wrap; gap: 14px 12px; }
+.mx { display: grid; gap: 6px; align-content: start; }
+.mx-title { margin: 0; font-size: 0.84rem; color: var(--muted); }
+.mx-title b { color: var(--ink); font-family: var(--font-display); font-size: 1rem; margin-right: 4px; }
+.mx-grid { display: grid; grid-template-columns: 16px repeat(4, 30px); grid-auto-rows: 30px; gap: 2px; align-items: center; }
+.mx-grid .ax { font-size: 0.68rem; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
+.mx-grid .ax.c { align-self: end; }
+.cell { width: 30px; height: 30px; padding: 0; border-radius: 5px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; cursor: pointer; }
+.cell.st1 { background: var(--st1); }
+.cell.st2 { background: var(--st2); color: var(--ink); }
+.cell.st3 { background: var(--st3); color: var(--bad); }
+.cell.st4 { background: var(--st4); color: var(--bad); }
+.cell[aria-pressed="true"] { outline: 2.5px solid var(--accent); outline-offset: 1px; font-weight: 700; color: var(--ink); }
+.mx-read { margin: 0; font-size: 0.8rem; color: var(--muted); max-width: 150px; min-height: 2.4em; }
+.mx-read b { color: var(--ink); }
+.mx-read b.hi { color: var(--bad); }
+
+details.more { border-top: 1px solid var(--line); padding-top: 14px; }
+details.more > summary { cursor: pointer; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+details.more[open] > summary { margin-bottom: 16px; }
+details.more > .inner { display: grid; gap: 20px; }
+.count { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--muted); }
+details.help { font-size: 0.86rem; color: var(--muted); }
+details.help summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+details.help p { margin: 6px 0 0; }
+
+/* botões */
+button { font-weight: 700; font-size: 0.9rem; cursor: pointer; border-radius: 8px; padding: 9px 15px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); }
+button.ghost { background: transparent; color: var(--accent); white-space: nowrap; flex: none; }
+button.sm { padding: 4px 10px; font-size: 0.8rem; border-radius: 6px; }
+button.wide { width: 100%; white-space: normal; }
+button.link { background: none; border: 0; padding: 0; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; font-size: 0.86rem; border-radius: 2px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.toast { font-size: 0.85rem; color: var(--accent); }
+
+/* conduta */
+.out { display: grid; gap: 20px; min-width: 0; scroll-margin-top: 12px; }
+.hero { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 22px; display: grid; gap: 16px; min-width: 0; }
+.hero.block, .hero.none { border-color: var(--bad); }
+.hero .case-line { max-width: none; }
+.case-line { margin: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 0.82rem; color: var(--muted); }
+.eyebrow { margin: 0 0 4px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); }
+.hero.block .eyebrow, .hero.none .eyebrow { color: var(--bad); }
+.hero h2 { margin: 0; font-family: var(--font-display); font-weight: 650; font-size: clamp(1.45rem, 2.4vw, 1.9rem); line-height: 1.15; text-wrap: balance; }
+.hero p { margin: 0; max-width: 72ch; }
+.hero-stats { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 24px; }
+.rate { display: grid; gap: 3px; }
+.rate .num { font-family: var(--font-display); font-weight: 650; font-size: 2.5rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.rate .num.txt { font-size: 1.4rem; }
+.rate .lbl { font-size: 0.8rem; color: var(--muted); max-width: 36ch; }
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { font-size: 0.8rem; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; }
+.tags li.strong { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+@keyframes flash { from { box-shadow: 0 0 0 6px var(--accent-soft), var(--shadow); } to { box-shadow: 0 0 0 0 var(--accent-soft), var(--shadow); } }
+.hero.flash { animation: flash 900ms ease-out; }
+
+.flags { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.flag { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 10px; align-items: baseline; padding: 10px 12px; border-radius: 9px; background: var(--warn-soft); font-size: 0.92rem; }
+.flag .tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warn); }
+.flag.bad { background: var(--bad-soft); }
+.flag.bad .tag { color: var(--bad); }
+@media (max-width: 480px) { .flag { grid-template-columns: minmax(0, 1fr); } }
+
+.day { display: grid; gap: 8px; }
+.day-head { margin: 0; font-size: 0.86rem; color: var(--muted); }
+.day-head b { color: var(--ink); }
+.slots { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(128px, 1fr)); gap: 8px; }
+.slots > li { border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; display: grid; gap: 4px; align-content: start; background: var(--bg); }
+.slots .hr { display: flex; align-items: baseline; gap: 6px; font-family: var(--font-display); font-weight: 650; font-size: 1.15rem; color: var(--accent); font-variant-numeric: tabular-nums; }
+.slots .hr small { font-family: var(--font-body); font-weight: 400; font-size: 0.72rem; color: var(--muted); }
+.slots ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: 0.84rem; }
+.slots ul i { font-style: normal; color: var(--muted); }
+@media (max-width: 600px) {
+  .slots { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .slots > li { grid-template-columns: 4.2rem minmax(0, 1fr); align-items: baseline; padding: 8px 10px; }
+  .slots .hr { flex-direction: column; gap: 0; }
+  .slots ul { display: flex; flex-wrap: wrap; gap: 2px 12px; }
+}
+
+.sheets { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 14px; }
+.sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.sheet-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; border-bottom: 1px dashed var(--line); }
+.rxmark { font-family: var(--font-display); font-style: italic; font-weight: 650; font-size: 1.15rem; color: var(--eosin); }
+.sheet.adj { border-color: var(--bad); }
+.sheet.adj .rxmark, .sheet.exam .rxmark { font-family: var(--font-body); font-style: normal; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.sheet.adj .rxmark { color: var(--bad); }
+.sheet.exam .rxmark { color: var(--accent); }
+.sheet-body { margin: 0; padding: 12px 14px 16px; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; color: var(--ink); }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; min-width: 0; align-content: start; }
+.panel p { margin: 0; max-width: 78ch; }
+.panel.sub { background: none; border: 0; padding: 0; border-radius: 0; }
+.refr { border-color: var(--warn); }
+h3 { font-family: var(--font-display); font-weight: 650; font-size: 1.12rem; margin: 0; }
+.sec-title { font-family: var(--font-display); font-weight: 650; font-size: 1.3rem; margin: 0; }
+ol.steps, ul.notes { margin: 0; padding-left: 22px; display: grid; gap: 8px; max-width: 80ch; }
+ul.tight { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.follow { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.follow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 20px 28px; }
+
+dl.timeline { margin: 0; display: grid; }
+.tl { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 0 0 12px 24px; }
+.tl::before { content: ""; position: absolute; left: 4px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); }
+.tl::after { content: ""; position: absolute; left: 9px; top: 20px; bottom: 0; border-left: 2px solid var(--line); }
+.tl:last-child { padding-bottom: 0; }
+.tl:last-child::after { display: none; }
+.tl.key::before { background: var(--accent); }
+.tl dt { color: var(--muted); font-size: 0.88rem; }
+.tl dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; }
+.tl.long { grid-template-columns: minmax(0, 1fr); }
+.tl.long dd { text-align: left; font-weight: 400; }
+.tl.long dd b { font-weight: 700; }
+@media (max-width: 480px) { .tl { grid-template-columns: minmax(0, 1fr); } .tl dd { text-align: left; } }
+
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+td.num { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 9ch; }
+td.num small { display: block; font-weight: 400; color: var(--muted); font-size: 0.78rem; }
+td.avoid { color: var(--bad); font-weight: 700; white-space: nowrap; }
+td.na { color: var(--muted); font-weight: 700; white-space: nowrap; }
+td .hint { display: block; }
+@media (max-width: 600px) {
+  table.stack thead { display: none; }
+  table.stack, table.stack tbody, table.stack tr, table.stack td { display: block; width: 100%; }
+  table.stack tr { border-bottom: 1px solid var(--line); padding: 10px 0; }
+  table.stack td { border: 0; padding: 2px 0; }
+  table.stack td.num, table.stack td.avoid, table.stack td.na { white-space: normal; min-width: 0; }
+  table.stack td.num::before { content: "Erradicação: "; font-weight: 400; color: var(--muted); }
+}
+.rx { margin: 0; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+.txtseg { max-width: 560px; }
+.txtseg label { font-size: 0.84rem; }
+details > summary { cursor: pointer; }
+details > summary::marker { color: var(--accent); }
+details.ref { border-top: 1px solid var(--line); padding: 14px 2px 2px; display: grid; gap: 10px; }
+details.ref > summary { font-family: var(--font-display); font-weight: 650; font-size: 1.05rem; }
+details.ref[open] > summary { margin-bottom: 4px; }
+td details summary { color: var(--accent); font-weight: 700; margin-top: 6px; }
+td details .rx { margin-top: 6px; }
+ol.src-list { margin: 0; padding-left: 22px; display: grid; gap: 4px; font-size: 0.88rem; }
+
+footer.foot { color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--line); padding-top: 12px; max-width: 92ch; display: grid; gap: 6px; }
+footer.foot p { margin: 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1px; opacity: 0; }
+
+/* barra de conduta no celular */
+.jump { display: none; }
+@media (max-width: 860px) {
+  body { padding-bottom: calc(92px + env(safe-area-inset-bottom, 0px)); }
+  .jump {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: var(--surface); border-top: 1px solid var(--line); box-shadow: var(--shadow);
+    padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  }
+  .jump .jt { min-width: 0; font-size: 0.84rem; line-height: 1.3; color: var(--muted); }
+  .jump .jt b { display: block; font-size: 0.98rem; color: var(--ink); }
+  .jump button { flex: none; }
+  body:has(.case input[type="text"]:focus, .case input[type="number"]:focus, .case input[type="date"]:focus, .case textarea:focus, .case select:focus) .jump { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hero.flash { animation: none; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 46 46" aria-hidden="true">
+        <path class="rod" d="M5 27c2.5-6.5 6.5-6.5 9 0s6.5 6.5 9 0 6.5-6.5 9 0"/>
+        <path class="fla" d="M32 27c3-1.5 5.5-5 7.5-9.5M32.5 27.5c3.5 0 6.5 1.5 9 4M32 28c1 3 1 6.5-.5 10"/>
+      </svg>
+      <div>
+        <h1>Conduta <i>H. pylori</i></h1>
+        <p class="src">V Consenso Brasileiro sobre a Infecção por <i>H. pylori</i> · Arq Gastroenterol 2026;63:e26043</p>
+      </div>
+    </div>
+    <p class="ver">Apoio à decisão · versão 20/10/2026</p>
+  </header>
+
+  <div class="grid">
+    <form class="case" id="caseForm" autocomplete="off" novalidate>
+      <div class="formtop">
+        <p class="hint">A conduta se atualiza a cada mudança.</p>
+        <button type="button" class="ghost" id="resetBtn">Novo paciente</button>
+      </div>
+      <div class="undo" id="undoBar" role="status" hidden><span>Caso apagado.</span><button type="button" class="link" id="undoBtn">Desfazer</button></div>
+
+      <fieldset>
+        <legend>Paciente</legend>
+        <label class="text-in" for="pName">Nome (só nesta tela, não é salvo)
+          <input id="pName" type="text" placeholder="Nome completo">
+        </label>
+        <div class="row2">
+          <label class="text-in" for="age">Idade
+            <input id="age" type="number" min="0" max="120" inputmode="numeric" placeholder="anos">
+          </label>
+          <div class="text-in"><span id="sexLbl">Sexo</span>
+            <div class="seg" role="radiogroup" aria-labelledby="sexLbl">
+              <label title="Feminino"><input type="radio" name="sex" value="F" id="sexF" aria-label="Feminino"><span>F</span></label>
+              <label title="Masculino"><input type="radio" name="sex" value="M" id="sexM" aria-label="Masculino"><span>M</span></label>
+            </div>
+          </div>
+        </div>
+        <label class="text-in" for="startDate">Início do tratamento
+          <input id="startDate" type="date">
+        </label>
+        <label class="text-in" for="doc">Médico: nome, CRM, endereço e telefone
+          <textarea id="doc" rows="3" placeholder="Dr. Nome Sobrenome · CRM-CE 00000&#10;Endereço completo&#10;Telefone"></textarea>
+          <span class="hint">Exigidos na receita de antimicrobiano (RDC 20/2011). Fica salvo neste navegador.</span>
+        </label>
+      </fieldset>
+
+      <fieldset class="safety">
+        <legend>Segurança</legend>
+        <div class="checks">
+          <label><input type="checkbox" id="sPreg"> Gestante ou amamentando</label>
+          <label><input type="checkbox" id="sCkd"> Insuficiência renal (TFG &lt; 30 mL/min)</label>
+          <label><input type="checkbox" id="sHep"> Hepatopatia grave (Child-Pugh C)</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Diagnóstico</legend>
+        <p class="lbl-sm" id="dxLbl">Infecção confirmada por</p>
+        <div class="chips" role="radiogroup" aria-labelledby="dxLbl">
+          <label><input type="radio" name="dx" value="hist" id="dx-hist" checked><span>Histologia</span></label>
+          <label><input type="radio" name="dx" value="ubt" id="dx-ubt"><span>Teste respiratório</span></label>
+          <label><input type="radio" name="dx" value="fecal" id="dx-fecal"><span>Antígeno fecal</span></label>
+          <label><input type="radio" name="dx" value="urease" id="dx-urease"><span>Urease</span></label>
+          <label><input type="radio" name="dx" value="sero" id="dx-sero"><span>Só sorologia</span></label>
+          <span class="brk" aria-hidden="true"></span><span class="or">ou</span>
+          <label><input type="radio" name="dx" value="neg" id="dx-neg"><span>Testado e negativo</span></label>
+          <label><input type="radio" name="dx" value="none" id="dx-none"><span>Ainda não testado</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Biópsia · OLGA/OLGIM</legend>
+        <div class="checks" id="bxRow">
+          <label><input type="checkbox" id="bx"> Endoscopia com biópsia e laudo disponível</label>
+        </div>
+        <div class="bxbox" id="bxBox" hidden>
+          <button type="button" class="ghost wide" id="bxZero">Laudo sem atrofia e sem metaplasia</button>
+          <p class="hint">Toque no cruzamento do grau no antro (linha) com o grau no corpo (coluna). Graus: 0 ausente, 1 até 1/3 da mucosa, 2 de 1/3 a 2/3, 3 mais de 2/3.</p>
+          <div class="olga">
+            <div class="mx" id="mxA" data-in-a="aA" data-in-c="aC" data-sys="OLGA" data-what="atrofia"></div>
+            <div class="mx" id="mxM" data-in-a="mA" data-in-c="mC" data-sys="OLGIM" data-what="metaplasia"></div>
+          </div>
+          <input type="hidden" id="aA" value="">
+          <input type="hidden" id="aC" value="">
+          <input type="hidden" id="mA" value="">
+          <input type="hidden" id="mC" value="">
+          <p class="lbl-sm" id="migLbl">Tipo de metaplasia</p>
+          <div class="chips" role="radiogroup" aria-labelledby="migLbl">
+            <label><input type="radio" name="migType" value="none" id="mig-none" checked><span>Ausente ou não informado</span></label>
+            <label><input type="radio" name="migType" value="complete" id="mig-complete"><span>Completa</span></label>
+            <label><input type="radio" name="migType" value="incomplete" id="mig-incomplete"><span>Incompleta</span></label>
+          </div>
+          <label class="text-in" for="edaDate">Data da endoscopia
+            <input id="edaDate" type="date">
+          </label>
+          <div class="checks">
+            <label><input type="checkbox" id="dysp"> Displasia na biópsia</label>
+          </div>
+          <details class="help"><summary>O que são OLGA e OLGIM</summary>
+            <p>Sistemas que estadiam a gastrite pela extensão da lesão no antro (com incisura) e no corpo. O OLGA usa a atrofia; o OLGIM, a metaplasia intestinal, que tem melhor concordância entre patologistas.</p>
+            <p>Cada compartimento recebe grau de 0 a 3, e a combinação antro × corpo dá o estágio de 0 a IV. Estágios III e IV são alto risco de câncer gástrico.</p>
+            <p>Exige pelo menos 2 biópsias do antro e 2 do corpo, em frascos separados (Enunciados 19 e 22).</p>
+          </details>
+        </div>
+        <div class="checks">
+          <label><input type="checkbox" id="fhGC"> Parente de 1º grau com câncer gástrico</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Indicação do tratamento</legend>
+        <select id="indic" aria-label="Indicação do tratamento">
+          <option value="gastrite" selected>Gastrite crônica por H. pylori</option>
+          <option value="ulcera">Úlcera péptica gástrica ou duodenal</option>
+          <option value="dispNaoInv">Dispepsia não investigada</option>
+          <option value="dispInv">Dispepsia investigada (EDA sem lesão)</option>
+          <option value="preneo">Atrofia, metaplasia ou displasia</option>
+          <option value="malt">Linfoma MALT gástrico</option>
+          <option value="posres">Após ressecção de câncer gástrico</option>
+          <option value="familiarCG">Parente de 1º grau com câncer gástrico</option>
+          <option value="aine">Uso de AAS, AINE ou antiagregante</option>
+          <option value="drge">DRGE com IBP ou P-CAB contínuo</option>
+          <option value="anemia">Anemia ferropriva sem causa ou PTI</option>
+          <option value="bariatrica">Candidato a cirurgia bariátrica</option>
+          <option value="desejo">Desejo do paciente</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Linha de tratamento</legend>
+        <div class="seg" role="radiogroup" aria-label="Linha de tratamento">
+          <label><input type="radio" name="line" value="1" id="l1" checked><span>1ª linha</span></label>
+          <label><input type="radio" name="line" value="2" id="l2"><span>2ª linha</span></label>
+          <label><input type="radio" name="line" value="3" id="l3"><span>Resgate</span></label>
+        </div>
+        <p class="hint" id="lineHint">Nunca tratou H. pylori.</p>
+        <div class="checks" id="usedBox">
+          <p class="lbl-sm">Já usou para <i>H. pylori</i>:</p>
+          <label><input type="checkbox" id="uClari"> Esquema com claritromicina</label>
+          <label><input type="checkbox" id="uLevo"> Esquema com levofloxacino</label>
+          <label><input type="checkbox" id="uBQT"> Quádrupla com bismuto</label>
+          <label><input type="checkbox" id="uRifa"> Esquema com rifabutina</label>
+          <label><input type="checkbox" id="uDual"> Dupla com amoxicilina em dose alta</label>
+          <label id="uTVrow"><input type="checkbox" id="uTV"> Tetraciclina + vonoprazana</label>
+          <label><input type="checkbox" id="uUnk"> Não sabe qual esquema usou</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Alergia à penicilina</legend>
+        <div class="seg" role="radiogroup" aria-label="Alergia à penicilina">
+          <label><input type="radio" name="allergy" value="no" id="aNo" checked><span>Não</span></label>
+          <label><input type="radio" name="allergy" value="yes" id="aYes"><span>Sim</span></label>
+          <label><input type="radio" name="allergy" value="doubt" id="aDoubt"><span>Duvidosa</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Acesso</legend>
+        <div class="checks">
+          <label><input type="checkbox" id="hasBis" checked> Consegue bismuto (manipulação)</label>
+          <label><input type="checkbox" id="hasTetra" checked> Consegue tetraciclina</label>
+          <label><input type="checkbox" id="hasVono" checked> Consegue vonoprazana</label>
+          <label><input type="checkbox" id="hasRifa"> Consegue rifabutina (importação)</label>
+        </div>
+        <p class="actions"><button type="button" class="link" id="accSave">Usar este acesso como padrão</button><span class="toast" id="accToast" role="status"></span></p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Uso prévio de antibióticos</legend>
+        <p class="lbl-sm" id="macroLbl">Macrolídeos, para qualquer infecção</p>
+        <div class="chips" role="radiogroup" aria-labelledby="macroLbl">
+          <label><input type="radio" name="macro" value="none" id="macro-none" checked><span>Nunca</span></label>
+          <label><input type="radio" name="macro" value="azi" id="macro-azi"><span>Só azitromicina</span></label>
+          <label><input type="radio" name="macro" value="unk" id="macro-unk"><span>Não sabe</span></label>
+          <label><input type="radio" name="macro" value="high" id="macro-high"><span>Claritromicina, eritromicina ou roxitromicina</span></label>
+        </div>
+        <p class="lbl-sm" id="quinoLbl">Quinolonas (levo, cipro, moxi), para qualquer infecção</p>
+        <div class="chips" role="radiogroup" aria-labelledby="quinoLbl">
+          <label><input type="radio" name="quino" value="low" id="quino-low" checked><span>Nunca</span></label>
+          <label><input type="radio" name="quino" value="mod" id="quino-mod"><span>1 curso ou não sabe</span></label>
+          <label><input type="radio" name="quino" value="high" id="quino-high"><span>2 ou mais cursos</span></label>
+        </div>
+        <details class="help"><summary>De onde vêm esses critérios</summary>
+          <p>Só a claritromicina (e, em menor grau, eritro e roxitromicina) muda a conduta. No maior estudo com uso individual verificado em farmácia (Israel, 7.842 pacientes), claritromicina prévia reduziu a chance de erradicar com a tripla a cerca de um terço (OR 0,31), e quanto mais tempo desde o uso, melhor; azitromicina, como os 3 dias para garganta, não teve associação significativa. Na Hungria (4.744 pacientes), a maioria das cepas resistentes estava em quem nunca tinha usado macrolídeo: a resistência vem sobretudo da comunidade. A AGA é mais conservadora e evita claritromicina após qualquer macrolídeo.</p>
+          <p>Para quinolona não há dado de que o efeito diminua com o tempo: a resistência cresce com o número de cursos, e a AGA evita levofloxacino após qualquer uso prévio.</p>
+          <p>Mesmo sem uso prévio, a resistência primária no Brasil é de cerca de 17% para claritromicina e 13,5% para quinolonas.</p>
+        </details>
+      </fieldset>
+
+      <details class="more" id="more">
+        <summary>Mais dados: medicações e perfil <span class="count" id="moreCount"></span></summary>
+        <div class="inner">
+          <fieldset>
+            <legend>Medicações em uso</legend>
+            <div class="checks">
+              <label><input type="checkbox" id="mColch"> Colchicina</label>
+              <label><input type="checkbox" id="mStatin"> Sinvastatina, lovastatina ou atorvastatina</label>
+              <label><input type="checkbox" id="mWarf"> Anticoagulante oral (varfarina, rivaroxabana, apixabana, dabigatrana)</label>
+              <label><input type="checkbox" id="mContra"> Anticoncepcional hormonal</label>
+              <label><input type="checkbox" id="mArv"> Antirretrovirais (HIV)</label>
+              <label><input type="checkbox" id="pQT"> Risco de QT longo (cardiopatia, antiarrítmico, antipsicótico)</label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Perfil</legend>
+            <div class="checks">
+              <label><input type="checkbox" id="pSimple"> Prefere esquema simples</label>
+              <label><input type="checkbox" id="pSmoke"> Fumante</label>
+              <label><input type="checkbox" id="pObese"> Obesidade</label>
+              <label><input type="checkbox" id="pFrail"> Idoso frágil</label>
+              <label><input type="checkbox" id="pProbio"> Associar probiótico</label>
+            </div>
+          </fieldset>
+        </div>
+      </details>
+    </form>
+
+    <main class="out" id="out"></main>
+    <p class="sr-only" id="srLive" aria-live="polite"></p>
+  </div>
+
+  <footer class="foot">
+    <p>Apoio à decisão baseado no V Consenso Brasileiro sobre a Infecção por <i>H. pylori</i> (2026, com a errata do Enunciado 20 aplicada). Taxas de erradicação por intenção de tratar, de estudos diferentes; não compare diretamente. Alertas de gestação, amamentação, idade, interações, função renal e hepática vêm de farmacologia padrão, não do consenso: confira na bula. A Tabela 6 traz só a frequência de claritromicina e levofloxacino no alérgico, e o texto não dá a dose da claritromicina no resgate do alérgico: nesses casos o app usa as doses usuais. Quando o esquema tem remédio de 6 em 6 horas, os de 2x/dia vão para 6h e 18h, para reduzir o número de horários. Vonoprazana para <i>H. pylori</i> é uso off-label no Brasil.</p>
+    <p>Ferramenta para uso pessoal; não substitui o julgamento clínico. Se for distribuída institucionalmente, avalie o enquadramento como software dispositivo médico (RDC Anvisa 657/2022). Versão do app: 20/10/2026.</p>
+  </footer>
+</div>
+
+<div class="jump" id="jump" role="region" aria-label="Resumo da conduta">
+  <div class="jt" id="jumpTxt"></div>
+  <button type="button" id="jumpBtn">Ver conduta</button>
+</div>
+<textarea class="copybuf" id="copybuf" aria-hidden="true" tabindex="-1"></textarea>
+
+<script>
+(function () {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const pad = (n) => String(n).padStart(2, "0");
+  const isoDate = (dt) => `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`;
+  const br = (dt) => `${pad(dt.getDate())}/${pad(dt.getMonth() + 1)}/${dt.getFullYear()}`;
+  const monthYear = (dt) => `${pad(dt.getMonth() + 1)}/${dt.getFullYear()}`;
+  const addDays = (dt, n) => { const x = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate()); x.setDate(x.getDate() + n); return x; };
+  const addYears = (dt, n) => new Date(dt.getFullYear() + n, dt.getMonth(), dt.getDate());
+  const parseIso = (v) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v || ""); return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : null; };
+  const joinE = (a) => (a.length <= 1 ? (a[0] || "") : `${a.slice(0, -1).join(", ")} e ${a.at(-1)}`);
+  const radio = (n) => { const e = document.querySelector(`input[name="${n}"]:checked`); return e ? e.value : ""; };
+  const ROMAN = ["0", "I", "II", "III", "IV"];
+  // OLGA/OLGIM: estágio pela combinação de graus [antro][corpo] (Rugge 2007; Capelle 2010)
+  const STAGE = [[0, 1, 2, 2], [1, 1, 2, 3], [2, 2, 3, 4], [3, 3, 4, 4]];
+  const SEP = "\n\n—————————————\n\n";
+
+  document.documentElement.lang = "pt-BR";
+
+  // ---------- preferências deste navegador (em try/catch: o armazenamento pode faltar) ----------
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } },
+  };
+  const ACC = ["hasBis", "hasTetra", "hasVono", "hasRifa"];
+  function applyAccessDefaults() {
+    let v = null;
+    try { v = JSON.parse(store.get("conduta-hp-acesso") || "null"); } catch (e) { v = null; }
+    if (v && typeof v === "object") ACC.forEach((id) => { if (typeof v[id] === "boolean") $(id).checked = v[id]; });
+  }
+
+  // ---------- matrizes OLGA/OLGIM ----------
+  function buildMx(el) {
+    const sys = el.dataset.sys, what = el.dataset.what;
+    let h = `<p class="mx-title"><b>${sys}</b>${what}</p><div class="mx-grid" role="group" aria-label="${sys}: grau no antro nas linhas, no corpo nas colunas"><span class="ax" aria-hidden="true"></span>`;
+    for (let c = 0; c < 4; c++) h += `<span class="ax c" aria-hidden="true">${c}</span>`;
+    for (let a = 0; a < 4; a++) {
+      h += `<span class="ax" aria-hidden="true">${a}</span>`;
+      for (let c = 0; c < 4; c++) {
+        const st = STAGE[a][c];
+        h += `<button type="button" class="cell st${st}" data-a="${a}" data-c="${c}" aria-pressed="false" aria-label="${what} antro ${a}, corpo ${c}: ${sys} ${ROMAN[st]}">${ROMAN[st]}</button>`;
+      }
+    }
+    el.innerHTML = h + `</div><p class="mx-read" id="${el.id}-read"></p>`;
+  }
+  function paintMx(el, a, c, stage) {
+    el.querySelectorAll(".cell").forEach((b) => {
+      const on = Number(b.dataset.a) === a && Number(b.dataset.c) === c;
+      b.setAttribute("aria-pressed", String(on));
+      b.tabIndex = on || ((a === null || c === null) && b.dataset.a === "0" && b.dataset.c === "0") ? 0 : -1;
+    });
+    const read = $(el.id + "-read");
+    if (a !== null && c !== null) read.innerHTML = `Antro ${a} · corpo ${c}<br><b class="${stage >= 3 ? "hi" : ""}">${el.dataset.sys} ${ROMAN[stage]}${stage >= 3 ? " · alto risco" : ""}</b> <button type="button" class="link" data-clear="${el.id}">limpar</button>`;
+    else if (a !== null || c !== null) read.innerHTML = `Grau incompleto <button type="button" class="link" data-clear="${el.id}">limpar</button>`;
+    else read.textContent = "Sem grau marcado";
+  }
+  document.querySelectorAll(".mx").forEach(buildMx);
+
+  $("startDate").value = isoDate(new Date());
+  const savedDoc = store.get("conduta-hp-doc");
+  if (savedDoc) $("doc").value = savedDoc;
+  $("doc").addEventListener("input", () => store.set("conduta-hp-doc", $("doc").value));
+  applyAccessDefaults();
+  $("more").open = window.matchMedia("(min-width: 861px)").matches;
+
+  // ---------- estado ----------
+  function grade(id) { const v = $(id).value; return v === "" ? null : Number(v); }
+  function state() {
+    const c = (id) => $(id).checked;
+    const ageRaw = $("age").value.trim();
+    const ageNum = ageRaw === "" ? null : Number(ageRaw);
+    const ageBad = ageNum !== null && (!Number.isFinite(ageNum) || ageNum < 0 || ageNum > 120);
+    const dx = radio("dx") || "hist";
+    const s = {
+      name: $("pName").value.trim(), doc: $("doc").value.trim(), sex: radio("sex"),
+      age: ageBad ? null : (ageNum === null ? null : Math.floor(ageNum)), ageBad,
+      start: parseIso($("startDate").value) || new Date(),
+      preg: c("sPreg"), ckd: c("sCkd"), hep: c("sHep"),
+      dx, indic: $("indic").value,
+      line: Number(radio("line") || 1), allergy: radio("allergy") || "no",
+      uClari: c("uClari"), uLevo: c("uLevo"), uBQT: c("uBQT"), uRifa: c("uRifa"), uDual: c("uDual"), uUnk: c("uUnk"), uTV: c("uTV"),
+      bis: c("hasBis"), tetra: c("hasTetra"), vono: c("hasVono"), rifa: c("hasRifa"),
+      macro: radio("macro") || "none", quino: radio("quino") || "low",
+      colch: c("mColch"), statin: c("mStatin"), warf: c("mWarf"), contra: c("mContra"), arv: c("mArv"), qt: c("pQT"),
+      simple: c("pSimple"), smoke: c("pSmoke"), obese: c("pObese"), frail: c("pFrail"), probio: c("pProbio"),
+      // histologia positiva implica biópsia feita
+      bxDone: dx === "hist" || c("bx"),
+      aA: grade("aA"), aC: grade("aC"), mA: grade("mA"), mC: grade("mC"),
+      migType: radio("migType") || "none", edaDate: parseIso($("edaDate").value), dysp: c("dysp"),
+      fh: c("fhGC") || $("indic").value === "familiarCG",
+    };
+    s.minor = s.age !== null && s.age < 18;
+    s.adj = s.ckd || s.hep; // receita substituída pelo quadro de ajustes
+    if (s.line === 1) { s.uClari = s.uLevo = s.uBQT = s.uRifa = s.uDual = s.uUnk = s.uTV = false; }
+    if (s.allergy === "no") s.uTV = false;
+    // endoscopia já feita: biópsia informada ou diagnóstico por método invasivo
+    s.edaDone = s.bxDone || s.dx === "urease";
+    s.clariUsed = s.uClari || s.uUnk;
+    if (!s.bxDone) { s.aA = s.aC = s.mA = s.mC = null; s.migType = "none"; s.dysp = false; s.edaDate = null; }
+    s.olga = s.aA !== null && s.aC !== null ? STAGE.at(s.aA).at(s.aC) : null;
+    s.olgim = s.mA !== null && s.mC !== null ? STAGE.at(s.mA).at(s.mC) : null;
+    s.staged = s.bxDone && s.olga !== null && s.olgim !== null;
+    s.migPresent = s.bxDone && ((s.olgim || 0) > 0 || s.migType !== "none");
+    s.highStage = s.bxDone && ((s.olga || 0) >= 3 || (s.olgim || 0) >= 3);
+    return s;
+  }
+  const stg = (x) => (x === null ? "—" : ROMAN.at(x));
+  const stageStr = (s, sep) => `OLGA ${stg(s.olga)}${sep}OLGIM ${stg(s.olgim)}`;
+  const DX_LABEL = { ubt: "teste respiratório com ¹³C-ureia positivo", fecal: "antígeno fecal monoclonal positivo", hist: "histologia positiva", urease: "teste rápido da urease positivo", sero: "sorologia positiva (sem outro teste)", neg: "teste negativo", none: "não testado" };
+  const LINE_LABEL = { 1: "1ª linha", 2: "2ª linha", 3: "Resgate" };
+
+  // ---------- remédios ----------
+  const mk = (n, q, p, t) => ({ n, q, p, t });
+  const Q6 = ["6h", "12h", "18h", "24h"], E8 = ["6h", "14h", "22h"];
+  // horários de 2x/dia: 8h e 20h; se o esquema tem remédio de 6/6 h ou 8/8 h, 6h e 18h (menos horários no dia)
+  const BID_STD = ["8h", "20h"], BID_EARLY = ["6h", "18h"];
+  const at2 = (t) => `às ${t[0]} e às ${t[1]}`;
+  function drugSet(bid) {
+    return {
+      bis: mk("Subcitrato de bismuto coloidal 240 mg", "manipular 28 cápsulas", `Tomar 1 cápsula ${at2(bid)}, 30 minutos antes do café da manhã e do jantar, por 14 dias.`, bid),
+      tetra: mk("Tetraciclina 500 mg", "56 cápsulas", "Tomar 1 cápsula de 6 em 6 horas (6h, 12h, 18h e 24h), com água, longe de leite e derivados, por 14 dias.", Q6),
+      metro400q: mk("Metronidazol 400 mg", "56 comprimidos", "Tomar 1 comprimido de 6 em 6 horas (6h, 12h, 18h e 24h), de preferência com alimento, por 14 dias.", Q6),
+      metro500q: mk("Metronidazol 250 mg", "112 comprimidos", "Tomar 2 comprimidos (500 mg) de 6 em 6 horas (6h, 12h, 18h e 24h), de preferência com alimento, por 14 dias.", Q6),
+      clari: mk("Claritromicina 500 mg", "28 comprimidos", `Tomar 1 comprimido ${at2(bid)}, por 14 dias.`, bid),
+      amox2: mk("Amoxicilina 500 mg", "56 cápsulas", `Tomar 2 cápsulas (1 g) ${at2(bid)}, por 14 dias.`, bid),
+      amox3: mk("Amoxicilina 500 mg", "84 cápsulas", "Tomar 2 cápsulas (1 g) de 8 em 8 horas (6h, 14h e 22h), por 14 dias.", E8),
+      amox4: mk("Amoxicilina 500 mg", "112 cápsulas", "Tomar 2 cápsulas (1 g) de 6 em 6 horas (6h, 12h, 18h e 24h), por 14 dias.", Q6),
+      levo: mk("Levofloxacino 500 mg", "14 comprimidos", "Tomar 1 comprimido às 8h, por 14 dias.", ["8h"]),
+      rifa: mk("Rifabutina 150 mg", "28 cápsulas", `Tomar 1 cápsula ${at2(bid)}, por 14 dias.`, bid),
+    };
+  }
+  function antisec(s, bid, high) {
+    if (s.vono) return mk("Vonoprazana 20 mg", "28 comprimidos", `Tomar 1 comprimido ${at2(bid)}, por 14 dias.`, bid);
+    // obeso na dupla: amoxicilina de 6/6 h; IBP 4x/dia nos mesmos horários (Tabela 3: IBP em dose alta 3 ou 4x/dia)
+    if (high && s.obese) return mk("Omeprazol 20 mg", "112 cápsulas", "Tomar 2 cápsulas (40 mg) de 6 em 6 horas (6h, 12h, 18h e 24h), por 14 dias.", Q6);
+    if (high) return mk("Omeprazol 20 mg", "126 cápsulas", "Tomar 3 cápsulas (60 mg) de 8 em 8 horas (6h, 14h e 22h), por 14 dias.", E8);
+    return mk("Omeprazol 40 mg", "28 cápsulas", `Tomar 1 cápsula ${at2(bid)}, 30 a 60 minutos antes do café da manhã e do jantar, por 14 dias.`, bid);
+  }
+  const PROBIO = mk("Probiótico com Lactobacillus, Bifidobacterium e/ou Saccharomyces boulardii", "conforme apresentação", "Tomar conforme orientação do fabricante, durante os 14 dias do tratamento (cepa e dose não definidas pelo consenso).", []);
+  const RA = "Receita A – farmácia de manipulação", RB = "Receita B – antimicrobiano, 2 vias", RX = "Receita de antimicrobiano – 2 vias";
+
+  // ---------- esquemas (taxa: [número principal, nota]) ----------
+  const R = {
+    M1: { name: "Quádrupla com bismuto", drugs: ["bis", "tetra", "metro"], needBis: true, strength: "Forte", src: "Enunciados 28–30; Tabelas 3–5", align: true,
+      rate: { 1: [">90%"], 2: ["76–82%"], 3: ["76%", "Hp-EuReg, 3ª linha"], A1: ["89–90%"] },
+      simple: "4 remédios; tetraciclina e metronidazol 4x/dia",
+      build: (s, D, bid) => [{ title: RA, lines: [D.bis] }, { title: RB, lines: [D.tetra, D.metro400q, antisec(s, bid)] }] },
+    M9: { name: "Claritromicina + amoxicilina + bismuto", drugs: ["bis", "clari", "amox"], needBis: true, strength: "Fraca", src: "Enunciado 28; Tabela 3", align: false,
+      rate: { 1: [">90%"] }, simple: "4 remédios, todos 2x/dia",
+      build: (s, D, bid) => [{ title: RA, lines: [D.bis] }, { title: RB, lines: [D.clari, D.amox2, antisec(s, bid)] }] },
+    M2: { name: "Tripla com vonoprazana", drugs: ["clari", "amox"], needVono: true, strength: "Fraca", src: "Enunciados 27–28; Tabela 3", align: false,
+      rate: { 1: ["81%", "Ocidente; 85–89% na Ásia; 66% se resistente à claritromicina"] }, simple: "3 remédios, todos 2x/dia",
+      build: (s, D, bid) => [{ title: RX, lines: [D.clari, D.amox2, antisec(s, bid)] }] },
+    M3: { name: "Dupla em dose alta", drugs: ["amox"], strength: "Fraca", src: "Enunciados 28–30; Tabelas 3–5", align: true,
+      rate: { "1v": ["77%", "Ocidente; 83–89% na Ásia"], "1p": ["86–87%", "89–96% na América Latina e em Portugal"], "2v": ["75%", "Hp-BraReg, n=24"], "2p": ["100%", "estudo português pequeno"], "3v": ["74–93%", "100% no Hp-BraReg, n=36"], "3p": ["51–76%"] },
+      simple: "2 remédios; amoxicilina 3x/dia",
+      build: (s, D, bid) => [{ title: RX, lines: [s.obese ? D.amox4 : D.amox3, antisec(s, bid, true)] }] },
+    M8: { name: "Concomitante", drugs: ["clari", "amox", "metro"], strength: "Fraca", src: "Enunciado 28; Tabela 3", align: true,
+      rate: { 1: [">90%", "registros de vida real"] }, simple: "4 remédios; metronidazol 4x/dia",
+      build: (s, D, bid) => [{ title: RX, lines: [D.clari, D.amox2, D.metro500q, antisec(s, bid)] }] },
+    M4: { name: "Levofloxacino + amoxicilina + bismuto", drugs: ["bis", "levo", "amox"], needBis: true, strength: "Fraca", src: "Enunciado 29; Tabela 4", align: false,
+      rate: { 2: ["88–100%"] }, simple: "4 remédios; levofloxacino 1x/dia, demais 2x/dia",
+      build: (s, D, bid) => [{ title: RA, lines: [D.bis] }, { title: RB, lines: [D.levo, D.amox2, antisec(s, bid)] }] },
+    M5: { name: "Tripla com rifabutina", drugs: ["rifa", "amox"], needRifa: true, strength: "Fraca", src: "Enunciado 30; Tabela 5", align: false,
+      rate: { 3: ["71–89%"] }, simple: "3 remédios, todos 2x/dia",
+      build: (s, D, bid) => [{ title: RX, lines: [D.rifa, D.amox2, antisec(s, bid)] }] },
+    M6: { name: "Tetraciclina + vonoprazana", drugs: ["tetra"], needVono: true, strength: "Condicional", src: "Enunciado 32; Tabela 6", align: true,
+      rate: { A1: ["92%", "ensaio randomizado, n=300"], A2: ["Sem dado", "92% na 1ª linha"], A3: ["Sem dado", "92% na 1ª linha"] }, simple: "2 remédios; tetraciclina 4x/dia",
+      build: (s, D, bid) => [{ title: RX, lines: [D.tetra, antisec(s, bid)] }] },
+    M7: { name: "Claritromicina + levofloxacino", drugs: ["clari", "levo"], strength: "Condicional", src: "Enunciado 32; Tabela 6 (doses usuais)", align: false,
+      rate: { A2: ["64–100%"], A3: ["Sem dado", "64–100% na 2ª linha"] }, simple: "3 remédios; levofloxacino 1x/dia",
+      build: (s, D, bid) => [{ title: RX, lines: [D.clari, D.levo, antisec(s, bid)] }] },
+    M14: { name: "Claritromicina + metronidazol", drugs: ["clari", "metro"], strength: "Texto", src: "Enunciado 32, texto (metronidazol 1,5–1,6 g/dia)", align: true,
+      rate: { A3: ["Sem dado", "não informada no consenso"] }, simple: "3 remédios; metronidazol 4x/dia",
+      build: (s, D, bid) => [{ title: RX, lines: [D.clari, D.metro400q, antisec(s, bid)] }] },
+  };
+  function buildRx(id, s) {
+    const g = R[id];
+    const bid = g.align ? BID_EARLY : BID_STD;
+    const recs = g.build(s, drugSet(bid), bid);
+    if (s.probio) recs.push({ title: "Receita simples", lines: [PROBIO] });
+    return recs;
+  }
+  const regName = (id) => (R[id] ? R[id].name : (id === "TT" ? "Tripla clássica com IBP" : "Levofloxacino + amoxicilina sem bismuto"));
+  // força: "Forte"/"Fraca" (GRADE dos enunciados), "Condicional" (Tabela 6), "Texto" (citado só no texto)
+  const strengthChip = (g) => (g.strength === "Texto" ? "Sem recomendação formal" : `Recomendação ${g.strength.toLowerCase()}`);
+  const strengthTxt = (g) => (g.strength === "Texto" ? `sem recomendação formal; ${g.src}` : `${g.strength.toLowerCase()} (${g.src})`);
+  function rateFor(id, s, allergic) {
+    const r = R[id].rate;
+    if (allergic) return r["A" + s.line] || r[s.line] || ["—"];
+    if (id === "M3") return r[s.line + (s.vono ? "v" : "p")] || r[s.line] || ["—"];
+    return r[s.line] || ["—"];
+  }
+  const rateTxt = (r) => (r[1] ? `${r[0]} (${r[1]})` : r[0]);
+
+  // ---------- indicações (Tabela 1) ----------
+  const INDIC = {
+    gastrite: { label: "Gastrite crônica por H. pylori", notes: ["Erradicar em todos os casos (Enunciado 4, recomendação forte): elimina a atividade inflamatória, interrompe a progressão do dano e reduz o risco de úlcera, câncer gástrico e linfoma MALT."] },
+    ulcera: { label: "Úlcera péptica", notes: ["Erradicar sempre que houver opção terapêutica (Enunciado 5).", "Após a erradicação, a recidiva anual é de 0–2,3% na úlcera gástrica e 0–1,6% na duodenal, contra 52% e 64% sem tratamento.", "Na úlcera hemorrágica, histologia e teste da urease podem dar falso-negativo; a sorologia IgG pode complementar o diagnóstico (Enunciado 17)."] },
+    dispNaoInv: { label: "Dispepsia não investigada", notes: ["Até 45 anos, sem sinais de alarme: testar e tratar com teste não invasivo (Enunciado 6).", "Com sinais de alarme, a partir de 40 anos, ou após falha do testar e tratar: endoscopia com biópsias (Enunciado 18). Entre 40 e 45 anos os dois enunciados se sobrepõem; o Enunciado 18 indica endoscopia a partir de 40."] },
+    dispInv: { label: "Dispepsia investigada", notes: ["Erradicar como primeira conduta (Enunciado 7). O benefício é modesto: NNT de 9 a 15 para melhora e de 11 a 21 para cura.", "Resolução sustentada por mais de 6 meses após a erradicação caracteriza dispepsia associada ao H. pylori; persistência dos sintomas caracteriza dispepsia funcional."] },
+    preneo: { label: "Condição ou lesão pré-neoplásica", notes: ["Erradicar em todos os casos de atrofia, metaplasia ou displasia (Enunciado 8). A regressão é mais provável nos estágios iniciais.", "Na atrofia ou metaplasia extensa, prefira teste não invasivo para diagnóstico e controle: a bactéria rareia e a histologia pode dar falso-negativo.", "Vigilância conforme OLGA/OLGIM, tipo de metaplasia e história familiar (Enunciado 22; quadro de vigilância)."] },
+    malt: { label: "Linfoma MALT gástrico", notes: ["Erradicar em todo paciente H. pylori-positivo, em qualquer estágio (Enunciado 9).", "Controle de cura pelo menos 6 semanas após o início, com 2 semanas sem IBP e 4 semanas sem antibiótico (a data do teste já considera isso).", "Histologia de controle 3 a 6 meses após a erradicação, graduada pelo GELA. Remissão completa ou doença residual mínima provável: vigilância endoscópica regular.", "Doença persistente com sintomas ou progressão: tratamento específico. Remissão clínica e endoscópica com linfoma microscópico: aguardar pelo menos 12 meses antes de novo tratamento.", "H. pylori-negativo: o tratamento empírico pode ser tentado; sem resposta em 3 a 6 meses, tratamento específico. Negativo ou refratário: pesquisar t(11;18) por FISH."] },
+    posres: { label: "Após ressecção de câncer gástrico", notes: ["Erradicar em todo infectado (Enunciado 10). Após ressecção endoscópica de câncer precoce, a erradicação reduz o câncer metacrônico (evidência alta).", "Após gastrectomia a evidência é observacional, e diagnóstico e tratamento são mais difíceis no estômago operado. O seguimento oncológico segue protocolo próprio.", "Pais, irmãos e filhos do paciente têm risco 2 a 3 vezes maior: veja o texto para familiares."] },
+    familiarCG: { label: "Parente de 1º grau de paciente com câncer gástrico", notes: ["Testar e tratar (Enunciado 11): de 20 a 29 anos por teste não invasivo; a partir de 30 anos, endoscopia com biópsias de antro e corpo para diagnóstico e estadiamento.", "Em ensaio randomizado com 1.676 familiares, o tratamento reduziu o risco de câncer em 55%, e a erradicação confirmada, em 73%."] },
+    aine: { label: "Uso de AAS, AINE ou antiagregante", notes: ["Testar e erradicar, se possível antes de iniciar (Enunciado 12). Teste negativo bem feito: não há o que tratar.", "A infecção aumenta o risco de sangramento cerca de 1,7 vez com antitrombóticos e 8,4 vezes com antiagregantes. No estudo HEAT, o benefício em usuários de AAS se perdeu após 2,5 anos."] },
+    drge: { label: "DRGE com antissecretor contínuo", notes: ["Testar e erradicar (Enunciado 14). A erradicação não piora a resposta ao antissecretor e evita a gastrite corpo-predominante e a atrofia favorecidas pelo IBP crônico.", "Se o paciente mantém o antissecretor após o tratamento, suspenda 2 semanas antes do teste de controle (data na linha do tempo)."] },
+    anemia: { label: "Anemia ferropriva sem causa aparente ou PTI", notes: ["Erradicar depois de investigar com endoscopia e colonoscopia e excluir outras causas (Enunciado 13).", "Na anemia ferropriva, erradicação mais ferro eleva ferritina e hemoglobina mais que o ferro isolado.", "Na PTI, cerca de 40–50% têm aumento sustentado das plaquetas: reavalie a contagem após a erradicação."] },
+    bariatrica: { label: "Candidato a cirurgia bariátrica", notes: ["Endoscopia e teste para H. pylori antes de qualquer técnica; erradicar e confirmar a cura (Enunciado 15). Dois terços dos especialistas erradicam e confirmam a cura antes de operar.", "Sem erradicação pré-operatória, o risco de úlcera marginal aumenta (OR 6,88). Na obesidade, a dupla usa amoxicilina 1 g de 6 em 6 horas."] },
+    desejo: { label: "Desejo do paciente", notes: ["Indicação para erradicar uma infecção confirmada, após discussão com o médico (Enunciado 16). Não autoriza tratar sem teste positivo.", "Decisão compartilhada, sobretudo em idosos frágeis ou quando o benefício esperado é pequeno."] },
+  };
+
+  // ---------- decisão ----------
+  function decide(s) {
+    const allergic = s.allergy !== "no";
+    const flags = [], avoid = [], reasons = {};
+    const blocks = [];
+    if (s.preg) blocks.push("preg");
+    if (s.minor) blocks.push("minor");
+    if (s.dx === "none") blocks.push("dxNone");
+    if (s.dx === "neg" && s.indic !== "malt") blocks.push("dxNeg");
+    // Enunciado 17: sorologia como complemento na baixa carga bacteriana (úlcera sangrante, MALT, câncer gástrico, atrofia)
+    const atrophy = s.bxDone && ((s.aA || 0) > 0 || (s.aC || 0) > 0);
+    const seroOk = s.indic === "malt" || s.indic === "ulcera" || s.indic === "posres" || atrophy || s.highStage;
+    if (s.dx === "sero" && !seroOk) blocks.push("dxSero");
+    if (blocks.length) return { blocked: true, blocks, allergic, pick: null, alts: [], avoid, flags, reasons };
+
+    if (s.dx === "neg" && s.indic === "malt") flags.push(["warn", "Linfoma MALT H. pylori-negativo: tratamento empírico (Enunciado 9). Sem resposta endoscópica ou histológica em 3 a 6 meses, tratamento específico; pesquisar t(11;18) por FISH."]);
+    if (s.dx === "sero") flags.push(["warn", s.indic === "ulcera"
+      ? "Diagnóstico só por sorologia: o consenso a aceita como complemento na úlcera sangrante (Enunciado 17). Sem sangramento, confirme com teste respiratório, antígeno fecal ou histologia, se possível."
+      : "Diagnóstico só por sorologia: aceito como complemento nesta situação de baixa carga bacteriana (Enunciado 17). Se possível, confirme com outro método."]);
+    if (s.staged && s.olgim === 0 && s.migType !== "none") flags.push(["warn", "Tipo de metaplasia marcado, mas os graus de metaplasia estão em 0: confira o laudo."]);
+    if (s.edaDate && s.edaDate > new Date()) flags.push(["warn", "Data da endoscopia no futuro: confira o campo."]);
+    if (s.start > addDays(new Date(), 10)) flags.push(["warn", "Início do tratamento daqui a mais de 10 dias: a receita de antimicrobiano vale 10 dias a partir da emissão (RDC Anvisa 20/2011). Emita a receita mais perto do início."]);
+    if (s.bxDone && !s.staged) flags.push(["warn", "Estadiamento OLGA/OLGIM pendente: marque os graus de atrofia e de metaplasia nas matrizes da biópsia. Se o laudo não descreve nenhuma das duas, use \"Laudo sem atrofia e sem metaplasia\"."]);
+
+    let order;
+    if (!allergic) {
+      if (s.line === 1) {
+        // preferência por esquema simples: claritromicina + amoxicilina + bismuto (mesma taxa, tudo 2x/dia) passa à frente
+        if (s.bis) order = s.macro !== "high" ? (s.simple ? ["M9", "M1", "M2", "M3", "M8"] : ["M1", "M9", "M3", "M2", "M8"]) : ["M1", "M3", "M9", "M2", "M8"];
+        else order = s.macro !== "high" ? ["M2", "M3", "M8"] : ["M3", "M2", "M8"];
+      } else if (s.line === 2) {
+        order = s.quino === "low" ? ["M1", "M4", "M3"] : ["M1", "M3", "M4"];
+      } else {
+        order = ["M1", "M5", "M3"];
+      }
+    } else {
+      if (s.line === 1) order = ["M1", "M6"];
+      else if (s.line === 2) order = ["M1", "M6", "M7"];
+      else order = ["M1", "M14", "M7"];
+    }
+
+    const ok = order.filter((id) => {
+      const g = R[id];
+      let why = null;
+      if (g.needBis && !s.bis) why = "Sem acesso a bismuto";
+      else if (g.drugs.includes("tetra") && !s.tetra) why = "Sem tetraciclina disponível; a doxiciclina não substitui";
+      else if (g.needVono && !s.vono) why = "Vonoprazana não disponível";
+      else if (g.needRifa && !s.rifa) why = "Rifabutina indisponível; precisa importar";
+      else if (allergic && g.drugs.includes("amox")) why = "Contém amoxicilina";
+      else if (s.ckd && (g.drugs.includes("tetra") || g.drugs.includes("bis"))) why = "Evitar tetraciclina e bismuto com TFG < 30";
+      else if (s.ckd && id === "M3") why = "Dose alta de amoxicilina não se aplica com TFG < 30";
+      else if (s.colch && g.drugs.includes("clari")) why = "Interação grave da claritromicina com a colchicina";
+      else if (s.line > 1 && s.clariUsed && g.drugs.includes("clari")) why = s.uClari ? "Claritromicina já usada; não repetir" : "Esquema anterior desconhecido; presume-se claritromicina, não repetir";
+      else if (s.line > 1 && s.uLevo && g.drugs.includes("levo")) why = "Levofloxacino já usado; não repetir";
+      else if (s.ckd && s.hep && g.drugs.includes("clari")) why = "Evitar claritromicina com insuficiência renal e hepática graves";
+      else if (s.line === 2 && s.uBQT && id === "M1") why = "Quádrupla com bismuto já usada na 1ª linha";
+      else if (s.line > 1 && s.uTV && id === "M6") why = "Tetraciclina + vonoprazana já usada";
+      else if (s.line > 1 && s.uRifa && id === "M5") why = "Rifabutina já usada";
+      else if (s.line > 1 && s.uDual && id === "M3") why = "Dupla com amoxicilina em dose alta já usada";
+      else if (s.quino === "high" && g.drugs.includes("levo")) why = "2 ou mais cursos de quinolona; alta chance de resistência ao levofloxacino";
+      else if (!allergic && s.macro === "high" && g.drugs.includes("clari")) why = "Uso prévio de claritromicina, eritromicina ou roxitromicina; alta chance de resistência";
+      if (why) { avoid.push([id, why, /^(Sem acesso|Sem tetraciclina|Vonoprazana não disponível|Rifabutina indisponível)/.test(why) ? "na" : "avoid"]); return false; }
+      if (g.drugs.includes("clari")) {
+        if (s.macro === "azi" || s.macro === "unk") reasons[id] = "Azitromicina isolada não alterou a erradicação da tripla no maior estudo individual; conduta mantida (a AGA, mais conservadora, evitaria claritromicina).";
+        if (s.macro === "high") reasons[id] = "Atenção: macrolídeo prévio aumenta muito a chance de resistência; considere teste de suscetibilidade.";
+      }
+      if (id === "M1" && s.line === 3 && s.uBQT) reasons[id] = "Já usada antes: o consenso permite repetir com metronidazol em dose alta (1,6 g/dia, já na receita).";
+      if (g.drugs.includes("levo") && s.quino === "mod") reasons[id] = (reasons[id] ? reasons[id] + " " : "") + "Quinolona prévia: risco de resistência ao levofloxacino; a AGA recomenda evitar após qualquer uso.";
+      return true;
+    });
+
+    if (!allergic && s.line === 1 && !s.vono) avoid.push(["TT", "Só se resistência à claritromicina <15% ou suscetibilidade confirmada; 78% no Hp-BraReg (Enunciados 28 e 31)", "avoid"]);
+    if (!allergic && s.line === 2) avoid.push(["M13", "57–73% no Brasil; usar só após teste de suscetibilidade (Enunciados 29 e 31)", "avoid"]);
+
+    const pick = ok[0] || null;
+    const pd = pick ? R[pick].drugs : [];
+    if (s.allergy === "doubt") flags.push(["warn", "Alergia duvidosa: menos de 5% de quem refere alergia à penicilina tem alergia verdadeira. Considere teste cutâneo ou alergista; liberar a amoxicilina amplia muito as opções. Até lá, a conduta trata como alérgico."]);
+    if (s.line > 1 && s.uUnk) flags.push(["warn", "Esquema anterior desconhecido: como 95% dos tratamentos de 1ª linha no Hp-BraReg usaram claritromicina, o app assume que ela já foi usada."]);
+    if (s.line === 3) flags.push(["warn", "Após 3 falhas, peça teste de suscetibilidade (cultura ou PCR), se disponível (Enunciado 31)."]);
+    if (s.ageBad) flags.push(["warn", "Idade fora do intervalo válido: confira o campo."]);
+    if (s.indic === "dispNaoInv") {
+      if (s.edaDone) flags.push(["warn", "Com endoscopia já feita, a dispepsia é investigada: ajuste a indicação para \"Dispepsia investigada\" (Enunciado 7)."]);
+      else if (s.age === null) flags.push(["warn", "Informe a idade: a partir de 40 anos, a dispepsia tem indicação de endoscopia com biópsias antes de tratar (Enunciado 18)."]);
+      else if (s.age >= 40) flags.push(["bad", `Dispepsia aos ${s.age} anos: o Enunciado 18 indica endoscopia com biópsias a partir de 40 anos. Faça a endoscopia antes de tratar.`]);
+    }
+    if (s.indic === "familiarCG" && s.age !== null) {
+      if (s.age < 20) flags.push(["warn", "O Enunciado 11 indica testar parentes de 1º grau de câncer gástrico a partir de 20 anos."]);
+      else if (s.age >= 30 && !s.edaDone) flags.push(["bad", `Parente de câncer gástrico aos ${s.age} anos: a partir de 30, o Enunciado 11 indica endoscopia com biópsias de antro e corpo para diagnóstico e estadiamento.`]);
+    }
+    if (s.frail) flags.push(["warn", "Idoso frágil: decisão compartilhada sobre tratar, pesando o benefício esperado contra efeitos adversos e reexposição a antibióticos (Enunciado 16)."]);
+    if (pick && (s.ckd || s.hep)) flags.push(["bad", `${adjCause(s).charAt(0).toUpperCase() + adjCause(s).slice(1)}: a receita não é gerada automaticamente. Ajuste as doses conforme o quadro abaixo e confira na bula${s.hep ? "; considere discutir com hepatologia" : ""}.`]);
+    if (s.arv) flags.push(["bad", "Antirretrovirais: claritromicina, rifabutina e vonoprazana têm interações importantes (ritonavir e cobicistat elevam níveis; atazanavir e rilpivirina dependem da acidez gástrica). Revise o esquema com o infectologista antes de prescrever."]);
+    if (pick && s.qt && pd.some((x) => x === "clari" || x === "levo")) flags.push(["bad", "Risco de QT longo com claritromicina/levofloxacino: peça ECG antes de iniciar."]);
+    if (pick && s.statin && pd.includes("clari")) flags.push(["bad", "Estatina + claritromicina: risco de rabdomiólise. Suspenda sinvastatina ou lovastatina durante os 14 dias; atorvastatina, reduza ou suspenda."]);
+    if (pick && s.warf && pd.some((x) => x === "clari" || x === "metro" || x === "levo")) flags.push(["warn", "Anticoagulante: claritromicina, metronidazol e levofloxacino potencializam a varfarina (controle o INR durante e logo após o tratamento); a claritromicina eleva os níveis de rivaroxabana, apixabana e dabigatrana (observe sangramento)."]);
+    if (pick && pd.includes("levo") && s.age !== null && s.age >= 60) flags.push(["warn", "Levofloxacino a partir de 60 anos: maior risco de tendinite e ruptura de tendão, sobretudo com corticoide. Oriente suspender e procurar atendimento se houver dor em tendão."]);
+    if (pick && s.contra && pd.includes("rifa")) flags.push(["warn", "Rifabutina reduz a eficácia do anticoncepcional hormonal: use método de barreira durante o tratamento e por 4 semanas após."]);
+    if (pick && s.colch && !pd.includes("clari")) flags.push(["warn", "Colchicina em uso: esquemas com claritromicina foram retirados pela interação grave."]);
+    if (pick && !allergic && s.line === 1 && pd.includes("clari") && !pd.includes("bis")) flags.push(["warn", "Resistência primária à claritromicina no Brasil: cerca de 17%, acima do limite de 15%. Sem bismuto, esquemas com claritromicina perdem eficácia; faça sempre o controle de cura."]);
+    if (pick && pd.includes("levo")) flags.push(["warn", "Resistência primária a quinolonas no Brasil: cerca de 13,5%. No Hp-BraReg, levofloxacino sem bismuto erradicou só 57–73%; mantenha o bismuto no esquema."]);
+    if (s.smoke) flags.push(["warn", "Tabagismo quase dobra a chance de falha: oriente parar durante o tratamento."]);
+    if (pick === "M3" && s.obese) flags.push(["warn", `Obesidade: na dupla, amoxicilina 1 g de 6 em 6 horas${s.vono ? "" : ", com o omeprazol nos mesmos horários"} (já ajustado na receita).`]);
+    if (!pick) {
+      const onlyAccess = avoid.filter((a) => R[a[0]]).every((a) => a[2] === "na");
+      flags.push(["bad", s.line === 3 ? "Os esquemas recomendados já foram usados ou não estão disponíveis. Siga o roteiro de caso refratário abaixo."
+        : s.ckd ? "Com TFG < 30, as opções ficam restritas. Discuta esquema e doses com nefrologia ou gastroenterologia."
+        : onlyAccess ? "Nenhum esquema recomendado está disponível com o acesso informado. Revise bismuto, tetraciclina, vonoprazana e rifabutina."
+        : allergic ? "Sem opção sem amoxicilina nas condições informadas. Confirme a alergia (teste cutâneo ou alergista), que libera a maioria dos esquemas, ou revise o acesso."
+        : "Os esquemas recomendados para esta linha já foram usados ou devem ser evitados. Peça teste de suscetibilidade, se disponível (Enunciado 31), e discuta com gastroenterologia."]);
+    }
+    // alertas graves primeiro (ordenação estável mantém a ordem dentro de cada grupo)
+    flags.sort((a, b) => (a[0] === "bad" ? 0 : 1) - (b[0] === "bad" ? 0 : 1));
+    return { blocked: false, blocks, allergic, pick, alts: ok.slice(1), avoid, flags, reasons };
+  }
+
+  function whyText(id, s, allergic) {
+    const L = s.line;
+    const map = {
+      M1: L === 1 ? (allergic ? "Opção mais consistente no alérgico, sem amoxicilina, com 89–90% de erradicação." : "Única opção com recomendação forte. Pouco afetada pela resistência e não gasta claritromicina nem levofloxacino.")
+          : L === 2 ? "Preferida no retratamento quando não foi usada antes; dispensa teste de suscetibilidade."
+          : "Preferida no resgate quando o perfil de resistência é desconhecido; pode ser repetida com metronidazol em dose alta.",
+      M9: s.simple ? "Escolhida pela preferência por esquema simples: mesma taxa da quádrupla clássica em 1ª linha (>90%, inclusive com resistência à claritromicina), com todos os remédios 2x/dia. A quádrupla clássica, única com recomendação forte, fica como primeira alternativa." : "Mesma taxa da quádrupla clássica em 1ª linha, com todos os remédios 2x/dia.",
+      M2: s.simple ? "A mais prática sem bismuto: três remédios no mesmo horário, 2x/dia, e maior taxa que a dupla no ensaio EUA/Europa." : "Opção sem bismuto com maior taxa que a dupla no ensaio EUA/Europa (81% vs 77%).",
+      M3: L === 1 ? "Pouco afetada pela resistência, poucos efeitos adversos e preserva a claritromicina."
+          : L === 2 ? "Opção de 2ª linha quando não há bismuto ou a quádrupla e o levofloxacino não cabem (Enunciado 29); pouco afetada pela resistência."
+          : "Opção de resgate na falta de bismuto e de rifabutina (Enunciado 30); pouco afetada pela resistência.",
+      M8: "Maior taxa sem bismuto, ao custo de três antibióticos; falha com resistência dupla à claritromicina e ao metronidazol. Metronidazol 500 mg 4x/dia conforme a Tabela 3 do consenso (outras diretrizes usam 500 mg 2x/dia).",
+      M4: "Bismuto supera parte da resistência ao levofloxacino; no Brasil, 100% no Hp-BraReg.",
+      M5: "Resistência à rifabutina <1%; não inferior à quádrupla com bismuto, com menos efeitos adversos. Peça hemograma.",
+      M6: "Primeiro ensaio randomizado em alérgicos: 92%, não inferior à quádrupla com bismuto, com menos efeitos adversos.",
+      M7: L === 3 ? "Alternativa no resgate do alérgico que ainda não usou claritromicina nem levofloxacino; o consenso a cita para a 2ª linha (Enunciado 32)." : "Opção de 2ª linha no alérgico após revisar o esquema inicial (Enunciado 32).",
+      M14: "Indicada após segunda falha no alérgico que ainda não usou claritromicina (Enunciado 32), com metronidazol em dose alta (1,6 g/dia). A dose da claritromicina é a usual; o consenso não a especifica.",
+    };
+    return map[id];
+  }
+
+  // ---------- função renal e hepática: quadro de ajustes no lugar da receita (farmacologia padrão) ----------
+  const adjCause = (s) => [s.ckd && "TFG < 30 mL/min", s.hep && "hepatopatia grave"].filter(Boolean).join(" e ");
+  function adjText(id, s) {
+    const g = R[id];
+    const t = [`AJUSTE PARA ${adjCause(s)} – conferir na bula antes de prescrever`, ""];
+    if (g.drugs.includes("bis")) t.push("- Subcitrato de bismuto: sem ajuste hepático específico" + (s.ckd ? "; evitar na insuficiência renal grave." : "."));
+    if (g.drugs.includes("tetra")) t.push("- Tetraciclina: " + [s.ckd && "evitar na insuficiência renal grave", s.hep && "hepatotóxica; usar com cautela e monitorar enzimas hepáticas"].filter(Boolean).join("; ") + ".");
+    if (g.drugs.includes("clari")) t.push("- Claritromicina: " + (s.ckd ? "reduzir a dose em 50% (250 mg 12/12 h ou 500 mg 1x/dia)" + (s.hep ? "; com hepatopatia grave associada, evitar" : "") : "sem ajuste se a função renal é normal; monitorar") + ".");
+    if (g.drugs.includes("amox")) t.push("- Amoxicilina: " + [s.ckd && "TFG 10–30, 500 mg de 12/12 h", s.hep && "monitorar a função hepática"].filter(Boolean).join("; ") + ".");
+    if (g.drugs.includes("levo")) t.push("- Levofloxacino: " + (s.ckd ? "500 mg no 1º dia; depois 250 mg 1x/dia (TFG 20–49) ou a cada 48 h (TFG 10–19)" : "sem ajuste na hepatopatia") + ".");
+    if (g.drugs.includes("metro")) t.push("- Metronidazol: " + (s.hep ? "reduzir a dose em 50% na hepatopatia grave" : "em geral sem ajuste (exceto hemodiálise)") + ".");
+    if (g.drugs.includes("rifa")) t.push("- Rifabutina: " + [s.ckd && "reduzir a dose em 50%", s.hep && "cautela na hepatopatia grave"].filter(Boolean).join("; ") + ".");
+    t.push(s.vono ? "- Vonoprazana: a exposição aumenta na insuficiência renal ou hepática grave; usar com cautela." : (s.hep ? "- Omeprazol: a exposição aumenta na hepatopatia grave; usar com cautela." : "- Omeprazol: sem ajuste renal."));
+    if (s.ckd) t.push("- Tetraciclina e bismuto: evitar na insuficiência renal grave.");
+    return t.join("\n");
+  }
+
+  // ---------- vigilância ----------
+  // Enunciado 22: alto risco (OLGA/OLGIM III–IV ou metaplasia incompleta) → 3 anos; com história familiar → 1–2 anos;
+  // história familiar com OLGA/OLGIM I–II → 3 anos.
+  function surv(s) {
+    if (!s.bxDone) return { text: `Sem biópsia: não há estadiamento OLGA/OLGIM. Se houver indicação de endoscopia, colha 2 biópsias do antro e 2 do corpo, em frascos separados.${s.fh ? " Com história familiar de câncer gástrico, a endoscopia está indicada a partir de 30 anos (Enunciado 11)." : ""}`, yrs: null };
+    if (s.dysp) return { text: "Displasia é lesão pré-cancerosa: erradicar e seguir conduta endoscópica específica (delimitação com magnificação/cromoendoscopia e manejo da lesão).", yrs: null };
+    const st = stageStr(s, " · ");
+    const incomplete = s.migType === "incomplete";
+    // alto risco já definido mesmo com laudo incompleto; o restante exige os 4 graus
+    if (!s.staged && !s.highStage && !incomplete) return { text: `Estadiamento incompleto (${st}): marque os graus de atrofia e de metaplasia nas matrizes para definir a vigilância.`, yrs: null };
+    if (s.highStage || incomplete) {
+      const why = s.highStage ? "estágio de alto risco" : "metaplasia incompleta";
+      return s.fh
+        ? { text: `${st}, ${why}, com história familiar: vigilância endoscópica a cada 1–2 anos (Enunciado 22).`, yrs: [1, 2] }
+        : { text: `${st}, ${why}: vigilância endoscópica a cada 3 anos (Enunciado 22).`, yrs: [3, 3] };
+    }
+    if (s.fh && (s.olga > 0 || s.olgim > 0)) return { text: `${st} com história familiar de câncer gástrico: vigilância endoscópica a cada 3 anos (Enunciado 22).`, yrs: [3, 3] };
+    if (s.migPresent) {
+      if (s.migType === "complete") return { text: `${st} com metaplasia completa, sem história familiar: sem indicação de vigilância endoscópica.`, yrs: null };
+      return { text: `${st} com metaplasia de tipo não informado: peça o tipo ao patologista. Se incompleta, vigilância a cada 3 anos; se completa e sem história familiar, sem vigilância.`, yrs: null };
+    }
+    if (s.olga > 0) return { text: `${st}: atrofia sem metaplasia, sem estágio de alto risco e sem história familiar. Erradicar; o consenso não indica vigilância nessa situação.`, yrs: null };
+    return { text: "OLGA 0 · OLGIM 0: sem atrofia nem metaplasia. Sem indicação de vigilância endoscópica; controle de cura não invasivo.", yrs: null };
+  }
+
+  // ---------- datas ----------
+  function dates(s) {
+    const end = addDays(s.start, 13);
+    let test = addDays(end, 28);
+    if (s.indic === "malt") { const m = addDays(s.start, 42); if (m > test) test = m; }
+    const sv = surv(s);
+    const base = s.edaDate || s.start;
+    const baseLbl = s.edaDate ? "a partir da endoscopia de " + br(s.edaDate) : "contado do início do tratamento; informe a data da endoscopia para precisão";
+    let eda = null, edaShort = null;
+    if (sv.yrs) {
+      edaShort = sv.yrs[0] === sv.yrs[1] ? `por volta de ${monthYear(addYears(base, sv.yrs[0]))}` : `entre ${monthYear(addYears(base, sv.yrs[0]))} e ${monthYear(addYears(base, sv.yrs[1]))}`;
+      eda = `${edaShort} (${baseLbl})`;
+    }
+    return { end, test, ppiStop: addDays(test, -14), h2Stop: addDays(test, -3), eda, edaShort, edaBase: baseLbl, maltHisto: [addDays(end, 90), addDays(end, 180)] };
+  }
+
+  // ---------- textos ----------
+  // minúscula só na 1ª letra de palavra comum; preserva siglas como TFG, DRGE, AAS
+  const lower1 = (w) => (/^[A-ZÀ-Ý][a-zà-ÿ]/.test(w) ? w.charAt(0).toLowerCase() + w.slice(1) : w);
+  function doseOf(p) { const m = /^Tomar (\d+ (?:cápsulas?|comprimidos?)(?: \([^)]*\))?)/.exec(p); return m ? m[1] : ""; }
+  // RDC 20/2011: receita de antimicrobiano com nome completo, idade e sexo do paciente; emitente com nome, CRM,
+  // endereço, telefone, assinatura e carimbo; data de emissão; 2 vias; validade de 10 dias
+  const SEX = { F: "feminino", M: "masculino" };
+  const docLines = (s) => (s.doc ? s.doc.split(/\n+/).map((x) => x.trim()).filter(Boolean) : []);
+  const headLines = (s, title) => [title, ...docLines(s), "",
+    `Paciente: ${s.name || "______________________"}`,
+    `Idade: ${s.age !== null ? s.age + " anos" : "______"} · Sexo: ${SEX[s.sex] || "______"}`,
+    `Data: ${br(new Date())}`];
+  const signLines = (s) => ["", "", "_______________________________", docLines(s)[0] || "Assinatura e carimbo"];
+
+  function rxParts(id, s) {
+    return buildRx(id, s).map((rec) => {
+      const out = [...headLines(s, rec.title.toUpperCase()), "", "USO ORAL"];
+      rec.lines.forEach((l, i) => { out.push(`${i + 1}. ${l.n} ........ ${l.q}`); out.push(`   ${l.p}`); });
+      out.push(...signLines(s));
+      return out.join("\n");
+    });
+  }
+
+  function justText(s, d, dt) {
+    const used = [s.uClari && "claritromicina", s.uLevo && "levofloxacino", s.uBQT && "quádrupla com bismuto", s.uRifa && "rifabutina", s.uDual && "dupla com amoxicilina em dose alta", s.uTV && "tetraciclina + vonoprazana", s.uUnk && "esquema desconhecido (presumida claritromicina)"].filter(Boolean);
+    let linha = s.line === 1 ? "sem tratamento prévio (1ª linha)" : s.line === 2 ? "falha de 1 tratamento prévio (2ª linha)" : "falha de 2 ou mais tratamentos (resgate)";
+    if (s.line > 1) linha += used.length ? `; esquemas já utilizados: ${used.join(", ")}` : "; esquemas prévios não informados";
+    const alerg = { no: "Sem alergia à penicilina.", yes: "Alergia à penicilina referida.", doubt: "Alergia à penicilina duvidosa; conduzido como alérgico até avaliação (teste cutâneo ou alergista)." }[s.allergy];
+    const mac = s.line > 1 && s.uClari && s.macro !== "high" ? "claritromicina em tratamento prévio do H. pylori" : { none: "nunca", azi: "apenas azitromicina", unk: "não sabe informar", high: "claritromicina, eritromicina ou roxitromicina" }[s.macro];
+    const qui = s.line > 1 && s.uLevo && s.quino === "low" ? "levofloxacino em tratamento prévio do H. pylori" : { low: "nunca", mod: "1 curso ou não sabe informar", high: "2 ou mais cursos" }[s.quino];
+    const hist = !s.bxDone ? "não realizada." : stageStr(s, ", ") + (s.staged ? "" : " (graus do laudo incompletos)") + (s.migType !== "none" ? `, metaplasia intestinal ${s.migType === "incomplete" ? "incompleta" : "completa"}` : "") + (s.dysp ? ", displasia" : "") + (s.edaDate ? ` (endoscopia de ${br(s.edaDate)})` : "") + ".";
+    const meds = [s.colch && "colchicina", s.statin && "estatina", s.warf && "anticoagulante oral", s.contra && "anticoncepcional hormonal", s.arv && "antirretrovirais"].filter(Boolean);
+    const comorb = [s.ckd && "TFG < 30 mL/min", s.hep && "hepatopatia grave", s.qt && "risco de QT longo", s.frail && "idoso frágil", ...meds].filter(Boolean);
+    const L = [];
+    L.push(`CONDUTA – ERRADICAÇÃO DE H. PYLORI · ${br(new Date())}`);
+    L.push("Referência: V Consenso Brasileiro sobre a Infecção por H. pylori (Arq Gastroenterol. 2026;63:e26043).");
+    L.push("");
+    L.push(`Indicação: ${INDIC[s.indic].label}.${s.age !== null ? ` Idade: ${s.age} anos.` : ""}`);
+    L.push(`Diagnóstico: ${DX_LABEL[s.dx]}.${s.dx === "neg" && s.indic === "malt" ? " Tratamento empírico no linfoma MALT H. pylori-negativo (Enunciado 9)." : ""}`);
+    L.push(`Linha: ${linha}. ${alerg}`);
+    L.push(`Uso prévio de macrolídeos: ${mac}. Uso prévio de quinolonas: ${qui}.`);
+    if (comorb.length) L.push(`Comorbidades e medicações relevantes: ${comorb.join(", ")}.`);
+    L.push(`Histologia: ${hist}${s.fh ? " História familiar de câncer gástrico em parente de 1º grau." : ""}`);
+    L.push(`Disponibilidade: bismuto ${s.bis ? "sim" : "não"}; tetraciclina ${s.tetra ? "sim" : "não"}; vonoprazana ${s.vono ? "sim" : "não"}${s.line === 3 ? `; rifabutina ${s.rifa ? "sim" : "não"}` : ""}.`);
+    L.push("");
+    const refr = "Conduta no caso refratário (Enunciados 16, 30 e 31): confirmar a falha por teste não invasivo bem preparado; diferenciar recrudescência de reinfecção (na reinfecção, testar e tratar familiares); revisar adesão, tabagismo e supressão ácida; solicitar teste de suscetibilidade (cultura ou PCR); reavaliar alergia à penicilina; decisão compartilhada sobre novas tentativas.";
+    if (!d.pick) {
+      L.push(s.line === 3 ? "Esquemas recomendados já utilizados ou indisponíveis." : "Nenhum esquema recomendado disponível nas condições atuais.");
+      if (s.line === 3) L.push(refr);
+      L.push("", `Vigilância endoscópica: ${surv(s).text}`);
+      return L.join("\n");
+    }
+    const g = R[d.pick];
+    L.push(`ESQUEMA ESCOLHIDO: ${g.name}, por 14 dias (início ${br(s.start)}, término ${br(dt.end)}).`);
+    if (s.adj) L.push(`Medicamentos: ${buildRx(d.pick, s).flatMap((r) => r.lines).map((l) => l.n.replace(/ \d.*$/, "").toLowerCase()).join(", ")}, com doses ajustadas para ${adjCause(s)} conforme bula.`);
+    else buildRx(d.pick, s).flatMap((r) => r.lines).forEach((l) => L.push(`- ${l.n}: ${l.p.replace(/^Tomar /, "").replace(/,? por 14 dias\.?$/, "").replace(/ \(cepa e dose não definidas pelo consenso\)\.?$/, "")}`));
+    L.push(`Força da recomendação no consenso: ${strengthTxt(g)}. Taxa de erradicação esperada: ${rateTxt(rateFor(d.pick, s, d.allergic))}.`);
+    L.push("");
+    L.push(`Justificativa: ${whyText(d.pick, s, d.allergic)}${d.reasons[d.pick] ? " " + d.reasons[d.pick] : ""}`);
+    [["avoid", "Esquemas evitados:"], ["na", "Esquemas indisponíveis:"]].forEach(([k, title]) => {
+      const rows = d.avoid.filter((a) => a[2] === k);
+      if (!rows.length) return;
+      L.push(title);
+      rows.forEach(([id, w]) => L.push(`- ${regName(id)}: ${lower1(w)}.`));
+    });
+    if (d.pick !== "M1" && !d.avoid.some(([id]) => id === "M1") && (!s.bis || !s.tetra)) L.push(`Quádrupla com bismuto (única opção com recomendação forte) não utilizada: ${!s.bis ? "bismuto" : "tetraciclina"} indisponível.`);
+    if (d.alts.length) L.push(`Alternativas em caso de intolerância ou falta de adesão: ${d.alts.map((id) => R[id].name).join("; ")}.`);
+    const extra = [];
+    if (s.smoke) extra.push("cessação do tabagismo durante o tratamento");
+    if (s.qt && g.drugs.some((x) => x === "clari" || x === "levo")) extra.push("ECG pelo risco de QT longo");
+    if (s.statin && g.drugs.includes("clari")) extra.push("suspensão ou redução da estatina durante o tratamento");
+    if (s.warf && g.drugs.some((x) => x === "clari" || x === "metro" || x === "levo")) extra.push("controle do INR se varfarina e vigilância de sangramento com anticoagulante oral direto");
+    if (g.drugs.includes("levo") && s.age !== null && s.age >= 60) extra.push("orientação sobre risco de tendinopatia com levofloxacino");
+    if (s.contra && g.drugs.includes("rifa")) extra.push("método contraceptivo de barreira durante e 4 semanas após");
+    if (s.arv) extra.push("revisão de interações com o infectologista");
+    if (s.hep) extra.push("ajuste e cautela na hepatopatia grave, conforme bula");
+    if (s.frail) extra.push("decisão compartilhada sobre o tratamento (idoso frágil)");
+    if (g.drugs.includes("rifa")) extra.push("hemograma durante o tratamento");
+    if (s.probio) extra.push("probiótico adjuvante (Enunciado 33; cepa e dose não definidas pelo consenso)");
+    if (extra.length) L.push(`Cuidados: ${extra.join("; ")}.`);
+    if (s.line === 3) L.push(refr);
+    L.push("Orientações: adesão ao esquema completo, efeitos adversos esperados e evitar álcool.");
+    L.push("");
+    L.push(`Vigilância endoscópica: ${surv(s).text}${dt.eda ? ` Próxima endoscopia ${dt.eda}.` : ""}`);
+    L.push(`Controle de cura: teste respiratório com ¹³C-ureia (ou antígeno fecal monoclonal) a partir de ${br(dt.test)}, com ${s.vono ? "vonoprazana suspensa" : "IBP suspenso"} 2 semanas e antibióticos e bismuto 4 semanas antes.`);
+    if (s.indic === "bariatrica") L.push("Cirurgia bariátrica de preferência após confirmação da cura (Enunciado 15).");
+    if (s.indic === "malt") L.push(`Histologia de controle do linfoma entre ${br(dt.maltHisto[0])} e ${br(dt.maltHisto[1])} (GELA).`);
+    return L.join("\n");
+  }
+
+  // horários do dia: agrupa os remédios por hora
+  function daySlots(s, id) {
+    const slots = {};
+    buildRx(id, s).flatMap((r) => r.lines).filter((l) => l.t.length).forEach((l) => l.t.forEach((h) => { (slots[h] = slots[h] || []).push(l); }));
+    return Object.keys(slots).sort((a, b) => parseInt(a, 10) - parseInt(b, 10)).map((h) => [h, slots[h]]);
+  }
+
+  function waText(s, d, dt) {
+    const hi = s.name ? `Olá, ${s.name.split(" ")[0]}!` : "Olá!";
+    const L = [`${hi} Seguem as orientações do seu tratamento para H. pylori.`, "", `São 14 dias: de ${br(s.start)} a ${br(dt.end)}. Não pare antes, mesmo se melhorar.`, ""];
+    const lines = buildRx(d.pick, s).flatMap((r) => r.lines);
+    if (s.adj) {
+      L.push(`As doses e os horários foram ajustados para ${s.ckd && s.hep ? "o seu rim e o seu fígado" : s.ckd ? "o seu rim" : "o seu fígado"}. Siga exatamente a receita.`);
+    } else {
+      L.push("Horários:");
+      daySlots(s, d.pick).forEach(([h, ls]) => { L.push(h === "24h" ? "24h (meia-noite)" : h); ls.forEach((l) => L.push(`  • ${l.n.replace(" coloidal", "")}: ${doseOf(l.p)}`)); });
+      if (s.probio) L.push("Probiótico: conforme a embalagem, durante os 14 dias.");
+    }
+    L.push("", "Importante:");
+    L.push("- Não beba álcool durante o tratamento e até 3 dias depois.");
+    L.push("- Evite fumar nesses dias: o cigarro atrapalha o tratamento.");
+    if (lines.some((l) => l.n.startsWith("Subcitrato"))) L.push("- O bismuto deixa as fezes e a língua escuras. É normal e passa depois.", "- Tome o bismuto 30 minutos antes do café e do jantar.");
+    if (lines.some((l) => l.n.startsWith("Tetraciclina"))) L.push("- Tome a tetraciclina com água, longe de leite, derivados, antiácidos, ferro e cálcio.");
+    if (lines.some((l) => l.n.startsWith("Omeprazol 40"))) L.push("- Tome o omeprazol 30 a 60 minutos antes do café e do jantar.");
+    if (lines.some((l) => l.n.startsWith("Omeprazol 20"))) L.push("- Tome o omeprazol com o estômago vazio, 30 minutos antes de comer, sempre que possível.");
+    if (lines.some((l) => l.n.startsWith("Metronidazol"))) L.push("- Se o metronidazol der enjoo, tome junto com um lanche leve.");
+    L.push("- Gosto metálico, enjoo e diarreia leve podem acontecer. Se tiver diarreia forte ou com sangue, manchas na pele, inchaço no rosto ou falta de ar, procure atendimento.");
+    L.push("", `Exame de controle (teste do sopro) a partir de ${br(dt.test)}. Se continuar usando omeprazol ou vonoprazana depois do tratamento, pare a partir de ${br(dt.ppiStop)}.`);
+    return L.join("\n");
+  }
+
+  function examText(s, dt) {
+    return [...headLines(s, "SOLICITAÇÃO DE EXAME"), "",
+      "Teste respiratório com ¹³C-ureia para controle de erradicação de Helicobacter pylori.",
+      "Alternativa: pesquisa de antígeno fecal de H. pylori por ELISA monoclonal.", "",
+      `Indicação clínica: controle após tratamento de erradicação (término em ${br(dt.end)}).`,
+      `Realizar a partir de ${br(dt.test)}.`, "",
+      "Preparo:",
+      "- Suspender omeprazol, vonoprazana e similares 2 semanas antes.",
+      "- Antibióticos e bismuto suspensos há pelo menos 4 semanas.",
+      "- Suspender ranitidina, famotidina e similares 72 horas antes.",
+      "- Alginato, antiácidos e sucralfato podem ser mantidos.", ...signLines(s)].join("\n");
+  }
+
+  function diagExamText(s) {
+    return [...headLines(s, "SOLICITAÇÃO DE EXAME"), "",
+      "Teste respiratório com ¹³C-ureia para diagnóstico de infecção por Helicobacter pylori.",
+      "Alternativa: pesquisa de antígeno fecal de H. pylori por ELISA monoclonal.", "",
+      `Indicação clínica: pesquisa de infecção por H. pylori (${lower1(INDIC[s.indic].label.replace(/ por H\. pylori$/, ""))}).`, "",
+      "Preparo:",
+      "- Suspender omeprazol, vonoprazana e similares 2 semanas antes.",
+      "- Não usar antibióticos nem bismuto nas 4 semanas anteriores.",
+      "- Suspender ranitidina, famotidina e similares 72 horas antes.",
+      "- Alginato, antiácidos e sucralfato podem ser mantidos.", ...signLines(s)].join("\n");
+  }
+
+  function famText(s) {
+    const L = ["ORIENTAÇÃO PARA FAMILIARES", ""];
+    L.push("O H. pylori passa de pessoa para pessoa, principalmente dentro de casa e na infância. O V Consenso recomenda considerar testar e tratar os familiares adultos de quem tem a infecção, o que reduz a chance de reinfecção.");
+    L.push("");
+    L.push("Exame indicado para o familiar adulto: teste respiratório com ¹³C-ureia ou pesquisa de antígeno de H. pylori nas fezes. Leve esta orientação ao seu médico.");
+    if (s.indic === "posres") L.push("", "Como o paciente teve câncer gástrico, pais, irmãos e filhos têm risco 2 a 3 vezes maior: de 20 a 29 anos, fazer teste não invasivo; a partir de 30 anos, endoscopia com biópsias.");
+    else if (s.fh) L.push("", "Há câncer gástrico na família: pais, irmãos e filhos de quem teve câncer gástrico devem fazer, de 20 a 29 anos, teste não invasivo e, a partir de 30 anos, endoscopia com biópsias.");
+    L.push("", "Crianças: a decisão de testar é do pediatra.");
+    return L.join("\n");
+  }
+
+  // ---------- peças da tela ----------
+  const BLOCK_HTML = {
+    preg: "<p><b>Gestação ou amamentação.</b> O consenso não define esquema para essas situações. Na gestação, tetraciclina, levofloxacino e bismuto são contraindicados. Na amamentação, evite tetraciclina, quinolonas e bismuto; amoxicilina, claritromicina, metronidazol em dose usual e omeprazol costumam ser compatíveis, mas confira em fonte específica de lactação. Em geral, a erradicação é adiada para depois da gestação e da amamentação; se houver indicação urgente, como úlcera complicada, discuta com obstetrícia e gastroenterologia.</p>",
+    minor: "<p><b>Menor de 18 anos.</b> O V Consenso trata de adultos. Em crianças e adolescentes, siga a diretriz conjunta ESPGHAN/NASPGHAN 2023, citada no consenso: esquemas e doses são por peso, a tetraciclina é contraindicada abaixo de 8 anos e as quinolonas são evitadas.</p>",
+    dxNone: "<p><b>Infecção ainda não confirmada.</b> Toda infecção confirmada deve ser tratada, mas não se trata sem diagnóstico. Peça teste respiratório com ¹³C-ureia ou antígeno fecal monoclonal. Indique endoscopia com biópsias se houver sinais de alarme, dispepsia a partir de 40 anos ou parente de 1º grau com câncer gástrico a partir de 30 anos (Enunciados 11 e 18).</p>",
+    dxNeg: "<p><b>Teste negativo: não há o que tratar.</b> Antes de aceitar o resultado, confira se havia uso de IBP ou vonoprazana nas 2 semanas anteriores, antibiótico ou bismuto nas 4 semanas, sangramento ativo, biópsias insuficientes (menos de 2 do antro e 2 do corpo) ou só teste da urease. Se sim, repita com teste respiratório ou antígeno fecal bem preparado; a sorologia IgG pode complementar (Enunciado 17).</p>",
+    dxSero: "<p><b>Só sorologia.</b> A sorologia não distingue infecção atual de passada e, sozinha, não indica tratamento. O consenso a aceita como complemento em situações de baixa carga bacteriana: úlcera sangrante, linfoma MALT, câncer gástrico e atrofia gástrica (Enunciado 17). Nesses casos, informe a indicação ou os graus de atrofia da biópsia e o app libera a conduta. Se a dúvida vem de uso recente de IBP, antibiótico ou bismuto, suspenda e repita o teste respiratório ou o antígeno fecal com o preparo correto.</p>",
+  };
+
+  function caseLine(s) {
+    const dx = { hist: "Histologia positiva", ubt: "Teste respiratório positivo", fecal: "Antígeno fecal positivo", urease: "Urease positiva", sero: "Só sorologia", neg: "Teste negativo", none: "Sem teste" }[s.dx];
+    const parts = [dx];
+    if (s.bxDone) parts.push(s.olga === null && s.olgim === null ? "OLGA/OLGIM pendente" : stageStr(s, " · "));
+    parts.push(LINE_LABEL[s.line].toLowerCase());
+    parts.push({ no: "sem alergia", yes: "alérgico à penicilina", doubt: "alergia duvidosa" }[s.allergy]);
+    const acc = [s.bis && "bismuto", s.tetra && "tetraciclina", s.vono && "vonoprazana", s.rifa && "rifabutina"].filter(Boolean);
+    parts.push(acc.length ? `com ${joinE(acc)}` : "sem bismuto, tetraciclina, vonoprazana ou rifabutina");
+    return parts.join(" · ");
+  }
+
+  const flagsHtml = (fl) => (fl.length ? `<ul class="flags">${fl.map(([k, t]) => `<li class="flag ${k === "bad" ? "bad" : "warn"}"><span class="tag">${k === "bad" ? "Grave" : "Atenção"}</span><span>${esc(t)}</span></li>`).join("")}</ul>` : "");
+
+  const shortName = (n) => (n.startsWith("Subcitrato") ? "Bismuto" : n.split(" ")[0]);
+  const shortDose = (p) => doseOf(p).replace(/cápsulas?/, "cáps.").replace(/comprimidos?/, "comp.");
+  function dayHtml(s, id) {
+    const slots = daySlots(s, id);
+    return `<div class="day"><p class="day-head"><b>${slots.length} ${slots.length === 1 ? "horário" : "horários"} por dia</b>, durante 14 dias${s.probio ? ", mais o probiótico" : ""}</p>
+      <ol class="slots">${slots.map(([h, ls]) => `<li><span class="hr">${h}${h === "24h" ? "<small>meia-noite</small>" : ""}</span><ul>${ls.map((l) => `<li>${esc(shortName(l.n))} <i>${esc(shortDose(l.p))}</i></li>`).join("")}</ul></li>`).join("")}</ol></div>`;
+  }
+
+  let sheets = [];
+  function sheetsHtml(kind) {
+    const mark = kind === "adj" ? "Ajuste de dose" : kind === "exam" ? "Pedido de exame" : "Rx";
+    return `<div class="sheets" id="rxBox">${sheets.map((t, i) => `<article class="sheet ${kind}"><div class="sheet-bar"><span class="rxmark" aria-hidden="true">${mark}</span><button type="button" class="ghost sm" data-copy-sheet="${i}">Copiar</button></div><pre class="sheet-body">${esc(t)}</pre></article>`).join("")}</div>`;
+  }
+
+  function heroHtml(s, d) {
+    const line = LINE_LABEL[s.line];
+    if (d.blocked) {
+      const dxBlock = d.blocks.some((b) => b.startsWith("dx")) && !s.preg && !s.minor;
+      sheets = dxBlock ? [diagExamText(s)] : [];
+      return `<section class="pick hero block" id="hero" aria-labelledby="blockTitle">
+        <p class="case-line">${esc(caseLine(s))}</p>
+        <div><p class="eyebrow">${dxBlock ? "Diagnóstico antes do tratamento" : "Fora do escopo do app"}</p><h2 id="blockTitle">Receita não gerada</h2></div>
+        ${d.blocks.map((b) => BLOCK_HTML[b]).join("")}
+        ${dxBlock ? `${sheetsHtml("exam")}<div class="actions"><button type="button" id="copyRx">Copiar pedido do teste</button><span class="toast" id="toast" role="status"></span></div>` : ""}
+      </section>`;
+    }
+    if (!d.pick) {
+      sheets = [];
+      return `<section class="pick hero none" id="hero" aria-labelledby="noneTitle">
+        <p class="case-line">${esc(caseLine(s))}</p>
+        <div><p class="eyebrow">Conduta · ${line}</p><h2 id="noneTitle">Sem esquema disponível</h2></div>
+        ${flagsHtml(d.flags)}
+      </section>`;
+    }
+    const g = R[d.pick], r = rateFor(d.pick, s, d.allergic);
+    sheets = s.adj ? [adjText(d.pick, s)] : rxParts(d.pick, s);
+    const allergyTxt = s.allergy === "yes" ? " · alérgico à penicilina" : s.allergy === "doubt" ? " · alergia duvidosa, conduzido como alérgico" : "";
+    return `<section class="pick hero" id="hero" aria-labelledby="pickTitle">
+      <p class="case-line">${esc(caseLine(s))}</p>
+      <div><p class="eyebrow">Conduta sugerida · ${line}${allergyTxt}</p><h2 id="pickTitle">${esc(g.name)}</h2></div>
+      <div class="hero-stats">
+        <div class="rate"><span class="num${/^[>\d]/.test(r[0]) ? "" : " txt"}">${esc(r[0])}</span><span class="lbl">de erradicação esperada${r[1] ? ` · ${esc(r[1])}` : ""}</span></div>
+        <ul class="tags">
+          <li class="${g.strength === "Forte" ? "strong" : ""}">${esc(strengthChip(g))}</li>
+          <li>14 dias</li>
+          <li>${esc(g.simple)}</li>
+          <li>${esc(g.src)}</li>
+        </ul>
+      </div>
+      <p class="why">${esc(whyText(d.pick, s, d.allergic))}${d.reasons[d.pick] ? " " + esc(d.reasons[d.pick]) : ""}</p>
+      ${flagsHtml(d.flags)}
+      ${s.adj ? "" : dayHtml(s, d.pick)}
+      ${sheetsHtml(s.adj ? "adj" : "presc")}
+      <div class="actions"><button type="button" id="copyRx">${s.adj ? "Copiar ajustes" : sheets.length > 1 ? "Copiar todas as receitas" : "Copiar receita"}</button><span class="toast" id="toast" role="status"></span></div>
+    </section>`;
+  }
+
+  function altHtml(s, d) {
+    let h = `<section class="panel" id="altPanel"><h3>Alternativas</h3><div class="tbl-wrap"><table class="stack">
+      <thead><tr><th>Esquema</th><th>Erradicação</th><th>Por que considerar</th></tr></thead><tbody>`;
+    d.alts.forEach((id) => {
+      const r = rateFor(id, s, d.allergic);
+      h += `<tr><td><b>${esc(R[id].name)}</b><span class="hint">${esc(R[id].simple)} · ${esc(R[id].src)}</span></td>
+        <td class="num">${esc(r[0])}${r[1] ? `<small>${esc(r[1])}</small>` : ""}</td>
+        <td>${esc(whyText(id, s, d.allergic))}${d.reasons[id] ? " " + esc(d.reasons[id]) : ""}
+        ${s.adj ? "" : `<details data-k="rx-${id}"><summary>Ver receita</summary><pre class="rx">${esc(rxParts(id, s).join(SEP))}</pre></details>`}</td></tr>`;
+    });
+    d.avoid.forEach(([id, why, kind]) => {
+      h += `<tr><td><b>${esc(regName(id))}</b></td>${kind === "na" ? `<td class="na">Indisponível</td>` : `<td class="avoid">Evitar</td>`}<td>${esc(why)}</td></tr>`;
+    });
+    return h + `</tbody></table></div></section>`;
+  }
+
+  function followHtml(s, d, dt) {
+    const ind = INDIC[s.indic], sv = surv(s);
+    const tl = [];
+    if (d.pick) {
+      tl.push(["Início do tratamento", br(s.start), "key"], ["Último dia de tratamento", br(dt.end), "key"]);
+      tl.push(["Se mantiver IBP ou vonoprazana, suspender a partir de", br(dt.ppiStop), ""], ["Antagonista H2, suspender a partir de", br(dt.h2Stop), ""]);
+      tl.push(["Teste de controle a partir de", br(dt.test), "key"]);
+      if (s.indic === "malt") tl.push(["Histologia de controle do MALT", `${br(dt.maltHisto[0])} a ${br(dt.maltHisto[1])}`, ""]);
+      if (s.indic === "bariatrica") tl.push(["Cirurgia bariátrica", `de preferência após confirmar a cura (teste a partir de ${br(dt.test)})`, "long"]);
+    }
+    if (dt.eda) tl.push(["Próxima endoscopia", `<b>${esc(dt.edaShort)}</b> · ${esc(dt.edaBase)}`, "long key"]);
+    const tlHtml = tl.length ? `<section class="panel sub" id="datesPanel"><h3>Linha do tempo</h3><dl class="dates timeline">${tl.map(([k, v, c]) => `<div class="tl ${c}"><dt>${esc(k)}</dt><dd>${c.includes("long") && v.includes("<b>") ? v : esc(v)}</dd></div>`).join("")}</dl></section>` : "";
+    return `<section class="follow" aria-labelledby="followTitle">
+      <h2 class="sec-title" id="followTitle">Seguimento</h2>
+      <div class="follow-grid">
+        <section class="panel sub" id="indPanel"><h3>Pela indicação</h3><p class="hint">${esc(ind.label)}</p><ul class="notes">${ind.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></section>
+        ${tlHtml}
+        <section class="panel sub" id="survPanel"><h3>Vigilância endoscópica</h3><p>${esc(sv.text)}</p>
+          ${s.highStage ? `<p class="hint">Na atrofia ou metaplasia extensa, a bactéria rareia e a histologia pode dar falso-negativo: confirme o diagnóstico e a cura por teste não invasivo (Enunciado 8).</p>` : ""}
+          ${s.fh && s.bxDone ? `<p class="hint">Parentes de 1º grau de pacientes com câncer gástrico: testar e tratar; de 20 a 29 anos por teste não invasivo e a partir de 30 anos por EDA com biópsias de antro e corpo (Enunciado 11).</p>` : ""}</section>
+        <section class="panel sub" id="curePanel"><h3>Controle de cura</h3>
+          <ul class="tight">
+            <li>Teste respiratório com ¹³C-ureia (ou antígeno fecal monoclonal)</li>
+            <li>Pelo menos 4 semanas após o fim do tratamento${s.indic === "malt" ? " e 6 semanas após o início" : ""}</li>
+            <li>Suspender ${s.vono ? "vonoprazana" : "IBP"} 2 semanas antes; antibióticos e bismuto, 4 semanas</li>
+            <li>Antagonista H2: 72 horas antes</li>
+          </ul>
+          <p class="hint">Sorologia e teste rápido da urease isolado não servem para controle de cura.</p></section>
+      </div>
+    </section>`;
+  }
+
+  let texts = {};
+  let txtSel = "just";
+  const TXT_HINT = { just: "Para colar no prontuário eletrônico. Revise antes de salvar.", wa: "Mensagem curta para o paciente, com horários e orientações.", exam: "Solicitação do teste de controle com data e preparo.", fam: "Orientação para entregar ou enviar aos familiares." };
+  function textsHtml(s, d, dt) {
+    texts = { just: justText(s, d, dt), fam: famText(s) };
+    if (d.pick) { texts.wa = waText(s, d, dt); texts.exam = examText(s, dt); }
+    if (!texts[txtSel]) txtSel = "just";
+    const tabs = [["just", "Prontuário"], ["wa", "WhatsApp"], ["exam", "Pedido do teste"], ["fam", "Familiares"]].filter(([k]) => texts[k]);
+    return `<section class="panel" id="txtPanel" aria-labelledby="txtTitle"><h3 id="txtTitle">Textos prontos para copiar</h3>
+      <div class="seg txtseg" role="radiogroup" aria-label="Texto">${tabs.map(([k, l]) => `<label><input type="radio" name="txt" value="${k}" id="txt-${k}" ${k === txtSel ? "checked" : ""}><span>${l}</span></label>`).join("")}</div>
+      <p class="hint" id="txtHint">${esc(TXT_HINT[txtSel])}</p>
+      <pre class="rx" id="txtBox">${esc(texts[txtSel])}</pre>
+      <div class="actions"><button type="button" id="copyTxt">Copiar texto</button><span class="toast" id="toast2" role="status"></span></div>
+    </section>`;
+  }
+
+  function refrPanel() {
+    return `<section class="panel refr" aria-labelledby="refrTitle"><h3 id="refrTitle">Caso refratário: quando os esquemas falharam</h3>
+      <p class="hint">Roteiro baseado nos Enunciados 3, 16, 19, 26, 30, 31 e 33 do V Consenso.</p>
+      <ol class="steps">
+        <li><b>Confirme a falha.</b> Controle por teste respiratório ou antígeno fecal, pelo menos 4 semanas após o fim, com IBP ou vonoprazana suspensos 2 semanas e antibióticos e bismuto 4 semanas. Sorologia não vale.</li>
+        <li><b>Recrudescência ou reinfecção?</b> Positivo até 1 ano após o tratamento sugere recrudescência (o esquema falhou). Positivo depois de 1 ano, com teste negativo antes, sugere reinfecção: teste e trate os familiares, porque o tratamento da família reduz a recorrência.</li>
+        <li><b>Investigue por que falhou.</b> Adesão aos 14 dias, interrupção por efeito adverso, tabagismo e supressão ácida insuficiente. Metabolizador rápido do CYP2C19 tem 82% mais chance de falha com IBP: prefira vonoprazana.</li>
+        <li><b>Peça teste de suscetibilidade.</b> Após 3 falhas: cultura com antibiograma ou PCR para mutações de resistência à claritromicina (23S rRNA) e ao levofloxacino (gyrA). A PCR pode usar a amostra do teste rápido da urease. Com cepa sensível, claritromicina ou levofloxacino voltam a ser opção.</li>
+        <li><b>Reveja a alergia à penicilina.</b> Menos de 5% de quem refere alergia tem alergia verdadeira. Teste cutâneo ou IgE específica podem liberar a amoxicilina e todos os esquemas que a usam.</li>
+        <li><b>Esquemas que ainda cabem.</b> Quádrupla com bismuto repetida com metronidazol em dose alta (≥1,5 g/dia); rifabutina + amoxicilina + vonoprazana; dupla vonoprazana + amoxicilina 3 g/dia (100% em 36 pacientes com 3 ou mais falhas no Hp-BraReg). Probiótico adjuvante pode somar 8–16% à erradicação.</li>
+        <li><b>Evite.</b> Repetir claritromicina ou levofloxacino sem teste de suscetibilidade. N-acetilcisteína não acrescenta benefício.</li>
+        <li><b>Decida com o paciente se vale insistir.</b> Pese o ganho de mais uma tentativa contra efeitos adversos e reexposição a antibióticos, sobretudo em idosos frágeis ou quando o benefício esperado é pequeno (Enunciado 16). Atrofia ou metaplasia extensa, história familiar de câncer gástrico, linfoma MALT ou ressecção de câncer precoce pesam a favor de insistir. Se parar, mantenha a vigilância endoscópica indicada pela biópsia.</li>
+      </ol></section>`;
+  }
+
+  function diagPanel() {
+    return `<details class="ref" data-k="diag"><summary>Antes de tratar: diagnóstico e preparo</summary>
+      <ul class="notes">
+        <li><b>Endoscopia com biópsias</b> (Enunciado 18): sinais de alarme (perda de peso, anemia ferropriva, sangramento, massa palpável, disfagia), dispepsia a partir de 40 anos, falha do antissecretor ou do testar e tratar, e parentes de 1º grau de câncer gástrico a partir de 30 anos.</li>
+        <li><b>Biópsias</b> (Enunciado 19): pelo menos 2 do antro e 2 do corpo, em frascos separados e identificados; incisura desejável; biópsia dirigida de áreas suspeitas. HE identifica a bactéria; imuno-histoquímica fica para casos especiais.</li>
+        <li><b>Teste rápido da urease</b> (Enunciado 19): alternativa à histologia onde há poucos recursos; sensibilidade de 80–100% e especificidade de 97–99%. Isolado, não serve para confirmar erradicação (sensibilidade cai para cerca de 60%), nem no sangramento ativo, na gastrectomia ou na bariátrica. A amostra pode ser usada depois para PCR de resistência.</li>
+        <li><b>Testes não invasivos</b> (Enunciado 17): teste respiratório com ¹³C-ureia, de preferência com ácido cítrico, é o padrão-ouro; antígeno fecal monoclonal é alternativa válida. O teste com ¹⁴C deve ser evitado em crianças e gestantes.</li>
+        <li><b>Sorologia</b>: não detecta infecção ativa nem serve para controle. Pode complementar em situações de baixa carga bacteriana: úlcera sangrante, MALT, câncer gástrico, atrofia ou uso recente de IBP, antibiótico ou bismuto.</li>
+        <li><b>Preparo para qualquer teste</b> (Enunciado 20 com errata): suspender antagonista H2 72 horas antes, IBP e P-CAB 14 dias antes, antibióticos e bismuto 4 semanas antes. Sucralfato, alginato e antiácidos não precisam ser suspensos.</li>
+      </ul></details>`;
+  }
+
+  function sourcesPanel() {
+    const S = [
+      ["V Consenso Brasileiro sobre a Infecção por H. pylori, Arq Gastroenterol 2026;63:e26043", "https://doi.org/10.1590/S0004-2803.24612026-043"],
+      ["Errata do Enunciado 20 (antagonista H2: 72 horas)", "https://doi.org/10.1590/S0004-2803.24612026-E43"],
+      ["Sanches et al. Resistência à claritromicina e quinolonas no Brasil (WJG 2016)", "https://wjgnet.com/1007-9327/full/v22/i33/7587.htm"],
+      ["Boltin et al. Macrolídeo prévio e erradicação (Israel, 7.842 pacientes)", "https://cris.iucc.ac.il/en/publications/impact-of-previous-exposure-to-macrolide-antibiotics-on-helicobac/"],
+      ["Hp-EuReg. Consumo de macrolídeos e erradicação (27.549 pacientes)", "https://www.iris.unina.it/handle/11588/1039078"],
+      ["Kocsmár et al. Resistência primária e consumo de macrolídeos (Hungria)", "https://semmelweis.hu/english/2021/04/research-led-by-semmelweis-university-may-improve-the-treatment-of-gastric-disorders-caused-by-infection/"],
+      ["Carothers et al. Quinolona prévia e resistência ao levofloxacino (CID 2007)", "https://academic.oup.com/cid/article/44/2/e5/331570"],
+      ["AGA. Manejo do H. pylori refratário", "https://gastro.org/clinical-guidance/management-of-refractory-helicobacter-pylori-infection/"],
+      ["ACG 2024. Tratamento do H. pylori (resumo)", "https://gastroenterology.acponline.org/archives/2024/09/27/1.htm"],
+      ["RDC Anvisa 20/2011: receita de antimicrobiano (orientação da Sesa-PR)", "https://www.saude.pr.gov.br/sites/default/arquivos_restritos/files/documento/2020-05/orientacoesrdc_20201_antibioticos.pdf"],
+    ];
+    return `<details class="ref" data-k="src"><summary>Fontes</summary>
+      <p class="hint">As taxas de erradicação e os prazos vêm do V Consenso e dos estudos que ele cita, indicados em cada esquema. Interações, ajuste renal e hepático, gestação e idade vêm de farmacologia padrão: confira na bula.</p>
+      <ol class="src-list">${S.map(([t, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join("")}</ol></details>`;
+  }
+
+  const CASES = [
+    ["1ª linha, sem alergia, bismuto, tetraciclina e vonoprazana", "Quádrupla com bismuto, em 4 horários por dia (6h, 12h, 18h e 24h)"],
+    ["1ª linha, com bismuto, paciente prefere esquema simples", "Claritromicina + amoxicilina + bismuto (tudo 2x/dia); quádrupla clássica como alternativa"],
+    ["1ª linha, sem bismuto, com vonoprazana, macrolídeo nunca ou só azitromicina", "Tripla com vonoprazana"],
+    ["1ª linha, sem bismuto, claritromicina prévia", "Dupla em dose alta"],
+    ["1ª linha, sem bismuto e sem vonoprazana", "Dupla com IBP em dose alta; tripla com IBP em \"evitar\""],
+    ["1ª linha, com bismuto mas sem tetraciclina", "Claritromicina + amoxicilina + bismuto"],
+    ["2ª linha, quádrupla já usada, quinolona nunca, com bismuto", "Levofloxacino + amoxicilina + bismuto"],
+    ["Alergia confirmada, 1ª linha, sem bismuto, com vonoprazana", "Tetraciclina + vonoprazana"],
+    ["Alergia confirmada, resgate, claritromicina e quádrupla já usadas, com bismuto", "Quádrupla repetida (não repete claritromicina)"],
+    ["Alérgico, 2ª linha, já usou tetraciclina + vonoprazana, com bismuto", "Quádrupla com bismuto; tetraciclina + vonoprazana não se repete"],
+    ["Resgate sem alergia, quádrupla já usada, com bismuto", "Quádrupla repetida, taxa de 76% (Hp-EuReg)"],
+    ["Resgate, todos os esquemas usados, sem bismuto e sem rifabutina", "Sem esquema; roteiro de caso refratário"],
+    ["Gestante, ou idade < 18", "Receita não gerada, fora do escopo"],
+    ["Ainda não testado; ou só sorologia na gastrite sem atrofia", "Receita não gerada; pedido de teste diagnóstico"],
+    ["Só sorologia, gastrite com atrofia na biópsia", "Conduta liberada com alerta de sorologia complementar (Enunciado 17)"],
+    ["Testado e negativo com linfoma MALT", "Tratamento empírico com alerta (Enunciado 9)"],
+    ["TFG < 30, 1ª linha, bismuto e vonoprazana", "Quádrupla evitada; tripla com vonoprazana com quadro de ajuste renal"],
+    ["Hepatopatia grave, 1ª linha", "Quádrupla com quadro de ajustes (metronidazol −50%), sem receita automática"],
+    ["Teste respiratório positivo, sem biópsia", "\"Sem estadiamento OLGA/OLGIM\", sem afirmar OLGA 0"],
+    ["Histologia positiva com graus ainda não marcados", "Estadiamento pendente; nada é afirmado sobre a vigilância"],
+    ["Biópsia: atrofia antro 2 e corpo 2 (OLGA III), sem e com história familiar", "Vigilância a cada 3 anos; com história familiar, 1–2 anos"],
+    ["Biópsia: metaplasia incompleta em estágio I–II, com história familiar", "Vigilância a cada 1–2 anos (Enunciado 22)"],
+    ["Biópsia: OLGA I, sem metaplasia, com história familiar", "Vigilância a cada 3 anos (Enunciado 22)"],
+    ["Dispepsia não investigada aos 50 anos, sem endoscopia", "Alerta: endoscopia antes de tratar (Enunciado 18)"],
+  ];
+  function casesPanel() {
+    return `<details class="ref" data-k="cases"><summary>Casos para validação</summary>
+      <p class="hint">Cenários para conferir a lógica do app, de preferência com um colega gastroenterologista.</p>
+      <div class="tbl-wrap"><table class="stack"><thead><tr><th>Cenário</th><th>Resultado esperado</th></tr></thead><tbody>
+      ${CASES.map(([a, b]) => `<tr><td>${esc(a)}</td><td>${esc(b)}</td></tr>`).join("")}</tbody></table></div></details>`;
+  }
+
+  // ---------- desenho ----------
+  let lastKey = null;
+  function render() {
+    const s = state();
+    const d = decide(s);
+    const dt = dates(s);
+
+    $("bxBox").hidden = !s.bxDone;
+    $("bxRow").hidden = s.dx === "hist";
+    paintMx($("mxA"), s.aA, s.aC, s.olga);
+    paintMx($("mxM"), s.mA, s.mC, s.olgim);
+    const nMore = ["mColch", "mStatin", "mWarf", "mContra", "mArv", "pQT", "pSimple", "pSmoke", "pObese", "pFrail", "pProbio"].filter((id) => $(id).checked).length;
+    $("moreCount").textContent = nMore ? `(${nMore} ${nMore === 1 ? "marcado" : "marcados"})` : "";
+
+    let html = heroHtml(s, d);
+    if (!d.blocked && s.line === 3) html += refrPanel();
+    if (!d.blocked && (d.alts.length || d.avoid.length)) html += altHtml(s, d);
+    if (!d.blocked) html += followHtml(s, d, dt) + textsHtml(s, d, dt);
+    html += diagPanel() + sourcesPanel() + casesPanel();
+
+    // painéis abertos continuam abertos depois de redesenhar
+    const openKeys = new Set([...$("out").querySelectorAll("details[open][data-k]")].map((e) => e.dataset.k));
+    $("out").innerHTML = html;
+    $("out").querySelectorAll("details[data-k]").forEach((e) => { if (openKeys.has(e.dataset.k)) e.open = true; });
+
+    // barra do celular e leitor de tela
+    let title, sub;
+    if (d.blocked) { title = "Receita não gerada"; sub = d.blocks.some((b) => b.startsWith("dx")) && !s.preg && !s.minor ? "Confirme o diagnóstico antes" : "Fora do escopo do app"; }
+    else if (d.pick) { title = R[d.pick].name; sub = `Erradicação: ${rateFor(d.pick, s, d.allergic)[0]}`; }
+    else { title = "Sem esquema disponível"; sub = s.line === 3 ? "Veja o roteiro de caso refratário" : "Revise acesso e alergia"; }
+    $("jumpTxt").innerHTML = `<b>${esc(title)}</b>${esc(sub)}`;
+    const live = `${title}. ${sub}`;
+    if ($("srLive").textContent !== live) $("srLive").textContent = live;
+
+    // destaque breve quando a conduta muda
+    const key = d.blocked ? "b:" + d.blocks.join() : d.pick || "none";
+    if (lastKey !== null && key !== lastKey) $("hero").classList.add("flash");
+    lastKey = key;
+  }
+
+  // ---------- cópia ----------
+  function copyText(text, done) {
+    const fallback = () => {
+      const bf = $("copybuf");
+      bf.value = text;
+      bf.focus({ preventScroll: true });
+      bf.select();
+      let okc = false;
+      try { okc = document.execCommand("copy"); } catch (e) { okc = false; }
+      bf.blur();
+      done(okc);
+    };
+    try { navigator.clipboard.writeText(text).then(() => done(true), fallback); } catch (e) { fallback(); }
+  }
+  function feedback(btn, toastId, ok, msg) {
+    if (toastId && $(toastId)) $(toastId).textContent = ok ? msg : "Não deu para copiar: selecione o texto e copie manualmente.";
+    if (btn) {
+      if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+      btn.textContent = ok ? "Copiado" : "Selecione e copie";
+      clearTimeout(btn._t);
+      btn._t = setTimeout(() => { btn.textContent = btn.dataset.label; }, 1800);
+    }
+  }
+  $("out").addEventListener("click", (e) => {
+    const sb = e.target.closest("[data-copy-sheet]");
+    if (sb) { copyText(sheets[Number(sb.dataset.copySheet)] || "", (ok) => feedback(sb, null, ok)); return; }
+    if (e.target.closest("#copyRx")) { const b = e.target.closest("#copyRx"); copyText(sheets.join(SEP), (ok) => feedback(b, "toast", ok, "Copiado para a área de transferência")); return; }
+    if (e.target.closest("#copyTxt")) { const b = e.target.closest("#copyTxt"); copyText(texts[txtSel] || "", (ok) => feedback(b, "toast2", ok, "Texto copiado")); }
+  });
+  $("out").addEventListener("change", (e) => {
+    if (e.target.name === "txt") {
+      txtSel = e.target.value;
+      $("txtBox").textContent = texts[txtSel];
+      $("txtHint").textContent = TXT_HINT[txtSel];
+      $("toast2").textContent = "";
+    }
+  });
+
+  // ---------- ficha: eventos ----------
+  function syncUsed() {
+    $("usedBox").hidden = $("l1").checked;
+    $("uTVrow").hidden = $("aNo").checked;
+    $("lineHint").textContent = $("l1").checked ? "Nunca tratou H. pylori." : $("l2").checked ? "Tratou 1 vez e o controle de cura deu positivo." : "Já falhou 2 ou mais tratamentos.";
+  }
+  const form = $("caseForm");
+  const fields = () => [...form.elements].filter((e) => /^(INPUT|SELECT|TEXTAREA)$/.test(e.tagName));
+  // um clique dispara "input" e "change": redesenha só quando a ficha mudou de fato
+  let lastSig = null;
+  const update = () => {
+    const sig = fields().map((e) => (e.type === "checkbox" || e.type === "radio" ? (e.checked ? 1 : 0) : e.value)).join("|");
+    if (sig === lastSig) return;
+    lastSig = sig;
+    syncUsed();
+    render();
+  };
+  form.addEventListener("input", update);
+  form.addEventListener("change", update);
+  form.addEventListener("submit", (e) => e.preventDefault());
+  form.addEventListener("click", (e) => {
+    const cell = e.target.closest(".cell");
+    if (cell) {
+      const mx = cell.closest(".mx"), ia = $(mx.dataset.inA), ic = $(mx.dataset.inC);
+      const same = ia.value === cell.dataset.a && ic.value === cell.dataset.c;
+      ia.value = same ? "" : cell.dataset.a;
+      ic.value = same ? "" : cell.dataset.c;
+      update();
+      return;
+    }
+    const clr = e.target.closest("[data-clear]");
+    if (clr) {
+      const mx = $(clr.dataset.clear);
+      $(mx.dataset.inA).value = ""; $(mx.dataset.inC).value = "";
+      update();
+    }
+  });
+  form.addEventListener("keydown", (e) => {
+    const cell = e.target.closest(".cell");
+    const mv = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] }[e.key];
+    if (!cell || !mv) return;
+    const na = Math.min(3, Math.max(0, Number(cell.dataset.a) + mv[0])), nc = Math.min(3, Math.max(0, Number(cell.dataset.c) + mv[1]));
+    const next = cell.closest(".mx").querySelector(`.cell[data-a="${na}"][data-c="${nc}"]`);
+    if (next) { e.preventDefault(); next.focus(); }
+  });
+  $("bxZero").addEventListener("click", () => {
+    ["aA", "aC", "mA", "mC"].forEach((id) => { $(id).value = "0"; });
+    $("mig-none").checked = true;
+    update();
+  });
+  $("accSave").addEventListener("click", () => {
+    const v = {}; ACC.forEach((id) => { v[id] = $(id).checked; });
+    $("accToast").textContent = store.set("conduta-hp-acesso", JSON.stringify(v)) ? "Salvo para os próximos pacientes." : "Não foi possível salvar neste navegador.";
+  });
+
+  // novo paciente, com desfazer
+  let snap = null, undoTimer = 0;
+  $("resetBtn").addEventListener("click", () => {
+    snap = fields().map((e) => [e, e.type === "checkbox" || e.type === "radio" ? e.checked : e.value]);
+    const keepDoc = $("doc").value;
+    form.reset();
+    ["aA", "aC", "mA", "mC"].forEach((id) => { $(id).value = ""; });
+    $("doc").value = keepDoc;
+    applyAccessDefaults();
+    $("startDate").value = isoDate(new Date());
+    txtSel = "just";
+    $("accToast").textContent = "";
+    update();
+    $("undoBar").hidden = false;
+    clearTimeout(undoTimer);
+    undoTimer = setTimeout(() => { $("undoBar").hidden = true; }, 12000);
+    window.scrollTo({ top: 0, behavior: "auto" });
+    form.scrollTop = 0;
+  });
+  $("undoBtn").addEventListener("click", () => {
+    if (snap) snap.forEach(([e, v]) => { if (e.type === "checkbox" || e.type === "radio") e.checked = v; else e.value = v; });
+    snap = null;
+    $("undoBar").hidden = true;
+    update();
+  });
+
+  // barra do celular: leva à conduta ou de volta à ficha
+  let onForm = true;
+  const setJump = () => { $("jumpBtn").textContent = onForm ? "Ver conduta" : "Editar caso"; };
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([en]) => { onForm = en.isIntersecting; setJump(); }, { rootMargin: "0px 0px -55% 0px" }).observe(form);
+  }
+  $("jumpBtn").addEventListener("click", () => {
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    (onForm ? $("out") : form).scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: "start" });
+  });
+
+  update();
+})();
+</script>
+
+<script>if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));</script>
+</body></html>
