@@ -189,6 +189,8 @@ button.link { background: none; border: 0; padding: 0; color: var(--accent); tex
 .flag .tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warn); }
 .flag.bad { background: var(--bad-soft); }
 .flag.bad .tag { color: var(--bad); }
+.flag.info { background: var(--accent-soft); }
+.flag.info .tag { color: var(--accent); }
 @media (max-width: 480px) { .flag { grid-template-columns: minmax(0, 1fr); } }
 
 .day { display: grid; gap: 8px; }
@@ -310,6 +312,13 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
 .pf-read { margin: 0; font-size: 0.86rem; color: var(--muted); }
 .pf-read b { font-family: var(--font-display); font-size: 1.05rem; color: var(--accent); }
 .pf-read.hi b { color: var(--bad); }
+.toc { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 0; margin-bottom: -6px; background: color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.toc a { font-size: 0.82rem; font-weight: 700; color: var(--muted); text-decoration: none; padding: 5px 11px; border-radius: 999px; }
+.toc a:hover { color: var(--accent); }
+.toc a.on { background: var(--accent-soft); color: var(--accent); }
+#out > section, #out > details { scroll-margin-top: 58px; }
+@media (max-width: 860px) { .toc { display: none; } #out > section, #out > details { scroll-margin-top: 12px; } }
+.rx-actions { padding-top: 4px; }
 .adh-grid { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radius: 8px; padding: 9px 15px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; }
 #printArea { display: none; }
@@ -495,6 +504,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
           <label><input type="checkbox" id="uRifa"> Esquema com rifabutina</label>
           <label><input type="checkbox" id="uDual"> Dupla com amoxicilina em dose alta</label>
           <label id="uTVrow"><input type="checkbox" id="uTV"> Tetraciclina + vonoprazana</label>
+          <label id="uBQT2row"><input type="checkbox" id="uBQT2"> Quádrupla com bismuto já repetida (usada 2 vezes)</label>
           <label><input type="checkbox" id="uUnk"> Não sabe qual esquema usou</label>
         </div>
       </fieldset>
@@ -598,7 +608,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     <p>Apoio à decisão baseado no V Consenso Brasileiro sobre a Infecção por <i>H. pylori</i> (2026, com a errata do Enunciado 20 aplicada). Taxas de erradicação por intenção de tratar, de estudos diferentes; não compare diretamente. Alertas de gestação, amamentação, idade, interações, função renal e hepática vêm de farmacologia padrão, não do consenso: confira na bula. A Tabela 6 traz só a frequência de claritromicina e levofloxacino no alérgico, e o texto não dá a dose da claritromicina no resgate do alérgico: nesses casos o app usa as doses usuais. Quando o esquema tem remédio de 6 em 6 horas, os de 2x/dia vão para 6h e 18h, para reduzir o número de horários. Vonoprazana para <i>H. pylori</i> é uso off-label no Brasil.</p>
     <p>Ferramenta para uso pessoal; não substitui o julgamento clínico. Se for distribuída institucionalmente, avalie o enquadramento como software dispositivo médico (RDC Anvisa 657/2022). Versão do app: 20/10/2026 (2).</p>
     <details class="help"><summary>Novidades da versão 2</summary>
-      <p>Escore PEN-FAST na alergia à penicilina; TFG pela CKD-EPI 2021; rabeprazol no lugar do omeprazol com clopidogrel (Tabela 2); alertas de imunossupressores e metotrexato; impressão das receitas com 1ª e 2ª vias; folheto do paciente com calendário de 14 dias; lembretes de horário para a agenda do celular (.ics); envio das orientações pelo WhatsApp; orientações de levofloxacino e rifabutina; escolha de tema claro ou escuro.</p>
+      <p>Escore PEN-FAST na alergia à penicilina; TFG pela CKD-EPI 2021; rabeprazol no lugar do omeprazol com clopidogrel (Tabela 2); alertas de imunossupressores e metotrexato; impressão das receitas com 1ª e 2ª vias e kit da consulta (receitas, pedido do teste e folheto); sumário fixo das seções; botão de retratamento quando o controle de cura dá positivo; pendências de dados separadas dos alertas clínicos; folheto do paciente com calendário de 14 dias; lembretes de horário para a agenda do celular (.ics); envio das orientações pelo WhatsApp; orientações de levofloxacino e rifabutina; escolha de tema claro ou escuro.</p>
     </details>
   </footer>
 </div>
@@ -699,7 +709,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
       preg: c("sPreg"), ckd: c("sCkd"), hep: c("sHep"),
       dx, indic: $("indic").value,
       line: Number(radio("line") || 1), allergy: radio("allergy") || "no",
-      uClari: c("uClari"), uLevo: c("uLevo"), uBQT: c("uBQT"), uRifa: c("uRifa"), uDual: c("uDual"), uUnk: c("uUnk"), uTV: c("uTV"),
+      uClari: c("uClari"), uLevo: c("uLevo"), uBQT: c("uBQT"), uRifa: c("uRifa"), uDual: c("uDual"), uUnk: c("uUnk"), uTV: c("uTV"), uBQT2: c("uBQT2"),
       bis: c("hasBis"), tetra: c("hasTetra"), vono: c("hasVono"), rifa: c("hasRifa"),
       macro: radio("macro") || "none", quino: radio("quino") || "low",
       colch: c("mColch"), statin: c("mStatin"), warf: c("mWarf"), contra: c("mContra"), arv: c("mArv"), qt: c("pQT"),
@@ -726,7 +736,8 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
       s.egfr = 142 * Math.pow(Math.min(s.creat / k, 1), a) * Math.pow(Math.max(s.creat / k, 1), -1.2) * Math.pow(0.9938, s.age) * (f ? 1.012 : 1);
     }
     s.adj = s.ckd || s.hep; // receita substituída pelo quadro de ajustes
-    if (s.line === 1) { s.uClari = s.uLevo = s.uBQT = s.uRifa = s.uDual = s.uUnk = s.uTV = false; }
+    if (s.line === 1) { s.uClari = s.uLevo = s.uBQT = s.uRifa = s.uDual = s.uUnk = s.uTV = s.uBQT2 = false; }
+    if (s.uBQT2) s.uBQT = true;
     if (s.allergy === "no") s.uTV = false;
     // endoscopia já feita: biópsia informada ou diagnóstico por método invasivo
     s.edaDone = s.bxDone || s.dx === "urease";
@@ -871,7 +882,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     if (s.staged && s.olgim === 0 && s.migType !== "none") flags.push(["warn", "Tipo de metaplasia marcado, mas os graus de metaplasia estão em 0: confira o laudo."]);
     if (s.edaDate && s.edaDate > new Date()) flags.push(["warn", "Data da endoscopia no futuro: confira o campo."]);
     if (s.start > addDays(new Date(), 10)) flags.push(["warn", "Início do tratamento daqui a mais de 10 dias: a receita de antimicrobiano vale 10 dias a partir da emissão (RDC Anvisa 20/2011). Emita a receita mais perto do início."]);
-    if (s.bxDone && !s.staged) flags.push(["warn", "Estadiamento OLGA/OLGIM pendente: marque os graus de atrofia e de metaplasia nas matrizes da biópsia. Se o laudo não descreve nenhuma das duas, use \"Laudo sem atrofia e sem metaplasia\"."]);
+    if (s.bxDone && !s.staged) flags.push(["info", "Estadiamento OLGA/OLGIM pendente: marque os graus de atrofia e de metaplasia nas matrizes da biópsia. Se o laudo não descreve nenhuma das duas, use \"Laudo sem atrofia e sem metaplasia\"."]);
 
     let order;
     if (!allergic) {
@@ -905,6 +916,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
       else if (s.line > 1 && s.clariUsed && g.drugs.includes("clari")) why = s.uClari ? "Claritromicina já usada; não repetir" : "Esquema anterior desconhecido; presume-se claritromicina, não repetir";
       else if (s.line > 1 && s.uLevo && g.drugs.includes("levo")) why = "Levofloxacino já usado; não repetir";
       else if (s.ckd && s.hep && g.drugs.includes("clari")) why = "Evitar claritromicina com insuficiência renal e hepática graves";
+      else if (s.line > 1 && s.uBQT2 && id === "M1") why = "Quádrupla com bismuto já usada 2 vezes; não repetir de novo";
       else if (s.line === 2 && s.uBQT && id === "M1") why = "Quádrupla com bismuto já usada na 1ª linha";
       else if (s.line > 1 && s.uTV && id === "M6") why = "Tetraciclina + vonoprazana já usada";
       else if (s.line > 1 && s.uRifa && id === "M5") why = "Rifabutina já usada";
@@ -932,7 +944,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     if (s.ageBad) flags.push(["warn", "Idade fora do intervalo válido: confira o campo."]);
     if (s.indic === "dispNaoInv") {
       if (s.edaDone) flags.push(["warn", "Com endoscopia já feita, a dispepsia é investigada: ajuste a indicação para \"Dispepsia investigada\" (Enunciado 7)."]);
-      else if (s.age === null) flags.push(["warn", "Informe a idade: a partir de 40 anos, a dispepsia tem indicação de endoscopia com biópsias antes de tratar (Enunciado 18)."]);
+      else if (s.age === null) flags.push(["info", "Informe a idade: a partir de 40 anos, a dispepsia tem indicação de endoscopia com biópsias antes de tratar (Enunciado 18)."]);
       else if (s.age >= 40) flags.push(["bad", `Dispepsia aos ${s.age} anos: o Enunciado 18 indica endoscopia com biópsias a partir de 40 anos. Faça a endoscopia antes de tratar.`]);
     }
     if (s.indic === "familiarCG" && s.age !== null) {
@@ -971,7 +983,8 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
         : "Os esquemas recomendados para esta linha já foram usados ou devem ser evitados. Peça teste de suscetibilidade, se disponível (Enunciado 31), e discuta com gastroenterologia."]);
     }
     // alertas graves primeiro (ordenação estável mantém a ordem dentro de cada grupo)
-    flags.sort((a, b) => (a[0] === "bad" ? 0 : 1) - (b[0] === "bad" ? 0 : 1));
+    const RANK = { bad: 0, warn: 1, info: 2 };
+    flags.sort((a, b) => RANK[a[0]] - RANK[b[0]]);
     return { blocked: false, blocks, allergic, pick, alts: ok.slice(1), avoid, flags, reasons };
   }
 
@@ -1079,7 +1092,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
   }
 
   function justText(s, d, dt) {
-    const used = [s.uClari && "claritromicina", s.uLevo && "levofloxacino", s.uBQT && "quádrupla com bismuto", s.uRifa && "rifabutina", s.uDual && "dupla com amoxicilina em dose alta", s.uTV && "tetraciclina + vonoprazana", s.uUnk && "esquema desconhecido (presumida claritromicina)"].filter(Boolean);
+    const used = [s.uClari && "claritromicina", s.uLevo && "levofloxacino", s.uBQT && (s.uBQT2 ? "quádrupla com bismuto (2 vezes)" : "quádrupla com bismuto"), s.uRifa && "rifabutina", s.uDual && "dupla com amoxicilina em dose alta", s.uTV && "tetraciclina + vonoprazana", s.uUnk && "esquema desconhecido (presumida claritromicina)"].filter(Boolean);
     let linha = s.line === 1 ? "sem tratamento prévio (1ª linha)" : s.line === 2 ? "falha de 1 tratamento prévio (2ª linha)" : "falha de 2 ou mais tratamentos (resgate)";
     if (s.line > 1) linha += used.length ? `; esquemas já utilizados: ${used.join(", ")}` : "; esquemas prévios não informados";
     const alerg = { no: "Sem alergia à penicilina.", yes: "Alergia à penicilina referida.", doubt: "Alergia à penicilina duvidosa; conduzido como alérgico até avaliação (teste cutâneo ou alergista)." }[s.allergy] + (s.pf !== null ? ` PEN-FAST ${s.pf}${s.pfScar ? " (reação cutânea grave prévia)" : s.pf < 3 ? " (baixo risco)" : ""}.` : "");
@@ -1238,7 +1251,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     return parts.join(" · ");
   }
 
-  const flagsHtml = (fl) => (fl.length ? `<ul class="flags">${fl.map(([k, t]) => `<li class="flag ${k === "bad" ? "bad" : "warn"}"><span class="tag">${k === "bad" ? "Grave" : "Atenção"}</span><span>${esc(t)}</span></li>`).join("")}</ul>` : "");
+  const flagsHtml = (fl) => (fl.length ? `<ul class="flags">${fl.map(([k, t]) => `<li class="flag ${k}"><span class="tag">${{ bad: "Grave", warn: "Atenção", info: "Pendente" }[k]}</span><span>${esc(t)}</span></li>`).join("")}</ul>` : "");
 
   const shortName = (n) => (n.startsWith("Subcitrato") ? "Bismuto" : n.split(" ")[0]);
   const shortDose = (p) => doseOf(p).replace(/cápsulas?/, "cáps.").replace(/comprimidos?/, "comp.");
@@ -1263,7 +1276,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
         <p class="case-line">${esc(caseLine(s))}</p>
         <div><p class="eyebrow">${dxBlock ? "Diagnóstico antes do tratamento" : "Fora do escopo do app"}</p><h2 id="blockTitle">Receita não gerada</h2></div>
         ${d.blocks.map((b) => BLOCK_HTML[b]).join("")}
-        ${dxBlock ? `${sheetsHtml("exam")}<div class="actions"><button type="button" id="copyRx">Copiar pedido do teste</button><button type="button" class="ghost" id="printRx">${viewerDl ? "Baixar pedido para imprimir" : "Imprimir pedido"}</button><span class="toast" id="toast" role="status"></span></div>` : ""}
+        ${dxBlock ? `<div class="actions rx-actions"><button type="button" id="copyRx">Copiar pedido do teste</button><button type="button" class="ghost" id="printRx">${viewerDl ? "Baixar pedido para imprimir" : "Imprimir pedido"}</button><span class="toast" id="toast" role="status"></span></div>${sheetsHtml("exam")}` : ""}
       </section>`;
     }
     if (!d.pick) {
@@ -1292,8 +1305,9 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
       <p class="why">${esc(whyText(d.pick, s, d.allergic))}${d.reasons[d.pick] ? " " + esc(d.reasons[d.pick]) : ""}</p>
       ${flagsHtml(d.flags)}
       ${s.adj ? "" : dayHtml(s, d.pick)}
+      <div class="actions rx-actions"><button type="button" id="copyRx">${s.adj ? "Copiar ajustes" : sheets.length > 1 ? "Copiar todas as receitas" : "Copiar receita"}</button>${s.adj ? "" : `<button type="button" class="ghost" id="printRx">${viewerDl ? "Baixar receitas (2 vias)" : "Imprimir receitas (2 vias)"}</button><button type="button" class="ghost" id="printKit" title="Receitas em 2 vias, pedido do teste de controle e folheto do paciente com calendário">${viewerDl ? "Baixar kit da consulta" : "Imprimir kit da consulta"}</button>`}<span class="toast" id="toast" role="status"></span></div>
+      ${s.adj ? "" : `<p class="hint">Kit da consulta: receitas em 2 vias, pedido do teste de controle e folheto do paciente com calendário, em uma impressão só.</p>`}
       ${sheetsHtml(s.adj ? "adj" : "presc")}
-      <div class="actions"><button type="button" id="copyRx">${s.adj ? "Copiar ajustes" : sheets.length > 1 ? "Copiar todas as receitas" : "Copiar receita"}</button>${s.adj ? "" : `<button type="button" class="ghost" id="printRx">${viewerDl ? "Baixar receitas para imprimir (2 vias)" : "Imprimir receitas (com 2 vias)"}</button>`}<span class="toast" id="toast" role="status"></span></div>
     </section>`;
   }
 
@@ -1325,7 +1339,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     }
     if (dt.eda) tl.push(["Próxima endoscopia", `<b>${esc(dt.edaShort)}</b> · ${esc(dt.edaBase)}`, "long key"]);
     const tlHtml = tl.length ? `<section class="panel sub" id="datesPanel"><h3>Linha do tempo</h3><dl class="dates timeline">${tl.map(([k, v, c]) => `<div class="tl ${c}"><dt>${esc(k)}</dt><dd>${c.includes("long") && v.includes("<b>") ? v : esc(v)}</dd></div>`).join("")}</dl></section>` : "";
-    return `<section class="follow" aria-labelledby="followTitle">
+    return `<section class="follow" id="followPanel" aria-labelledby="followTitle">
       <h2 class="sec-title" id="followTitle">Seguimento</h2>
       <div class="follow-grid">
         <section class="panel sub" id="indPanel"><h3>Pela indicação</h3><p class="hint">${esc(ind.label)}</p><ul class="notes">${ind.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul></section>
@@ -1340,7 +1354,8 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
             <li>Suspender ${s.vono ? "vonoprazana" : "IBP"} 2 semanas antes; antibióticos e bismuto, 4 semanas</li>
             <li>Antagonista H2: 72 horas antes</li>
           </ul>
-          <p class="hint">Sorologia e teste rápido da urease isolado não servem para controle de cura.</p></section>
+          <p class="hint">Sorologia e teste rápido da urease isolado não servem para controle de cura.</p>
+          ${d.pick ? `<button type="button" class="ghost" id="nextLine">Controle positivo: planejar o retratamento</button><p class="hint">Passa para a ${s.line === 1 ? "2ª linha" : "linha de resgate"} e marca ${esc(R[d.pick].name.toLowerCase())} como já usada.</p>` : ""}</section>
       </div>
     </section>`;
   }
@@ -1385,6 +1400,10 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
       return P2.test(t) ? one("1ª via · retenção da farmácia") + one("2ª via · paciente") : one(t.startsWith("SOLICITAÇÃO") ? "Pedido de exame" : "Receita");
     }).join("");
   }
+  function kitHtml() {
+    const { s, d, dt } = cur;
+    return rxPrintHtml() + `<section class="pp"><div class="via"><span>Pedido de exame</span><span>Conduta H. pylori</span></div><pre>${esc(examText(s, dt))}</pre></section>` + leafletHtml(s, d, dt);
+  }
   function leafletHtml(s, d, dt) {
     const slots = daySlots(s, d.pick);
     const lines = buildRx(d.pick, s).flatMap((r) => r.lines);
@@ -1425,6 +1444,12 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     const fonts = document.querySelector('link[rel="stylesheet"][href*="fonts.googleapis"]');
     return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Conduta H. pylori · impressão</title>${fonts ? fonts.outerHTML : ""}<style>:root{${vars}} body{margin:0;padding:24px 0} .pp{max-width:182mm;margin:0 auto 28px} @media screen{.pp{border-bottom:1px dashed #999;padding-bottom:24px}}\n${rules}</style></head><body><div id="printArea">${html}</div><script>addEventListener("load",function(){setTimeout(function(){print()},500)})<\/script></body></html>`;
   }
+  let ownPrint = false;
+  window.addEventListener("beforeprint", () => {
+    if (ownPrint) return;
+    $("printArea").innerHTML = sheets.length ? rxPrintHtml() : `<section class="pp"><pre>${esc($("hero") ? $("hero").innerText : "")}</pre></section>`;
+  });
+  window.addEventListener("afterprint", () => { ownPrint = false; });
   function doPrint(html, name, toastId) {
     $("printArea").innerHTML = html;
     const n = native();
@@ -1435,6 +1460,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
         .catch((e) => { if ($(toastId)) $(toastId).textContent = e && e.code === "declined" ? "" : "Não deu para salvar aqui: use o app instalado para imprimir."; });
       return;
     }
+    ownPrint = true;
     window.print();
   }
   function saveFile(name, mime, text, toastId) {
@@ -1487,7 +1513,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
   }
 
   function refrPanel() {
-    return `<section class="panel refr" aria-labelledby="refrTitle"><h3 id="refrTitle">Caso refratário: quando os esquemas falharam</h3>
+    return `<section class="panel refr" id="refrPanel" aria-labelledby="refrTitle"><h3 id="refrTitle">Caso refratário: quando os esquemas falharam</h3>
       <p class="hint">Roteiro baseado nos Enunciados 3, 16, 19, 26, 30, 31 e 33 do V Consenso.</p>
       <ol class="steps">
         <li><b>Confirme a falha.</b> Controle por teste respiratório ou antígeno fecal, pelo menos 4 semanas após o fim, com IBP ou vonoprazana suspensos 2 semanas e antibióticos e bismuto 4 semanas. Sorologia não vale.</li>
@@ -1547,6 +1573,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     ["Alergia confirmada, resgate, claritromicina e quádrupla já usadas, com bismuto", "Quádrupla repetida (não repete claritromicina)"],
     ["Alérgico, 2ª linha, já usou tetraciclina + vonoprazana, com bismuto", "Quádrupla com bismuto; tetraciclina + vonoprazana não se repete"],
     ["Resgate sem alergia, quádrupla já usada, com bismuto", "Quádrupla repetida, taxa de 76% (Hp-EuReg)"],
+    ["Resgate, quádrupla já repetida (2 vezes)", "Quádrupla evitada; rifabutina ou dupla, conforme o acesso"],
     ["Resgate, todos os esquemas usados, sem bismuto e sem rifabutina", "Sem esquema; roteiro de caso refratário"],
     ["Gestante, ou idade < 18", "Receita não gerada, fora do escopo"],
     ["Ainda não testado; ou só sorologia na gastrite sem atrofia", "Receita não gerada; pedido de teste diagnóstico"],
@@ -1575,6 +1602,7 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
   // ---------- desenho ----------
   let lastKey = null;
   let cur = null;
+  let tocObs = null;
   function render() {
     const s = state();
     const d = decide(s);
@@ -1613,11 +1641,25 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     if (!d.blocked && d.pick && !s.adj) html += adhPanel(s, d, dt);
     cur = { s, d, dt };
     html += diagPanel() + sourcesPanel() + casesPanel();
+    const toc = [["hero", "Conduta"]];
+    if (!d.blocked && s.line === 3) toc.push(["refrPanel", "Refratário"]);
+    if (!d.blocked && (d.alts.length || d.avoid.length)) toc.push(["altPanel", "Alternativas"]);
+    if (!d.blocked) toc.push(["followPanel", "Seguimento"], ["txtPanel", "Textos"]);
+    if (!d.blocked && d.pick && !s.adj) toc.push(["adhPanel", "Paciente"]);
+    if (toc.length > 1) html = `<nav class="toc" aria-label="Seções da conduta">${toc.map(([id, l]) => `<a href="#${id}" data-toc="${id}">${l}</a>`).join("")}</nav>` + html;
 
     // painéis abertos continuam abertos depois de redesenhar
     const openKeys = new Set([...$("out").querySelectorAll("details[open][data-k]")].map((e) => e.dataset.k));
     $("out").innerHTML = html;
     $("out").querySelectorAll("details[data-k]").forEach((e) => { if (openKeys.has(e.dataset.k)) e.open = true; });
+    // sumário: marca a seção que está no topo da tela
+    if (tocObs) tocObs.disconnect();
+    if ("IntersectionObserver" in window && $("out").querySelector(".toc")) {
+      tocObs = new IntersectionObserver((ents) => {
+        ents.forEach((en) => { if (en.isIntersecting) $("out").querySelectorAll(".toc a").forEach((a) => a.classList.toggle("on", a.dataset.toc === en.target.id)); });
+      }, { rootMargin: "-60px 0px -70% 0px" });
+      toc.forEach(([id]) => { if ($(id)) tocObs.observe($(id)); });
+    }
 
     // barra do celular e leitor de tela
     let title, sub;
@@ -1662,6 +1704,22 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
     if (sb) { copyText(sheets[Number(sb.dataset.copySheet)] || "", (ok) => feedback(sb, null, ok)); return; }
     if (e.target.closest("#copyRx")) { const b = e.target.closest("#copyRx"); copyText(sheets.join(SEP), (ok) => feedback(b, "toast", ok, "Copiado para a área de transferência")); return; }
     if (e.target.closest("#printRx")) { doPrint(rxPrintHtml(), "receitas-h-pylori.html", "toast"); return; }
+    if (e.target.closest("#nextLine") && cur && cur.d.pick) {
+      // esquema que falhou → caixas de "já usou"; a próxima linha nunca passa do resgate
+      const USED = { M1: ["uBQT"], M9: ["uClari"], M2: ["uClari"], M3: ["uDual"], M8: ["uClari"], M4: ["uLevo"], M5: ["uRifa"], M6: ["uTV"], M7: ["uClari", "uLevo"], M14: ["uClari"] };
+      const failed = cur.d.pick, next = Math.min(cur.s.line + 1, 3);
+      $("l" + next).checked = true;
+      if (failed === "M1" && cur.s.uBQT) $("uBQT2").checked = true; // quádrupla repetida também falhou
+      (USED[failed] || []).forEach((id) => { $(id).checked = true; });
+      $("startDate").value = isoDate(new Date());
+      update();
+      if ($("toast")) $("toast").textContent = `Retratamento: ${R[failed].name} marcada como já usada.`;
+      $("hero").scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      return;
+    }
+    if (e.target.closest("#printKit") && cur) { doPrint(kitHtml(), "kit-consulta-h-pylori.html", "toast"); return; }
+    const ta = e.target.closest("[data-toc]");
+    if (ta && $(ta.dataset.toc)) { e.preventDefault(); $(ta.dataset.toc).scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" }); return; }
     if (e.target.closest("#printLeaf") && cur) { doPrint(leafletHtml(cur.s, cur.d, cur.dt), "folheto-h-pylori.html", "toast3"); return; }
     if (e.target.closest("#icsBtn") && cur) { saveFile("tratamento-h-pylori.ics", "text/calendar", icsText(cur.s, cur.d, cur.dt), "toast3"); return; }
     if (e.target.closest("#copyTxt")) { const b = e.target.closest("#copyTxt"); copyText(texts[txtSel] || "", (ok) => feedback(b, "toast2", ok, "Texto copiado")); }
