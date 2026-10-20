@@ -1453,7 +1453,8 @@ a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radiu
   function doPrint(html, name, toastId) {
     $("printArea").innerHTML = html;
     const n = native();
-    if (n) { n.postMessage({ type: "print" }); return; }
+    // o WebKit também dispara beforeprint na impressão nativa: marcar antes para não trocar o conteúdo
+    if (n) { ownPrint = true; n.postMessage({ type: "print" }); return; }
     if (viewerDl) {
       viewerDl.save({ filename: name, data: printDoc(html) })
         .then(() => { if ($(toastId)) $(toastId).textContent = "Arquivo salvo: abra e imprima."; })
