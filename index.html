@@ -292,6 +292,50 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
   body:has(.case input[type="text"]:focus, .case input[type="number"]:focus, .case input[type="date"]:focus, .case textarea:focus, .case select:focus) .jump { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { .hero.flash { animation: none; } }
+
+/* v2: tema, PEN-FAST, adesão e impressão */
+.topr { display: grid; justify-items: end; gap: 6px; }
+@media (max-width: 700px) { .topr { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; width: 100%; } }
+.seg.theme { grid-auto-columns: auto; font-size: 0.8rem; }
+.seg.theme label { min-height: 30px; padding: 4px 10px; font-size: 0.78rem; }
+.penfast { border: 1px solid var(--line); border-radius: 9px; padding: 12px 14px; background: var(--bg); display: grid; gap: 8px; }
+.pf-items { display: grid; gap: 8px; }
+.pf-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; align-items: center; font-size: 0.86rem; }
+.pf-row i { font-style: normal; color: var(--muted); }
+.pf-row .seg label { min-height: 32px; padding: 4px 10px; font-size: 0.8rem; }
+@media (max-width: 420px) { .pf-row { grid-template-columns: minmax(0, 1fr); } }
+.gfr { margin: 0; font-size: 0.84rem; color: var(--muted); }
+.gfr b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.gfr.hi, .gfr.hi b { color: var(--bad); }
+.pf-read { margin: 0; font-size: 0.86rem; color: var(--muted); }
+.pf-read b { font-family: var(--font-display); font-size: 1.05rem; color: var(--accent); }
+.pf-read.hi b { color: var(--bad); }
+.adh-grid { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+a.btn { display: inline-block; font-weight: 700; font-size: 0.9rem; border-radius: 8px; padding: 9px 15px; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; }
+#printArea { display: none; }
+@media print {
+  @page { size: A4; margin: 14mm; }
+  html, body { background: #fff !important; color: #000 !important; }
+  body { padding: 0 !important; }
+  body > *:not(#printArea) { display: none !important; }
+  #printArea { display: block !important; }
+  .pp { break-after: page; page-break-after: always; color: #000; }
+  .pp:last-child { break-after: auto; page-break-after: auto; }
+  .pp .via { display: flex; justify-content: space-between; gap: 12px; font: 700 8.5pt/1.3 var(--font-body); letter-spacing: 0.08em; text-transform: uppercase; border-bottom: 1px solid #000; padding-bottom: 4px; margin-bottom: 12px; }
+  .pp pre { margin: 0; font: 11pt/1.55 var(--font-mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+  .pp h1 { font: 650 16pt/1.2 var(--font-display); margin: 0 0 4px; }
+  .pp h1 i { font-style: italic; }
+  .pp h2 { font: 650 11.5pt/1.3 var(--font-display); margin: 10px 0 4px; }
+  .pp p, .pp li { font: 9.5pt/1.4 var(--font-body); margin: 0 0 3px; }
+  .pp ul { margin: 0; padding-left: 18px; }
+  .pp table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .pp th, .pp td { border: 1px solid #000; padding: 3px 5px; text-align: center; font: 9.5pt/1.25 var(--font-body); }
+  .pp th { font-weight: 700; text-transform: none; letter-spacing: 0; color: #000; }
+  .pp td.d { text-align: left; white-space: nowrap; }
+  .pp .box { display: inline-block; width: 13px; height: 13px; border: 1.5px solid #000; border-radius: 2px; }
+  .pp .meds { font-size: 8pt; font-weight: 400; display: block; }
+  .pp .box { width: 12px; height: 12px; }
+}
 </style>
 
 <div class="wrap">
@@ -306,7 +350,14 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
         <p class="src">V Consenso Brasileiro sobre a Infecção por <i>H. pylori</i> · Arq Gastroenterol 2026;63:e26043</p>
       </div>
     </div>
-    <p class="ver">Apoio à decisão · versão 20/10/2026</p>
+    <div class="topr">
+      <p class="ver">Apoio à decisão · versão 20/10/2026 (2)</p>
+      <div class="seg theme" role="radiogroup" aria-label="Tema">
+        <label><input type="radio" name="theme" value="auto" id="thAuto" checked><span>Auto</span></label>
+        <label><input type="radio" name="theme" value="light" id="thLight"><span>Claro</span></label>
+        <label><input type="radio" name="theme" value="dark" id="thDark"><span>Escuro</span></label>
+      </div>
+    </div>
   </header>
 
   <div class="grid">
@@ -349,6 +400,10 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
           <label><input type="checkbox" id="sCkd"> Insuficiência renal (TFG &lt; 30 mL/min)</label>
           <label><input type="checkbox" id="sHep"> Hepatopatia grave (Child-Pugh C)</label>
         </div>
+        <label class="text-in" for="creat">Creatinina sérica (mg/dL), para calcular a TFG
+          <input id="creat" type="number" min="0.1" max="20" step="0.01" inputmode="decimal" placeholder="opcional">
+        </label>
+        <p class="gfr" id="gfrRead" hidden></p>
       </fieldset>
 
       <fieldset>
@@ -451,6 +506,24 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
           <label><input type="radio" name="allergy" value="yes" id="aYes"><span>Sim</span></label>
           <label><input type="radio" name="allergy" value="doubt" id="aDoubt"><span>Duvidosa</span></label>
         </div>
+        <div class="penfast" id="pfBox" hidden>
+          <p class="lbl-sm"><b>PEN-FAST</b>: chance de a alergia ser verdadeira</p>
+          <div class="pf-items">
+            <div class="pf-row"><span id="pfFL">Reação há 5 anos ou menos <i>(2)</i></span>
+              <div class="seg" role="radiogroup" aria-labelledby="pfFL"><label><input type="radio" name="pfF" value="1"><span>Sim ou não sabe</span></label><label><input type="radio" name="pfF" value="0"><span>Não</span></label></div></div>
+            <div class="pf-row"><span id="pfAL">Anafilaxia ou angioedema <i>(2)</i></span>
+              <div class="seg" role="radiogroup" aria-labelledby="pfAL"><label><input type="radio" name="pfA" value="1"><span>Sim</span></label><label><input type="radio" name="pfA" value="0"><span>Não</span></label></div></div>
+            <div class="pf-row"><span id="pfSL">Reação cutânea grave: bolhas, descamação, SSJ/NET ou DRESS <i>(2)</i></span>
+              <div class="seg" role="radiogroup" aria-labelledby="pfSL"><label><input type="radio" name="pfS" value="1"><span>Sim</span></label><label><input type="radio" name="pfS" value="0"><span>Não</span></label></div></div>
+            <div class="pf-row"><span id="pfTL">Precisou de tratamento <i>(1)</i></span>
+              <div class="seg" role="radiogroup" aria-labelledby="pfTL"><label><input type="radio" name="pfT" value="1"><span>Sim ou não sabe</span></label><label><input type="radio" name="pfT" value="0"><span>Não</span></label></div></div>
+          </div>
+          <p class="pf-read" id="pfRead"></p>
+          <details class="help"><summary>Sobre o PEN-FAST</summary>
+            <p>Regra validada em 1.567 pacientes (Austrália e EUA): escore abaixo de 3 tem valor preditivo negativo de 96%. Escore 0: menos de 1% de alergia verdadeira; 1–2: cerca de 5%; 3: cerca de 20%; 4–5: cerca de 50%. Anafilaxia e reação cutânea grave somam 2 pontos juntas, não 4.</p>
+            <p>Abaixo de 3, sem reação cutânea grave: candidato a provocação oral direta com amoxicilina, sob supervisão, ou avaliação do alergista. Retirar o rótulo libera os esquemas com amoxicilina, que o Consenso considera os mais eficazes.</p>
+          </details>
+        </div>
       </fieldset>
 
       <fieldset>
@@ -497,6 +570,9 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
               <label><input type="checkbox" id="mWarf"> Anticoagulante oral (varfarina, rivaroxabana, apixabana, dabigatrana)</label>
               <label><input type="checkbox" id="mContra"> Anticoncepcional hormonal</label>
               <label><input type="checkbox" id="mArv"> Antirretrovirais (HIV)</label>
+              <label><input type="checkbox" id="mClopi"> Clopidogrel</label>
+              <label><input type="checkbox" id="mImun"> Tacrolimo, ciclosporina, sirolimo ou everolimo</label>
+              <label><input type="checkbox" id="mMtx"> Metotrexato</label>
               <label><input type="checkbox" id="pQT"> Risco de QT longo (cardiopatia, antiarrítmico, antipsicótico)</label>
             </div>
           </fieldset>
@@ -520,7 +596,10 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
 
   <footer class="foot">
     <p>Apoio à decisão baseado no V Consenso Brasileiro sobre a Infecção por <i>H. pylori</i> (2026, com a errata do Enunciado 20 aplicada). Taxas de erradicação por intenção de tratar, de estudos diferentes; não compare diretamente. Alertas de gestação, amamentação, idade, interações, função renal e hepática vêm de farmacologia padrão, não do consenso: confira na bula. A Tabela 6 traz só a frequência de claritromicina e levofloxacino no alérgico, e o texto não dá a dose da claritromicina no resgate do alérgico: nesses casos o app usa as doses usuais. Quando o esquema tem remédio de 6 em 6 horas, os de 2x/dia vão para 6h e 18h, para reduzir o número de horários. Vonoprazana para <i>H. pylori</i> é uso off-label no Brasil.</p>
-    <p>Ferramenta para uso pessoal; não substitui o julgamento clínico. Se for distribuída institucionalmente, avalie o enquadramento como software dispositivo médico (RDC Anvisa 657/2022). Versão do app: 20/10/2026.</p>
+    <p>Ferramenta para uso pessoal; não substitui o julgamento clínico. Se for distribuída institucionalmente, avalie o enquadramento como software dispositivo médico (RDC Anvisa 657/2022). Versão do app: 20/10/2026 (2).</p>
+    <details class="help"><summary>Novidades da versão 2</summary>
+      <p>Escore PEN-FAST na alergia à penicilina; TFG pela CKD-EPI 2021; rabeprazol no lugar do omeprazol com clopidogrel (Tabela 2); alertas de imunossupressores e metotrexato; impressão das receitas com 1ª e 2ª vias; folheto do paciente com calendário de 14 dias; lembretes de horário para a agenda do celular (.ics); envio das orientações pelo WhatsApp; orientações de levofloxacino e rifabutina; escolha de tema claro ou escuro.</p>
+    </details>
   </footer>
 </div>
 
@@ -529,6 +608,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
   <button type="button" id="jumpBtn">Ver conduta</button>
 </div>
 <textarea class="copybuf" id="copybuf" aria-hidden="true" tabindex="-1"></textarea>
+<div id="printArea" aria-hidden="true"></div>
 
 <script>
 (function () {
@@ -595,6 +675,13 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
   if (savedDoc) $("doc").value = savedDoc;
   $("doc").addEventListener("input", () => store.set("conduta-hp-doc", $("doc").value));
   applyAccessDefaults();
+  function applyTheme(v) {
+    if (v === "light" || v === "dark") document.documentElement.dataset.theme = v; else delete document.documentElement.dataset.theme;
+    const id = { light: "thLight", dark: "thDark" }[v] || "thAuto";
+    $(id).checked = true;
+  }
+  applyTheme(store.get("conduta-hp-tema"));
+  document.querySelectorAll('input[name="theme"]').forEach((r) => r.addEventListener("change", () => { applyTheme(r.value); store.set("conduta-hp-tema", r.value); }));
   $("more").open = window.matchMedia("(min-width: 861px)").matches;
 
   // ---------- estado ----------
@@ -616,6 +703,9 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
       bis: c("hasBis"), tetra: c("hasTetra"), vono: c("hasVono"), rifa: c("hasRifa"),
       macro: radio("macro") || "none", quino: radio("quino") || "low",
       colch: c("mColch"), statin: c("mStatin"), warf: c("mWarf"), contra: c("mContra"), arv: c("mArv"), qt: c("pQT"),
+      clopi: c("mClopi"), imun: c("mImun"), mtx: c("mMtx"),
+      pfF: radio("pfF"), pfA: radio("pfA"), pfS: radio("pfS"), pfT: radio("pfT"),
+      creat: $("creat").value.trim() === "" ? null : Number($("creat").value),
       simple: c("pSimple"), smoke: c("pSmoke"), obese: c("pObese"), frail: c("pFrail"), probio: c("pProbio"),
       // histologia positiva implica biópsia feita
       bxDone: dx === "hist" || c("bx"),
@@ -624,6 +714,17 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
       fh: c("fhGC") || $("indic").value === "familiarCG",
     };
     s.minor = s.age !== null && s.age < 18;
+    // PEN-FAST (Trubiano 2020): F 2, A ou S 2 (juntos, não somam), T 1
+    // só pontua com os 4 itens respondidos: item em branco não pode virar "baixo risco"
+    s.pfDone = [s.pfF, s.pfA, s.pfS, s.pfT].every((v) => v !== "");
+    s.pf = s.allergy !== "no" && s.pfDone ? (s.pfF === "1" ? 2 : 0) + (s.pfA === "1" || s.pfS === "1" ? 2 : 0) + (s.pfT === "1" ? 1 : 0) : null;
+    s.pfScar = s.allergy !== "no" && s.pfS === "1";
+    // TFG pela CKD-EPI 2021, sem raça (Inker 2021)
+    s.egfr = null;
+    if (s.creat !== null && s.creat > 0 && s.creat < 30 && s.age !== null && s.age >= 18 && s.sex) {
+      const f = s.sex === "F", k = f ? 0.7 : 0.9, a = f ? -0.241 : -0.302;
+      s.egfr = 142 * Math.pow(Math.min(s.creat / k, 1), a) * Math.pow(Math.max(s.creat / k, 1), -1.2) * Math.pow(0.9938, s.age) * (f ? 1.012 : 1);
+    }
     s.adj = s.ckd || s.hep; // receita substituída pelo quadro de ajustes
     if (s.line === 1) { s.uClari = s.uLevo = s.uBQT = s.uRifa = s.uDual = s.uUnk = s.uTV = false; }
     if (s.allergy === "no") s.uTV = false;
@@ -665,6 +766,10 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
   }
   function antisec(s, bid, high) {
     if (s.vono) return mk("Vonoprazana 20 mg", "28 comprimidos", `Tomar 1 comprimido ${at2(bid)}, por 14 dias.`, bid);
+    // clopidogrel: omeprazol e esomeprazol inibem o CYP2C19 (FDA). Rabeprazol 20 mg = 36 mg de omeprazol (Tabela 2):
+    // 2x/dia é dose padrão; 4x/dia na dupla é dose alta (Tabela 3: 54–128 mg de equivalentes 2x/dia)
+    if (s.clopi && high) return mk("Rabeprazol 20 mg", "56 comprimidos", "Tomar 1 comprimido de 6 em 6 horas (6h, 12h, 18h e 24h), por 14 dias.", Q6);
+    if (s.clopi) return mk("Rabeprazol 20 mg", "28 comprimidos", `Tomar 1 comprimido ${at2(bid)}, 30 a 60 minutos antes do café da manhã e do jantar, por 14 dias.`, bid);
     // obeso na dupla: amoxicilina de 6/6 h; IBP 4x/dia nos mesmos horários (Tabela 3: IBP em dose alta 3 ou 4x/dia)
     if (high && s.obese) return mk("Omeprazol 20 mg", "112 cápsulas", "Tomar 2 cápsulas (40 mg) de 6 em 6 horas (6h, 12h, 18h e 24h), por 14 dias.", Q6);
     if (high) return mk("Omeprazol 20 mg", "126 cápsulas", "Tomar 3 cápsulas (60 mg) de 8 em 8 horas (6h, 14h e 22h), por 14 dias.", E8);
@@ -688,7 +793,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     M3: { name: "Dupla em dose alta", drugs: ["amox"], strength: "Fraca", src: "Enunciados 28–30; Tabelas 3–5", align: true,
       rate: { "1v": ["77%", "Ocidente; 83–89% na Ásia"], "1p": ["86–87%", "89–96% na América Latina e em Portugal"], "2v": ["75%", "Hp-BraReg, n=24"], "2p": ["100%", "estudo português pequeno"], "3v": ["74–93%", "100% no Hp-BraReg, n=36"], "3p": ["51–76%"] },
       simple: "2 remédios; amoxicilina 3x/dia",
-      build: (s, D, bid) => [{ title: RX, lines: [s.obese ? D.amox4 : D.amox3, antisec(s, bid, true)] }] },
+      build: (s, D, bid) => [{ title: RX, lines: [s.obese || (s.clopi && !s.vono) ? D.amox4 : D.amox3, antisec(s, bid, true)] }] },
     M8: { name: "Concomitante", drugs: ["clari", "amox", "metro"], strength: "Fraca", src: "Enunciado 28; Tabela 3", align: true,
       rate: { 1: [">90%", "registros de vida real"] }, simple: "4 remédios; metronidazol 4x/dia",
       build: (s, D, bid) => [{ title: RX, lines: [D.clari, D.amox2, D.metro500q, antisec(s, bid)] }] },
@@ -796,6 +901,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
       else if (s.ckd && (g.drugs.includes("tetra") || g.drugs.includes("bis"))) why = "Evitar tetraciclina e bismuto com TFG < 30";
       else if (s.ckd && id === "M3") why = "Dose alta de amoxicilina não se aplica com TFG < 30";
       else if (s.colch && g.drugs.includes("clari")) why = "Interação grave da claritromicina com a colchicina";
+      else if (s.imun && g.drugs.includes("clari")) why = "Claritromicina eleva muito os níveis de tacrolimo, ciclosporina, sirolimo e everolimo";
       else if (s.line > 1 && s.clariUsed && g.drugs.includes("clari")) why = s.uClari ? "Claritromicina já usada; não repetir" : "Esquema anterior desconhecido; presume-se claritromicina, não repetir";
       else if (s.line > 1 && s.uLevo && g.drugs.includes("levo")) why = "Levofloxacino já usado; não repetir";
       else if (s.ckd && s.hep && g.drugs.includes("clari")) why = "Evitar claritromicina com insuficiência renal e hepática graves";
@@ -820,7 +926,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
 
     const pick = ok[0] || null;
     const pd = pick ? R[pick].drugs : [];
-    if (s.allergy === "doubt") flags.push(["warn", "Alergia duvidosa: menos de 5% de quem refere alergia à penicilina tem alergia verdadeira. Considere teste cutâneo ou alergista; liberar a amoxicilina amplia muito as opções. Até lá, a conduta trata como alérgico."]);
+    if (s.allergy !== "no" && s.pf === null && !s.pfScar) flags.push(["warn", `${s.allergy === "doubt" ? "Alergia duvidosa" : "Alergia referida"}: menos de 5% de quem refere alergia à penicilina tem alergia verdadeira. Responda o PEN-FAST na ficha para estimar o risco; liberar a amoxicilina amplia muito as opções. Até lá, a conduta trata como alérgico.`]);
     if (s.line > 1 && s.uUnk) flags.push(["warn", "Esquema anterior desconhecido: como 95% dos tratamentos de 1ª linha no Hp-BraReg usaram claritromicina, o app assume que ela já foi usada."]);
     if (s.line === 3) flags.push(["warn", "Após 3 falhas, peça teste de suscetibilidade (cultura ou PCR), se disponível (Enunciado 31)."]);
     if (s.ageBad) flags.push(["warn", "Idade fora do intervalo válido: confira o campo."]);
@@ -835,6 +941,16 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     }
     if (s.frail) flags.push(["warn", "Idoso frágil: decisão compartilhada sobre tratar, pesando o benefício esperado contra efeitos adversos e reexposição a antibióticos (Enunciado 16)."]);
     if (pick && (s.ckd || s.hep)) flags.push(["bad", `${adjCause(s).charAt(0).toUpperCase() + adjCause(s).slice(1)}: a receita não é gerada automaticamente. Ajuste as doses conforme o quadro abaixo e confira na bula${s.hep ? "; considere discutir com hepatologia" : ""}.`]);
+    if (s.pf !== null) {
+      const PF_RISK = ["menos de 1%", "cerca de 5%", "cerca de 5%", "cerca de 20%", "cerca de 50%", "cerca de 50%"];
+      if (s.pfScar) flags.push(["bad", `Reação cutânea grave prévia à penicilina: não faça provocação nem teste com penicilina fora de centro especializado. Mantenha os esquemas sem amoxicilina.`]);
+      else if (s.pf < 3) flags.push(["warn", `PEN-FAST ${s.pf}, baixo risco (${PF_RISK[s.pf]} de alergia verdadeira). Considere provocação oral direta com amoxicilina sob supervisão, ou alergista: confirmada a tolerância, retire o rótulo e use os esquemas com amoxicilina. Até lá, a conduta trata como alérgico.`]);
+      else flags.push(["warn", `PEN-FAST ${s.pf}, risco ${s.pf === 3 ? "moderado" : "alto"} (${PF_RISK[s.pf]} de alergia verdadeira). Encaminhe ao alergista para teste cutâneo antes de reintroduzir penicilina.`]);
+    }
+    if (pick && s.clopi && !s.vono) flags.push(["warn", `Clopidogrel: omeprazol e esomeprazol inibem o CYP2C19 e reduzem a ativação do clopidogrel (alerta da FDA). A receita usa rabeprazol 20 mg, dose padrão pela Tabela 2 e menos dependente do CYP2C19${pick === "M3" && !s.obese ? "; na dupla, rabeprazol e amoxicilina 1 g de 6 em 6 horas (4 g/dia, dentro dos 3–4 g/dia do Enunciado 28)" : ""}. Se conseguir vonoprazana, prefira-a. Pantoprazol 40 mg é dose baixa na Tabela 2 e não substitui aqui.`]);
+    if (pick && s.imun && pd.includes("rifa")) flags.push(["bad", "Rifabutina induz o CYP3A4 e derruba os níveis de tacrolimo, ciclosporina, sirolimo e everolimo: só com o transplantador e dosagem sérica."]);
+    if (pick && s.imun && !pd.includes("rifa")) flags.push([pd.includes("metro") ? "bad" : "warn", `Imunossupressor em uso: esquemas com claritromicina foram retirados pela interação.${pd.includes("metro") ? " O metronidazol também eleva os níveis de tacrolimo e ciclosporina: dose o nível sérico na 1ª semana e combine com o transplantador." : " Dose o nível sérico se houver diarreia intensa ou desidratação."}`]);
+    if (pick && s.mtx && pd.includes("amox")) flags.push(["warn", "Metotrexato + amoxicilina: a amoxicilina reduz a eliminação do metotrexato (risco de mielotoxicidade). Combine com quem prescreve o metotrexato pausar a dose semanal nos 14 dias ou monitore hemograma e função renal."]);
     if (s.arv) flags.push(["bad", "Antirretrovirais: claritromicina, rifabutina e vonoprazana têm interações importantes (ritonavir e cobicistat elevam níveis; atazanavir e rilpivirina dependem da acidez gástrica). Revise o esquema com o infectologista antes de prescrever."]);
     if (pick && s.qt && pd.some((x) => x === "clari" || x === "levo")) flags.push(["bad", "Risco de QT longo com claritromicina/levofloxacino: peça ECG antes de iniciar."]);
     if (pick && s.statin && pd.includes("clari")) flags.push(["bad", "Estatina + claritromicina: risco de rabdomiólise. Suspenda sinvastatina ou lovastatina durante os 14 dias; atorvastatina, reduza ou suspenda."]);
@@ -845,7 +961,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     if (pick && !allergic && s.line === 1 && pd.includes("clari") && !pd.includes("bis")) flags.push(["warn", "Resistência primária à claritromicina no Brasil: cerca de 17%, acima do limite de 15%. Sem bismuto, esquemas com claritromicina perdem eficácia; faça sempre o controle de cura."]);
     if (pick && pd.includes("levo")) flags.push(["warn", "Resistência primária a quinolonas no Brasil: cerca de 13,5%. No Hp-BraReg, levofloxacino sem bismuto erradicou só 57–73%; mantenha o bismuto no esquema."]);
     if (s.smoke) flags.push(["warn", "Tabagismo quase dobra a chance de falha: oriente parar durante o tratamento."]);
-    if (pick === "M3" && s.obese) flags.push(["warn", `Obesidade: na dupla, amoxicilina 1 g de 6 em 6 horas${s.vono ? "" : ", com o omeprazol nos mesmos horários"} (já ajustado na receita).`]);
+    if (pick === "M3" && s.obese) flags.push(["warn", `Obesidade: na dupla, amoxicilina 1 g de 6 em 6 horas${s.vono ? "" : `, com o ${s.clopi ? "rabeprazol" : "omeprazol"} nos mesmos horários`} (já ajustado na receita).`]);
     if (!pick) {
       const onlyAccess = avoid.filter((a) => R[a[0]]).every((a) => a[2] === "na");
       flags.push(["bad", s.line === 3 ? "Os esquemas recomendados já foram usados ou não estão disponíveis. Siga o roteiro de caso refratário abaixo."
@@ -892,7 +1008,8 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     if (g.drugs.includes("levo")) t.push("- Levofloxacino: " + (s.ckd ? "500 mg no 1º dia; depois 250 mg 1x/dia (TFG 20–49) ou a cada 48 h (TFG 10–19)" : "sem ajuste na hepatopatia") + ".");
     if (g.drugs.includes("metro")) t.push("- Metronidazol: " + (s.hep ? "reduzir a dose em 50% na hepatopatia grave" : "em geral sem ajuste (exceto hemodiálise)") + ".");
     if (g.drugs.includes("rifa")) t.push("- Rifabutina: " + [s.ckd && "reduzir a dose em 50%", s.hep && "cautela na hepatopatia grave"].filter(Boolean).join("; ") + ".");
-    t.push(s.vono ? "- Vonoprazana: a exposição aumenta na insuficiência renal ou hepática grave; usar com cautela." : (s.hep ? "- Omeprazol: a exposição aumenta na hepatopatia grave; usar com cautela." : "- Omeprazol: sem ajuste renal."));
+    const ppi = s.clopi ? "Rabeprazol" : "Omeprazol";
+    t.push(s.vono ? "- Vonoprazana: a exposição aumenta na insuficiência renal ou hepática grave; usar com cautela." : (s.hep ? `- ${ppi}: a exposição aumenta na hepatopatia grave; usar com cautela.` : `- ${ppi}: sem ajuste renal.`));
     if (s.ckd) t.push("- Tetraciclina e bismuto: evitar na insuficiência renal grave.");
     return t.join("\n");
   }
@@ -965,12 +1082,12 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     const used = [s.uClari && "claritromicina", s.uLevo && "levofloxacino", s.uBQT && "quádrupla com bismuto", s.uRifa && "rifabutina", s.uDual && "dupla com amoxicilina em dose alta", s.uTV && "tetraciclina + vonoprazana", s.uUnk && "esquema desconhecido (presumida claritromicina)"].filter(Boolean);
     let linha = s.line === 1 ? "sem tratamento prévio (1ª linha)" : s.line === 2 ? "falha de 1 tratamento prévio (2ª linha)" : "falha de 2 ou mais tratamentos (resgate)";
     if (s.line > 1) linha += used.length ? `; esquemas já utilizados: ${used.join(", ")}` : "; esquemas prévios não informados";
-    const alerg = { no: "Sem alergia à penicilina.", yes: "Alergia à penicilina referida.", doubt: "Alergia à penicilina duvidosa; conduzido como alérgico até avaliação (teste cutâneo ou alergista)." }[s.allergy];
+    const alerg = { no: "Sem alergia à penicilina.", yes: "Alergia à penicilina referida.", doubt: "Alergia à penicilina duvidosa; conduzido como alérgico até avaliação (teste cutâneo ou alergista)." }[s.allergy] + (s.pf !== null ? ` PEN-FAST ${s.pf}${s.pfScar ? " (reação cutânea grave prévia)" : s.pf < 3 ? " (baixo risco)" : ""}.` : "");
     const mac = s.line > 1 && s.uClari && s.macro !== "high" ? "claritromicina em tratamento prévio do H. pylori" : { none: "nunca", azi: "apenas azitromicina", unk: "não sabe informar", high: "claritromicina, eritromicina ou roxitromicina" }[s.macro];
     const qui = s.line > 1 && s.uLevo && s.quino === "low" ? "levofloxacino em tratamento prévio do H. pylori" : { low: "nunca", mod: "1 curso ou não sabe informar", high: "2 ou mais cursos" }[s.quino];
     const hist = !s.bxDone ? "não realizada." : stageStr(s, ", ") + (s.staged ? "" : " (graus do laudo incompletos)") + (s.migType !== "none" ? `, metaplasia intestinal ${s.migType === "incomplete" ? "incompleta" : "completa"}` : "") + (s.dysp ? ", displasia" : "") + (s.edaDate ? ` (endoscopia de ${br(s.edaDate)})` : "") + ".";
-    const meds = [s.colch && "colchicina", s.statin && "estatina", s.warf && "anticoagulante oral", s.contra && "anticoncepcional hormonal", s.arv && "antirretrovirais"].filter(Boolean);
-    const comorb = [s.ckd && "TFG < 30 mL/min", s.hep && "hepatopatia grave", s.qt && "risco de QT longo", s.frail && "idoso frágil", ...meds].filter(Boolean);
+    const meds = [s.colch && "colchicina", s.statin && "estatina", s.warf && "anticoagulante oral", s.contra && "anticoncepcional hormonal", s.arv && "antirretrovirais", s.clopi && "clopidogrel", s.imun && "imunossupressor (inibidor de calcineurina ou mTOR)", s.mtx && "metotrexato"].filter(Boolean);
+    const comorb = [s.egfr !== null && `TFG estimada ${Math.round(s.egfr)} mL/min/1,73 m² (CKD-EPI 2021, creatinina ${String(s.creat).replace(".", ",")} mg/dL)`, s.ckd && "TFG < 30 mL/min", s.hep && "hepatopatia grave", s.qt && "risco de QT longo", s.frail && "idoso frágil", ...meds].filter(Boolean);
     const L = [];
     L.push(`CONDUTA – ERRADICAÇÃO DE H. PYLORI · ${br(new Date())}`);
     L.push("Referência: V Consenso Brasileiro sobre a Infecção por H. pylori (Arq Gastroenterol. 2026;63:e26043).");
@@ -1013,6 +1130,9 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     if (g.drugs.includes("levo") && s.age !== null && s.age >= 60) extra.push("orientação sobre risco de tendinopatia com levofloxacino");
     if (s.contra && g.drugs.includes("rifa")) extra.push("método contraceptivo de barreira durante e 4 semanas após");
     if (s.arv) extra.push("revisão de interações com o infectologista");
+    if (s.clopi && !s.vono) extra.push("rabeprazol no lugar do omeprazol pelo uso de clopidogrel (interação via CYP2C19)");
+    if (s.mtx && g.drugs.includes("amox")) extra.push("pausa ou monitorização do metotrexato");
+    if (s.pf !== null && s.pf < 3 && !s.pfScar) extra.push(`avaliação para retirar o rótulo de alergia à penicilina (PEN-FAST ${s.pf})`);
     if (s.hep) extra.push("ajuste e cautela na hepatopatia grave, conforme bula");
     if (s.frail) extra.push("decisão compartilhada sobre o tratamento (idoso frágil)");
     if (g.drugs.includes("rifa")) extra.push("hemograma durante o tratamento");
@@ -1051,11 +1171,14 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     L.push("- Evite fumar nesses dias: o cigarro atrapalha o tratamento.");
     if (lines.some((l) => l.n.startsWith("Subcitrato"))) L.push("- O bismuto deixa as fezes e a língua escuras. É normal e passa depois.", "- Tome o bismuto 30 minutos antes do café e do jantar.");
     if (lines.some((l) => l.n.startsWith("Tetraciclina"))) L.push("- Tome a tetraciclina com água, longe de leite, derivados, antiácidos, ferro e cálcio.");
+    if (lines.some((l) => l.n.startsWith("Levofloxacino"))) L.push("- Tome o levofloxacino 2 horas antes ou depois de antiácidos, ferro, cálcio, zinco ou leite.");
+    if (lines.some((l) => l.n.startsWith("Rifabutina"))) L.push("- A rifabutina pode deixar urina, suor e lágrimas alaranjados; evite lentes de contato gelatinosas nesses dias.");
     if (lines.some((l) => l.n.startsWith("Omeprazol 40"))) L.push("- Tome o omeprazol 30 a 60 minutos antes do café e do jantar.");
     if (lines.some((l) => l.n.startsWith("Omeprazol 20"))) L.push("- Tome o omeprazol com o estômago vazio, 30 minutos antes de comer, sempre que possível.");
+    if (lines.some((l) => l.n.startsWith("Rabeprazol"))) L.push(lines.some((l) => l.n.startsWith("Rabeprazol") && l.t.length === 4) ? "- Tome o rabeprazol com o estômago vazio, 30 minutos antes de comer, sempre que possível." : "- Tome o rabeprazol 30 a 60 minutos antes do café e do jantar.");
     if (lines.some((l) => l.n.startsWith("Metronidazol"))) L.push("- Se o metronidazol der enjoo, tome junto com um lanche leve.");
     L.push("- Gosto metálico, enjoo e diarreia leve podem acontecer. Se tiver diarreia forte ou com sangue, manchas na pele, inchaço no rosto ou falta de ar, procure atendimento.");
-    L.push("", `Exame de controle (teste do sopro) a partir de ${br(dt.test)}. Se continuar usando omeprazol ou vonoprazana depois do tratamento, pare a partir de ${br(dt.ppiStop)}.`);
+    L.push("", `Exame de controle (teste do sopro) a partir de ${br(dt.test)}. Se continuar usando omeprazol, outro remédio para o estômago ou vonoprazana depois do tratamento, pare a partir de ${br(dt.ppiStop)}.`);
     return L.join("\n");
   }
 
@@ -1140,7 +1263,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
         <p class="case-line">${esc(caseLine(s))}</p>
         <div><p class="eyebrow">${dxBlock ? "Diagnóstico antes do tratamento" : "Fora do escopo do app"}</p><h2 id="blockTitle">Receita não gerada</h2></div>
         ${d.blocks.map((b) => BLOCK_HTML[b]).join("")}
-        ${dxBlock ? `${sheetsHtml("exam")}<div class="actions"><button type="button" id="copyRx">Copiar pedido do teste</button><span class="toast" id="toast" role="status"></span></div>` : ""}
+        ${dxBlock ? `${sheetsHtml("exam")}<div class="actions"><button type="button" id="copyRx">Copiar pedido do teste</button><button type="button" class="ghost" id="printRx">Imprimir pedido</button><span class="toast" id="toast" role="status"></span></div>` : ""}
       </section>`;
     }
     if (!d.pick) {
@@ -1170,7 +1293,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
       ${flagsHtml(d.flags)}
       ${s.adj ? "" : dayHtml(s, d.pick)}
       ${sheetsHtml(s.adj ? "adj" : "presc")}
-      <div class="actions"><button type="button" id="copyRx">${s.adj ? "Copiar ajustes" : sheets.length > 1 ? "Copiar todas as receitas" : "Copiar receita"}</button><span class="toast" id="toast" role="status"></span></div>
+      <div class="actions"><button type="button" id="copyRx">${s.adj ? "Copiar ajustes" : sheets.length > 1 ? "Copiar todas as receitas" : "Copiar receita"}</button>${s.adj ? "" : `<button type="button" class="ghost" id="printRx">Imprimir receitas (com 2 vias)</button>`}<span class="toast" id="toast" role="status"></span></div>
     </section>`;
   }
 
@@ -1238,6 +1361,106 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     </section>`;
   }
 
+  // ---------- adesão (Enunciado 26, texto: educação e lembretes no celular aumentam adesão e erradicação) ----------
+  function adhPanel(s, d, dt) {
+    const wa = `https://wa.me/?text=${encodeURIComponent(texts.wa || "")}`;
+    return `<section class="panel" id="adhPanel" aria-labelledby="adhTitle"><h3 id="adhTitle">Adesão: entregue ao paciente</h3>
+      <p class="hint">O V Consenso cita melhora da adesão e da erradicação com educação do paciente e lembretes no celular (texto do Enunciado 26).</p>
+      <div class="adh-grid">
+        <button type="button" id="printLeaf">Imprimir folheto com calendário de 14 dias</button>
+        <button type="button" class="ghost" id="icsBtn">Lembretes no celular (.ics)</button>
+        <a class="btn" href="${esc(wa)}" target="_blank" rel="noopener">Enviar orientações no WhatsApp</a>
+        <span class="toast" id="toast3" role="status"></span>
+      </div>
+      <p class="hint">O arquivo .ics cria um alarme em cada horário por 14 dias e lembra a data do teste de controle. Envie ao paciente pelo WhatsApp ou abra no celular dele: o iPhone e o Android oferecem adicionar à agenda.</p>
+    </section>`;
+  }
+
+  // ---------- impressão ----------
+  const P2 = /2 VIAS/;
+  function rxPrintHtml() {
+    return sheets.map((t) => {
+      const one = (via) => `<section class="pp"><div class="via"><span>${esc(via)}</span><span>Conduta H. pylori</span></div><pre>${esc(t)}</pre></section>`;
+      return P2.test(t) ? one("1ª via · retenção da farmácia") + one("2ª via · paciente") : one(t.startsWith("SOLICITAÇÃO") ? "Pedido de exame" : "Receita");
+    }).join("");
+  }
+  function leafletHtml(s, d, dt) {
+    const slots = daySlots(s, d.pick);
+    const lines = buildRx(d.pick, s).flatMap((r) => r.lines);
+    const head = `<tr><th>Dia</th>${slots.map(([h, ls]) => `<th>${esc(h === "24h" ? "24h (meia-noite)" : h)}<span class="meds">${ls.map((l) => esc(shortName(l.n))).join(" + ")}</span></th>`).join("")}</tr>`;
+    let rows = "";
+    for (let i = 0; i < 14; i++) rows += `<tr><td class="d">${i + 1}º · ${br(addDays(s.start, i))}</td>${slots.map(() => `<td><span class="box"></span></td>`).join("")}</tr>`;
+    const imp = (texts.wa || "").split("\n");
+    const k = imp.indexOf("Importante:");
+    const tips = k >= 0 ? imp.slice(k + 1).filter((x) => x.startsWith("- ")).map((x) => x.slice(2)) : [];
+    return `<section class="pp">
+      <h1>Seu tratamento para <i>H. pylori</i></h1>
+      <p>${s.name ? esc(s.name) + " · " : ""}14 dias: de <b>${br(s.start)}</b> a <b>${br(dt.end)}</b>. Não pare antes, mesmo se melhorar.</p>
+      <h2>Remédios</h2>
+      <ul>${lines.map((l) => `<li><b>${esc(l.n)}</b>: ${esc(l.p.replace(/^Tomar /, "tomar "))}</li>`).join("")}</ul>
+      <h2>Marque cada dose tomada</h2>
+      <table>${head}${rows}</table>
+      <h2>Importante</h2>
+      <ul>${tips.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
+      <h2>Exame de controle</h2>
+      <p>Teste do sopro (ou pesquisa nas fezes) a partir de <b>${br(dt.test)}</b>. Se continuar usando omeprazol, outro remédio para o estômago ou vonoprazana depois do tratamento, pare a partir de ${br(dt.ppiStop)}. Traga este folheto na consulta.</p>
+    </section>`;
+  }
+  const native = () => (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.condutaHP) || null;
+  function doPrint(html) {
+    $("printArea").innerHTML = html;
+    const n = native();
+    if (n) n.postMessage({ type: "print" }); else window.print();
+  }
+  function saveFile(name, mime, text, toastId) {
+    const n = native();
+    if (n) { n.postMessage({ type: "save", name, text }); if ($(toastId)) $(toastId).textContent = "Arquivo gerado."; return; }
+    const file = new File([text], name, { type: mime });
+    if (window.matchMedia("(pointer: coarse)").matches && navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file], title: "Lembretes do tratamento" }).catch(() => {});
+      return;
+    }
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(file); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    if ($(toastId)) $(toastId).textContent = "Arquivo baixado: abra para adicionar à agenda.";
+  }
+  // calendário: um evento diário por horário, 14 dias, com alarme; mais o dia do teste de controle
+  function icsText(s, d, dt) {
+    const ie = (t) => String(t).replace(/\\/g, "\\\\").replace(/;/g, "\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+    const ymd = (x) => `${x.getFullYear()}${pad(x.getMonth() + 1)}${pad(x.getDate())}`;
+    const now = new Date();
+    const stamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth() + 1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
+    const uid = () => `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}@conduta-hp`;
+    const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Conduta H. pylori//PT-BR", "CALSCALE:GREGORIAN", "METHOD:PUBLISH"];
+    daySlots(s, d.pick).forEach(([h, ls]) => {
+      const hr = parseInt(h, 10);
+      const day = hr === 24 ? addDays(s.start, 1) : s.start;
+      const what = ls.map((l) => `${shortName(l.n)} ${doseOf(l.p)}`).join(" + ");
+      L.push("BEGIN:VEVENT", `UID:${uid()}`, `DTSTAMP:${stamp}`, `DTSTART:${ymd(day)}T${pad(hr % 24)}0000`, "DURATION:PT15M", "RRULE:FREQ=DAILY;COUNT=14",
+        `SUMMARY:${ie("H. pylori: " + ls.map((l) => shortName(l.n)).join(" + "))}`, `DESCRIPTION:${ie(what + ". Tratamento de 14 dias, não pare antes.")}`,
+        "BEGIN:VALARM", "ACTION:DISPLAY", "TRIGGER:PT0M", `DESCRIPTION:${ie("Hora do remédio: " + what)}`, "END:VALARM", "END:VEVENT");
+    });
+    L.push("BEGIN:VEVENT", `UID:${uid()}`, `DTSTAMP:${stamp}`, `DTSTART;VALUE=DATE:${ymd(dt.test)}`, `DTEND;VALUE=DATE:${ymd(addDays(dt.test, 1))}`,
+      `SUMMARY:${ie("Teste de controle do H. pylori (a partir de hoje)")}`, `DESCRIPTION:${ie("Teste do sopro ou pesquisa nas fezes. Sem omeprazol, outro remédio para o estômago ou vonoprazana nas 2 semanas antes.")}`,
+      "BEGIN:VALARM", "ACTION:DISPLAY", "TRIGGER:PT9H", `DESCRIPTION:${ie("Marcar o teste de controle do H. pylori")}`, "END:VALARM", "END:VEVENT");
+    L.push("END:VCALENDAR");
+    // RFC 5545: linhas de até 75 octetos, continuação começa com espaço
+    const enc = new TextEncoder();
+    const fold = (line) => {
+      const out = []; let cur = "", n = 0;
+      for (const ch of line) {
+        const b = enc.encode(ch).length;
+        if (n + b > (out.length ? 74 : 75)) { out.push(cur); cur = ""; n = 0; }
+        cur += ch; n += b;
+      }
+      out.push(cur);
+      return out.join("\r\n ");
+    };
+    return L.map(fold).join("\r\n") + "\r\n";
+  }
+
   function refrPanel() {
     return `<section class="panel refr" aria-labelledby="refrTitle"><h3 id="refrTitle">Caso refratário: quando os esquemas falharam</h3>
       <p class="hint">Roteiro baseado nos Enunciados 3, 16, 19, 26, 30, 31 e 33 do V Consenso.</p>
@@ -1276,6 +1499,10 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
       ["Carothers et al. Quinolona prévia e resistência ao levofloxacino (CID 2007)", "https://academic.oup.com/cid/article/44/2/e5/331570"],
       ["AGA. Manejo do H. pylori refratário", "https://gastro.org/clinical-guidance/management-of-refractory-helicobacter-pylori-infection/"],
       ["ACG 2024. Tratamento do H. pylori (resumo)", "https://gastroenterology.acponline.org/archives/2024/09/27/1.htm"],
+      ["Inker et al. Equação CKD-EPI 2021 sem raça (N Engl J Med 2021)", "https://doi.org/10.1056/NEJMoa2102953"],
+      ["Trubiano et al. PEN-FAST, regra de decisão para alergia à penicilina (JAMA Intern Med 2020)", "https://doi.org/10.1001/jamainternmed.2020.0403"],
+      ["Luo et al. Rede social como lembrete no tratamento do H. pylori (Helicobacter 2020), citado no Enunciado 26", "https://doi.org/10.1111/hel.12682"],
+      ["FDA. Interação entre clopidogrel e omeprazol/esomeprazol", "https://www.fda.gov/drugs/postmarket-drug-safety-information-patients-and-providers/information-healthcare-professionals-update-safety-labeling-changes-plavix-clopidogrel"],
       ["RDC Anvisa 20/2011: receita de antimicrobiano (orientação da Sesa-PR)", "https://www.saude.pr.gov.br/sites/default/arquivos_restritos/files/documento/2020-05/orientacoesrdc_20201_antibioticos.pdf"],
     ];
     return `<details class="ref" data-k="src"><summary>Fontes</summary>
@@ -1308,6 +1535,10 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     ["Biópsia: metaplasia incompleta em estágio I–II, com história familiar", "Vigilância a cada 1–2 anos (Enunciado 22)"],
     ["Biópsia: OLGA I, sem metaplasia, com história familiar", "Vigilância a cada 3 anos (Enunciado 22)"],
     ["Dispepsia não investigada aos 50 anos, sem endoscopia", "Alerta: endoscopia antes de tratar (Enunciado 18)"],
+    ["Alergia duvidosa, PEN-FAST 0", "Conduta de alérgico, com alerta de baixo risco e sugestão de retirar o rótulo"],
+    ["Alergia com reação cutânea grave (PEN-FAST S)", "Alerta grave: não provocar; esquemas sem amoxicilina"],
+    ["Clopidogrel, sem vonoprazana", "Receita com rabeprazol 20 mg no lugar do omeprazol; na dupla, rabeprazol e amoxicilina de 6 em 6 horas"],
+    ["Tacrolimo em uso, 1ª linha com bismuto", "Esquemas com claritromicina evitados; quádrupla mantida com alerta grave do metronidazol"],
   ];
   function casesPanel() {
     return `<details class="ref" data-k="cases"><summary>Casos para validação</summary>
@@ -1318,22 +1549,44 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
 
   // ---------- desenho ----------
   let lastKey = null;
+  let cur = null;
   function render() {
     const s = state();
     const d = decide(s);
     const dt = dates(s);
 
     $("bxBox").hidden = !s.bxDone;
+    const gr = $("gfrRead");
+    gr.hidden = s.creat === null;
+    if (s.creat !== null) {
+      if (s.egfr === null) { gr.className = "gfr"; gr.textContent = s.creat > 0 && s.creat < 30 ? "Informe idade (18 anos ou mais) e sexo para calcular a TFG." : "Creatinina fora do intervalo esperado: confira o valor."; }
+      else {
+        const g = Math.round(s.egfr), low = g < 30;
+        gr.className = "gfr" + (low !== s.ckd ? " hi" : "");
+        gr.innerHTML = `TFG estimada (CKD-EPI 2021): <b>${g} mL/min/1,73 m²</b>${low && !s.ckd ? " · abaixo de 30: marque a insuficiência renal acima" : !low && s.ckd ? " · acima de 30: confira a caixa de insuficiência renal" : ""}`;
+      }
+    }
     $("bxRow").hidden = s.dx === "hist";
     paintMx($("mxA"), s.aA, s.aC, s.olga);
     paintMx($("mxM"), s.mA, s.mC, s.olgim);
-    const nMore = ["mColch", "mStatin", "mWarf", "mContra", "mArv", "pQT", "pSimple", "pSmoke", "pObese", "pFrail", "pProbio"].filter((id) => $(id).checked).length;
+    if (s.allergy !== "no" && s.pf === null) {
+      $("pfRead").className = "pf-read" + (s.pfScar ? " hi" : "");
+      $("pfRead").innerHTML = s.pfScar ? "Reação cutânea grave: <b>não provocar</b>; mantenha esquemas sem amoxicilina" : "Responda os 4 itens para calcular o escore.";
+    }
+    if (s.pf !== null) {
+      const PFL = ["muito baixo (<1%)", "baixo (~5%)", "baixo (~5%)", "moderado (~20%)", "alto (~50%)", "alto (~50%)"];
+      $("pfRead").className = "pf-read" + (s.pf >= 3 || s.pfScar ? " hi" : "");
+      $("pfRead").innerHTML = s.pfScar ? `Escore <b>${s.pf}</b> · reação cutânea grave: não provocar; alergista` : `Escore <b>${s.pf}</b> · risco ${PFL[s.pf]} · ${s.pf < 3 ? "candidato a retirar o rótulo" : "alergista"}`;
+    }
+    const nMore = ["mColch", "mStatin", "mWarf", "mContra", "mArv", "mClopi", "mImun", "mMtx", "pQT", "pSimple", "pSmoke", "pObese", "pFrail", "pProbio"].filter((id) => $(id).checked).length;
     $("moreCount").textContent = nMore ? `(${nMore} ${nMore === 1 ? "marcado" : "marcados"})` : "";
 
     let html = heroHtml(s, d);
     if (!d.blocked && s.line === 3) html += refrPanel();
     if (!d.blocked && (d.alts.length || d.avoid.length)) html += altHtml(s, d);
     if (!d.blocked) html += followHtml(s, d, dt) + textsHtml(s, d, dt);
+    if (!d.blocked && d.pick && !s.adj) html += adhPanel(s, d, dt);
+    cur = { s, d, dt };
     html += diagPanel() + sourcesPanel() + casesPanel();
 
     // painéis abertos continuam abertos depois de redesenhar
@@ -1383,6 +1636,9 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
     const sb = e.target.closest("[data-copy-sheet]");
     if (sb) { copyText(sheets[Number(sb.dataset.copySheet)] || "", (ok) => feedback(sb, null, ok)); return; }
     if (e.target.closest("#copyRx")) { const b = e.target.closest("#copyRx"); copyText(sheets.join(SEP), (ok) => feedback(b, "toast", ok, "Copiado para a área de transferência")); return; }
+    if (e.target.closest("#printRx")) { doPrint(rxPrintHtml()); return; }
+    if (e.target.closest("#printLeaf") && cur) { doPrint(leafletHtml(cur.s, cur.d, cur.dt)); return; }
+    if (e.target.closest("#icsBtn") && cur) { saveFile("tratamento-h-pylori.ics", "text/calendar", icsText(cur.s, cur.d, cur.dt), "toast3"); return; }
     if (e.target.closest("#copyTxt")) { const b = e.target.closest("#copyTxt"); copyText(texts[txtSel] || "", (ok) => feedback(b, "toast2", ok, "Texto copiado")); }
   });
   $("out").addEventListener("change", (e) => {
@@ -1398,6 +1654,7 @@ textarea.copybuf { position: fixed; left: -9999px; top: 0; width: 1px; height: 1
   function syncUsed() {
     $("usedBox").hidden = $("l1").checked;
     $("uTVrow").hidden = $("aNo").checked;
+    $("pfBox").hidden = $("aNo").checked;
     $("lineHint").textContent = $("l1").checked ? "Nunca tratou H. pylori." : $("l2").checked ? "Tratou 1 vez e o controle de cura deu positivo." : "Já falhou 2 ou mais tratamentos.";
   }
   const form = $("caseForm");
